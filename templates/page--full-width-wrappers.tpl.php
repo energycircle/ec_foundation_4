@@ -109,29 +109,33 @@
       </div>
     <?php endif; ?>
     <div id="header-wrapper">
-      <div class="container clearfix">
+
 
 	   <header>
+       <div class="container clearfix">
       	<?php	$block = module_invoke('panels_mini', 'block_view', 'header');
       		print $block['content'];
-		?>
+		    ?>
+      </div>
 	   </header>
 
-      </div>
+     <?php if ($page['menu_bar'] || $primary_navigation || $secondary_navigation): ?>
+       <div id="nav-wrapper">
+         <div class="container clearfix">
+           <?php print render($page['menu_bar']); ?>
+           	<div id="main-menu-sf">
+ 	          	<?php	$block = module_invoke('panels_mini', 'block_view', 'main_menu_superfish');
+ 	          		print $block['content'];
+ 				      ?>
+            </div>
+
+          </div>
+       </div>
+     <?php endif; ?>
+
     </div>
 
-    <?php if ($page['menu_bar'] || $primary_navigation || $secondary_navigation): ?>
-      <div id="nav-wrapper">
-        <div class="container clearfix">
-          <?php print render($page['menu_bar']); ?>
-          	<div id="main-menu-sf">
-	          	<?php	$block = module_invoke('panels_mini', 'block_view', 'main_menu_superfish');
-	          		print $block['content'];
-				?>
-			</div>
-        </div>
-      </div>
-    <?php endif; ?>
+
     <?php if ($messages || $page['help']): ?>
       <div id="messages-help-wrapper">
         <div class="container clearfix">
@@ -140,18 +144,6 @@
         </div>
       </div>
     <?php endif; ?>
-
-    <?php
-        if (drupal_is_front_page()) { ?>
-        <div id="hero-wrapper">
-          <div class="container clearfix">
-            <?php
-                $block = module_invoke('panels_mini', 'block_view', 'hero');
-                    print $block['content'];
-            ?>
-          </div>
-        </div>
-   <?php  } ?>
 
     <?php if ($page['secondary_content']): ?>
       <div id="secondary-content-wrapper">
@@ -197,24 +189,27 @@
             <?php if ($content = render($page['content'])): ?>
               <div id="content">
 
-				  <div id="secondary-menu-wrapper">
-		          	<?php	$block = module_invoke('panels_mini', 'block_view', '	secondary_menu_tree');
-		          		print $block['content'];
-					?>
-				  </div>
 
-	  					<div id="breadcrumb-title-wrapper">
-						    <?php if ($breadcrumb): ?>
-						      <div id="breadcrumb">
-						        <?php print $breadcrumb; ?>
-						      </div>
-						    <?php endif; ?>
+              <?php if ( !drupal_is_front_page() ): ?>
+                <!-- panel-display -->
+  	  					<div id="breadcrumb-title-wrapper"  class="">
+                  <div class="block-inner">
+                    <div class="block-content">
 
-	                <?php if ($title): ?>
-	                  <h1 id="page-title"><?php print $title; ?></h1>
-	                <?php endif; ?>
-	  					</div>
+      	               <?php if ($title): ?>
+      	                  <h1 id="page-title"><?php print $title; ?></h1>
+      	               <?php endif; ?>
 
+                       <div id="secondary-menu-wrapper">
+           		          	<?php	$block = module_invoke('panels_mini', 'block_view', 'secondary_menu_tree');
+           		          		print $block['content'];
+           					      ?>
+             				  </div>
+
+                     </div>
+                   </div>
+  	  					</div>
+              <?php endif; ?>
                 <?php print $content; ?>
               </div>
             <?php endif; ?>

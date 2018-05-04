@@ -6,6 +6,8 @@
 // file is in charge of importing all the other partials needed for the theme.
 //
 
+
+
 //
 // Partials to be shared with all .scss files.
 //
@@ -16,7 +18,11 @@
 @import 'compass/css3';                        // Use one CSS3 mixin instead of multiple vendor prefixes.
 
 
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,800,800i');
+
 //
 // Import custom partial - mixins and variables defined for your theme
 //
 @import 'custom';
+// Sets the primary theme
+@import 'config/config-custom-theme';

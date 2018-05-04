@@ -67,10 +67,11 @@
 <head>
 <?php print $head; ?>
 <title><?php print $head_title; ?></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <?php print $styles; ?>
 <?php print $scripts; ?>
 <?php print $polyfills; ?>
-    
+
 </head>
 <body class="<?php print $classes; ?>"<?php print $attributes; ?>>
   <div id="skip-link" class="nocontent">

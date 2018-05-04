@@ -1,0 +1,1938 @@
+/*-----------------------------------------------------------------------*\
+
+    HOW TO USE:
+    ---------------------------------------------------------------------
+
+    The config file feeds all the partials with layout and design based variables.
+    Customize _config-custom-theme.scss, or choose a pre-built _config-theme
+
+
+    CONTENTS:
+    ---------------------------------------------------------------------
+
+    « General »
+    1. Global Variables
+    2. Colors
+    3. Type
+
+    « Panels »
+    4. Header
+    5. Navigation
+    6. Breadcrumb / Secondary Navigation
+    7. Featured Image
+    8. Body Content
+    9. Footer
+
+    « Content Types »
+    10. Hero
+    11. Service Request (CTA)
+    12. Blog Teasers
+    13. Services
+    14. Testimonials
+    15. Promotions
+    16. Distinctions
+    17. MISC
+
+
+\*-----------------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  1. Global Variables
+
+
+\*---------------------------------------------------------------------------*/
+
+$max-width: 1280px;
+$srv-request-height: 485px;
+$primary-breakpoint: 960px;
+
+//vertical padding (rem)
+$vp: 5;
+
+// default block padding (rem)
+$default-padding: 3;
+
+//dynamic negative margin
+$nm: calc((( #{$max-width} - 100vw) / 2) - 15px);
+
+//dynamic posative margin
+$pm: calc(((100vw - #{$max-width}) / 2) + 15px);
+
+$gutter-width: 15px;
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  2. Colors
+
+
+\*---------------------------------------------------------------------------*/
+
+
+$primary: #76a926;
+$secondary: #f3b506;
+$tertiary: $primary;
+$quaternary: $secondary;
+
+
+$dk_gray: #3d3d3d;
+$md_gray: #707070;
+$lt_gray: #f4f4f4;
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  3. Type
+
+
+\*---------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------*\
+
+    a. @fontface
+
+\*-----------------------------------------------------------------------*/
+
+$primary-ff: 'Open Sans', sans-serif;
+// $secondary-ff: 'Unna', serif;
+
+
+@mixin page_title{
+
+  font-family: $primary-ff;
+  color: lighten(black, 10%);
+  @include font-size(3.6);
+  @include rem(line-height, 4.8);
+  position: relative;
+  font-weight: 800;
+  text-transform: none;
+}
+
+/*-----------------------------------------------------------------------*\
+
+    TITLE
+
+\*-----------------------------------------------------------------------*/
+
+@mixin title($size: 2, $color: $dk_gray, $weight: 800){
+
+    position: relative;
+    font-family:   $primary-ff;
+    font-weight:   $weight;
+    color:         $color;
+    @include       font-size-calc($size);
+    @include       rem(margin, 0, 0, 1);
+    text-transform: none;
+    @content;
+
+    h1, h2{
+
+        font-size: inherit;
+        line-height: inherit;
+        margin: 0;
+        color: inherit;
+        font-weight: inherit;
+    }
+
+    @include            link-style;
+
+    @media only screen and (max-width: 959px) {
+
+      @if (($size *.7) > 2){
+
+        @include       font-size-calc($size * .7);
+      }
+
+    }
+
+}
+
+@mixin subtitle($size: 2, $color: $dk_gray, $weight: 800){
+
+  position: relative;
+  font-family:   $primary-ff;
+  font-weight:   $weight;
+  color:         $color;
+  @include       font-size-calc($size);
+  @include       rem(margin, 0, 0, 1);
+  text-transform: uppercase;
+  @content;
+
+  h1, h2{
+
+      font-size: inherit;
+      line-height: inherit;
+      margin: 0;
+      color: inherit;
+      font-weight: inherit;
+  }
+
+  @include            link-style;
+
+  @media only screen and (max-width: 959px) {
+
+    @if (($size *.7) > 2){
+
+      @include       font-size-calc($size * .7);
+    }
+
+  }
+
+}
+
+
+
+/*-----------------------------------------------------------------------*\
+
+    BODY
+
+\*-----------------------------------------------------------------------*/
+
+@mixin body-copy ($size: 1.6, $color: $md_gray, $weight: 400){
+
+    font-family:      $primary-ff;
+
+    font-weight:       $weight;
+    color:             $color;
+
+    @include           rem(margin, 0, 0, 1);
+    @include           font-size-calc($size);
+}
+
+
+
+/*---------------------------------------------------------------------------*\
+
+  BUTTONS
+
+\*---------------------------------------------------------------------------*/
+
+
+@mixin button ($color: $secondary, $size: 1.8, $outline: 'false' ){
+
+  @include           font-size-calc($size);
+  font-family:       $primary-ff;
+  text-transform:    uppercase;
+  letter-spacing:    0px;
+  text-decoration:   none;
+  font-weight:       700;
+
+  @include rem(padding, .5, 2.5);
+  display: inline-block;
+  border-radius: 0px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  overflow: hidden;
+  position: relative;
+
+  @if $outline == 'false'{
+    background: $color;
+    border: 0;
+  }
+
+  @if $outline == 'true'{
+
+    background: none;
+    border: 1px solid $color;
+  }
+
+  color: white;
+}
+
+/*---------------------------------------------------------------------------*\
+
+  Social Media
+
+\*---------------------------------------------------------------------------*/
+
+@mixin social-icons($color:$md_gray, $hover: $secondary, $size: 2.8) {
+
+  @include rem(width, $size);
+  @include rem(height, $size);
+
+  @include font-size($size);
+  @include rem(line-height, $size);
+
+  display:        inline-block;
+  //margin-left:    25px;
+  overflow:       hidden;
+  text-align:     center;
+  vertical-align: middle;
+
+  @include rem(margin, 0, .75, 0, 0);
+  color: rgba($color, 1);
+
+  &:hover{
+
+    color: $hover;
+  }
+
+  &:before {
+
+    font-family: "fontello";
+    @include font-size($size);
+    @include rem(line-height, $size);
+    @include rem(width, $size);
+    @include rem(height, $size);
+    display: inline-block;
+  }
+}
+
+@mixin social-media {
+
+  &[href*="facebook"] {
+    @include social-icons;
+
+    &:before {
+      content: '\f051';
+    }
+  }
+
+  &[href*="twitter"] {
+    @include social-icons;
+
+    &:before {
+      content: '\f057';
+    }
+  }
+
+  &[href*="google"] {
+    @include social-icons;
+
+    &:before {
+      content: '\f059';
+    }
+  }
+
+  &[href*="linkedin"] {
+    @include social-icons;
+
+    &:before {
+      content: '\f05c';
+    }
+  }
+
+  &[href*="angies"] {
+    @include social-icons;
+
+    &:before {
+      content: '\e802';
+    }
+  }
+
+  &[href*="homeadvisor"] {
+    @include social-icons;
+
+    &:before {
+      content: '\e801';
+    }
+  }
+
+  &[href*="yelp"] {
+    @include social-icons;
+
+    &:before {
+      content: '\e80f';
+    }
+  }
+
+  &[href*="instagram"] {
+    @include social-icons;
+
+    &:before {
+      content: '\f05d';
+    }
+  }
+
+  &[href*="pinterest"] {
+    @include social-icons;
+
+    &:before {
+      content: '\e803';
+    }
+  }
+}
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    4. Header
+
+
+\*-----------------------------------------------------------------------*/
+
+$header-wrapper-background:       rgba(white, 1);
+$header-background:               none;
+
+$header-aux-nav-color:            $dk_gray;
+$header-aux-nav-color-hover:      $primary;
+
+$header-phone-color:              $primary;
+$mobile-btn-color:                $secondary;
+
+@mixin override--header {
+
+
+  .pane-menu-menu-auxiliary-menu a{
+    font-family: $primary-ff;
+  }
+
+  #mini-panel-header .pane-menu-menu-auxiliary-menu + .panel-separator{
+
+    display: block;
+  }
+
+  #header-phone,
+  .custom-phone_number,
+  .custom-phone-number {
+    a,
+    p {
+      color: $primary;
+      font-family: $primary-ff;
+      @include font-size-calc(1.5);
+      &:hover {
+        color: $secondary;
+      }
+    }
+
+    p > a{
+
+      padding: 0;
+
+      &::before{
+        // content: "\E0CD";
+        // font-family: 'Material Icons';
+        // display: inline-block;
+        // top: 5px;
+        // margin-right: 5px;
+        // position: relative;
+      }
+    }
+  }
+
+  input[id*='edit-keys-'] {
+
+    color: black !important;
+    // background: none;
+
+    & + label .search-icon {
+
+      // color: black;
+    }
+
+    &:hover {
+
+      // background: rgba($tertiary, .9);
+      //box-shadow: 0 0 0 5px rgb(61, 71, 82);
+
+      & + label:after {
+
+        // color: $tertiary;
+
+      }
+    }
+
+    &:focus {
+
+      border: none;
+      background: rgba(whitesmoke, 1);
+    }
+  }
+
+  [id*="search-form-"] {
+
+    display: inline-block;
+    margin: 0;
+    position: relative;
+
+    .form-item{
+
+      position: relative;
+      display: inline-block;
+      margin: 0;
+
+      label {
+        display: none !important;
+      }
+
+      &:after {
+
+       color: black;
+      }
+    }
+  }
+}
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    5. Navigation
+
+
+\*-----------------------------------------------------------------------*/
+
+$nest-menu:                           false;
+$primary-menu-text-align:             center;
+$primary-menu-wrapper-background:     white;
+$primary-menu-background:             none;
+
+$primary-menu-background-color:       none;
+$primary-menu-text-color:             $dk_gray;
+$primary-menu-text-color--hover:      $primary;
+$primary-menu-dropdown-color:         darken($primary, 5%);
+
+$primary-menu-hamburger-color:        $dk_gray;
+$primary-menu-hamburger-background:   $primary;
+
+// #primary-menu #superfish-1 li.sf-depth-1 > a:hover
+// #primary-menu #superfish-1 li.sf-depth-1 > a:hover
+
+@mixin primary-menu-text-style{
+
+  > a{
+    font-family: $primary-ff;
+    @include font-size-calc(1.4);
+    font-weight: 400;
+    color: $primary-menu-text-color;
+    text-transform: uppercase;
+    @include rem(padding, 1, 1.5);
+    @include rem(letter-spacing, .1);
+    border: 0;
+    border-left: 0px solid $lt_gray;
+    background: none;
+    margin: 0;
+    height: auto;
+  }
+}
+
+@mixin primary-menu-toggle--pos{
+  top: -35px;
+  right: 0px;
+}
+
+
+@mixin override--navigation {
+
+  #nav-wrapper{
+
+    border-top: 1px solid $dk_gray;
+
+  }
+}
+
+/*-----------------------------------------------------------------------*\
+
+
+    6. Breadcrumb / Secondary Navigation
+
+
+\*-----------------------------------------------------------------------*/
+
+@mixin secondary-menu-text-style{
+
+  @include font-size(1.3);
+  @include rem(line-height, 1.3);
+  @include rem(margin, 0, .5, 0, 0);
+  @include rem(padding, 0, .5, 0, 0);
+  display: inline-block;
+  border-right: 1px solid $lt_gray;
+  font-weight: 400;
+  color: $md_gray;
+
+  &:hover {
+    color: $secondary;
+  }
+
+  &.active {
+    color: $tertiary;
+  }
+}
+
+
+@mixin override--breadcrumbs {
+
+  #breadcrumb-title-wrapper > .block-inner .block-content{
+
+    position: relative;
+    text-align: left;
+  }
+
+  #page-title{
+
+    .has-featured-image &{
+
+      position: absolute;
+
+      bottom: calc(100% + 50px + 20px);
+      margin: auto;
+      left: 0;
+      right: 0;
+      width: auto;
+      display: block;
+      // @include rem(padding, 0, 0);
+      padding: 0;
+      @include breakpoint($hero-breakpoint){
+        padding: 0 55% 0 0;
+      }
+
+      color: #fff;
+      text-shadow: 0 0 5px rgba(black, .5);
+    }
+
+    &::before{
+
+      .has-featured-image &{
+
+        background: white;
+        box-shadow: 0 0 5px rgba(black, .5);
+      }
+    }
+
+
+  }
+
+  #mini-panel-secondary_menu_tree{
+
+
+    @include rem(margin-bottom, 2);
+
+    .pane-menu-tree ul.menu li{
+
+      // display: inline;
+      vertical-align: top;
+
+    }
+
+    .pane-menu-tree ul.menu{
+      display: inline;
+    }
+
+    .pane-menu-tree .block-title,
+    .pane-menu-tree .block-content{
+
+      vertical-align: top;
+    }
+  }
+}
+
+/*-----------------------------------------------------------------------*\
+
+
+    7. Featured Image
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$feat-img-stretch-panel:              true;
+// pixel value
+$feat-img-max-width:                  none;
+// overlay color
+$feat-img-overlay-color:              rgba(#202020, .5);
+
+$feat-img-viewport-height:            true;
+$feat-img-viewport-max-height:        true;
+$feat-img-viewport-offset-height:     true;
+//viewport max-height measured in vw
+$feat-img-viewport-max-height:        33;
+$feat-img-min-width:                  1380px;
+
+@mixin override--featured-img {
+
+  &.block{
+    margin-bottom: 0;
+  }
+
+  .block-content{
+
+    min-height: 430px;
+  }
+}
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    8. Body Content
+
+
+\*-----------------------------------------------------------------------*/
+
+$pane-node-body-text-align:                   left;
+$pane-node-body-text-align--front:            left;
+
+$pane-node-body-limit-block-content:          true;
+$pane-node-body-limit-block-content--front:   true;
+
+@mixin override--body {
+
+  #content .one-column > .region-one-main > .region-inner > .pane-node-body,
+  #block-system-main .pane-node-body {
+
+  }
+
+  #content .pane-node-body{
+
+    @include rem(margin, $vp, 0);
+    @include rem(padding, 0, 0, $vp - 1.5);
+
+    h1{
+
+      @include page_title;
+    }
+
+    .front &{
+
+      // @include faux-width(#ededed);
+      @include rem(margin, $vp, 0);
+      // margin-bottom: $vp*10px !important;
+      // margin-bottom: $vp+rem !important;
+      position: relative;
+
+      .block-content{
+
+
+      }
+    }
+
+    ~ .pane-node-body{
+
+      margin: 0;
+      padding: 0;
+      border-bottom: 0;
+    }
+  }
+
+  #breadcrumb-title-wrapper .block-content{
+
+    width: 100%;
+  }
+}
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    9. Footer
+
+
+\*-----------------------------------------------------------------------*/
+
+$footer-stretch-panel:            true;
+$footer-bg:                       none;
+
+$footer-main-aux-nav-split:       "100%", "100%";
+$footer-main-aux-nav-col-count:   "2", "1";
+
+$footer-copyright-align:          center;
+
+$footer-hover-color:               $primary;
+
+@mixin override--footer {
+
+  @include rem(padding-top, $vp);
+
+  .custom-social_media{
+
+    text-align: center;
+
+    @include breakpoint{
+
+      text-align: left;
+    }
+
+  }
+
+  .pane-main-menu{
+
+    // @include teaser-content($width: 66%, $float: left, $breakpoint: 960px);
+    // width: 100%;
+  }
+
+  ul.menu li a{
+    margin-bottom: 10px;
+    @include rem(font-size, 1.4);
+  }
+
+  .pane-main-menu .block-inner{
+
+    // margin: 0;
+  }
+
+  .pane-main-menu ul.menu{
+    // -webkit-columns: 2;
+    // -moz-columns: 2;
+    // columns: 2;
+  }
+  .pane-main-menu ul.menu > li {
+
+    @include breakpoint{
+
+      padding-right: 25px;
+    }
+
+  }
+
+  ul.menu li.menu-depth-3 {
+
+    @include breakpoint{
+
+      padding-left: 15px;
+    }
+  }
+
+  .pane-title {
+
+  }
+
+  h2,
+  h3,
+  a,
+  p {
+    color: $dk_gray;
+    @include rem(font-size, 1.4);
+  }
+
+  .custom-company_info{
+
+    text-align: center;
+
+    @include breakpoint{
+
+      text-align: left;
+    }
+
+    .pane-title{
+
+      color: white;
+      @include rem(font-size, 1.4);
+    }
+
+    h1, h2, h3{
+    }
+
+    a{
+
+      color: white;
+      font-weight: 700;
+    }
+  }
+
+  a[href*="tel:"],
+  span.highlight{
+    color: $secondary;
+  }
+
+  @media only screen and (max-width: 768px){
+
+    text-align: center;
+  }
+
+
+}
+
+#mini-panel-footer {
+
+  .view-distinctions {
+
+    .views-row {
+
+      @include rem(margin, 0, 3)
+    }
+  }
+
+  .service-area {
+
+    // @include rem(margin, 0, -3);
+
+    @media only screen and (min-width: $max-width) {
+
+      // margin: 0 $nm;
+    }
+
+  }
+}
+
+/*-----------------------------------------------------------------------*\
+
+
+    10. Hero
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$hero-stretch-panel:           true;
+// pixel value
+$hero-max-width:               none;
+// overlay color
+$hero-overlay-color:           rgba(#202020, .5);
+
+$hero-caption-bg:              none;
+$hero-caption-bg--mobile:      rgba(#202020, 1);
+$hero-caption-max-width:       46%;
+
+// caption position
+// must be quoted value
+$hero-caption-horizontal-align: "left";
+// percent value
+$hero-caption-vertical-position: 20px;
+
+$hero-caption-text-align:        left;
+
+$hero-breakpoint:                960px;
+
+@mixin hero-caption-font-styles{
+
+  .field-display-title {
+    @include title( $color: white, $size: 3);
+
+  }
+
+  .field-display-subtitle {
+    @include body-copy($size: 2, $color: white);
+    font-weight: 400;
+  }
+
+  .link a {
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: underline;
+
+    &:hover{
+      color: $secondary;
+    }
+  }
+}
+
+
+@mixin override--hero {
+
+  .EC-region-top{
+
+    .front &{
+
+      @include rem(margin-bottom, 5);
+    }
+  }
+
+  .views-field-field-slide-image {
+
+
+    @media only screen and (min-width: $hero-breakpoint){
+      min-height: 420px;
+      img{
+
+        min-width: 1220px;
+        left: 50%;
+        -moz-transform: translateY(-50%) translateX(-50%);
+        -webkit-transform: translateY(-50%) translateX(-50%);
+        transform: translateY(-50%) translateX(-50%);
+      }
+    }
+  }
+
+  #fs-homeslide {
+
+    background: $hero-caption-bg--mobile;
+
+    .slides{
+
+      overflow: hidden;
+      margin-bottom: 1px;
+
+      img{
+      }
+    }
+
+    .flex-direction-nav{
+
+      bottom: 30px;
+      position: relative;
+      max-width: $max-width;
+      margin: auto;
+
+
+      @media only screen and (min-width: $hero-breakpoint){
+
+        // width: $hero-caption-max-width;
+        // position: relative;
+      }
+
+      a{
+
+        bottom: 50%;
+        -moz-transform: translateY(50%);
+        -webkit-transform: translateY(50%);
+        transform: translateY(50%);
+
+        &.flex-prev{
+
+          left: 30px;
+        }
+
+        &.flex-next{
+
+          left: 80px;
+        }
+      }
+    }
+  }
+
+  .flex-active-slide .hero-caption{
+
+    bottom: 50%;
+
+    @include breakpoint($hero-breakpoint){
+      -moz-transform: translateY(calc(50% + 90px/2));
+      -webkit-transform: translateY(calc(50% + 90px/2));
+      transform: translateY(calc(50% + 90px/2));
+    }
+    border-radius: 20px;
+  }
+
+  .hero-caption-wrapper{
+
+    @media only screen and (max-width: $hero-breakpoint){
+
+      padding-bottom: 60px;
+    }
+  }
+
+  .section-manage-lists & {
+
+  	img {
+  		min-width:auto;
+  		left: auto;
+  		transform: none;
+  		position: relative;
+  		top: auto;
+  	}
+
+		.views-field-field-slide-image {
+
+			height: auto;
+
+	  	&:after {
+
+	  		display: none;
+	  	}
+	  }
+	}
+}
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    11. Service Request (CTA)
+
+
+\*-----------------------------------------------------------------------*/
+
+// need a control so variables stay local to the partial
+
+// use faux-width mixin - boolean value
+$cta-stretch-panel:             false;
+$cta-stretch-panel--front:      false;
+
+// panel-pane background color
+$cta-panel-background:          rgba($primary, 1);
+$cta-panel-background--front:   rgba($primary, 1);
+
+// vertically bump content out of it's container
+// for example, CTA overlapping the hero
+$cta-vertical-offset:           0;
+$cta-vertical-offset--front:    0;
+
+// panel-pane alignment
+$cta-panel-alignment:           left;
+
+$cta-gutter:                    $gutter-width;
+
+// submit button
+@mixin cta-button{
+
+  @include button($color: $secondary);
+  @include bounce-to-right($tertiary);
+  @include rem(margin, $cta-gutter*.1);
+
+}
+
+// CTA Type styles
+@mixin cta-font-styles{
+
+  h2 {
+
+    @include title($size: 3.1, $weight: 300);
+    line-height: normal;
+    margin-bottom: 0;
+  }
+  h3 {
+    @include body-copy($size: 1.5);
+    display: inline;
+    // margin-right: 10px;
+  }
+
+  p,
+  p a {
+
+    @include title($size: 1.5, $weight: 800);
+    display: inline;
+
+    a:hover{
+    }
+  }
+
+  h2, h3, p, p a{
+
+    .has-featured-image:not(.page-node-12) &{
+
+      @include breakpoint(961px){
+        color: white;
+      }
+    }
+  }
+
+}
+
+// CTA Field Layout -- default
+@mixin field-layout{
+
+
+  #addressfield-wrapper{
+
+    clear: both;
+    @include rem(margin, 0, 0, 1);
+  }
+
+  .views-field-field-call-to-action{
+
+    @include teaser-content($width: 33%, $float: left, $breakpoint: 769px);
+    @include rem(padding-right, 3);
+  }
+
+  form{
+    @include teaser-content($width: 66%, $float: left, $breakpoint: 769px);
+    @include rem(margin, 0, -$cta-gutter*.1);
+  }
+
+
+  // .views-field-field-call-to-action,
+  .form-type-select,
+  // .compact-form-wrapper:not(input):not(.form-radios):not(textarea) {
+  .compact-form-wrapper{
+
+    width: calc( 100% - 1rem);
+    @include rem(margin, 0, .5, 1);
+
+    [id*="more-wrapper"] {
+
+      margin: 0 5px;
+    }
+  }
+
+
+
+  .form-item-field-address-und-0-country{
+
+    display: none;
+  }
+
+  .street-block {
+
+    .compact-form-wrapper{
+
+      @include teaser-content($width: calc(50% - 1rem ), $float: left, $breakpoint: 767px);
+    }
+  }
+
+  .locality-block {
+
+    .compact-form-wrapper,
+    .form-type-select{
+
+      @include teaser-content($width: calc(33.333% - 1rem ), $float: left, $breakpoint: 767px);
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  #edit-field-name,
+  #edit-field-email,
+  #edit-field-phone,
+  #edit-field-us-canada {
+
+    @include teaser-content($width: calc(33.333% ), $float: left, $breakpoint: 767px);
+
+  }
+
+  #edit-field-us-canada{
+
+    label,
+    div{
+      @include rem(font-size, 1.4);
+      display: inline-block;
+    }
+
+    label[for="edit-field-us-canada-und"]{
+      text-indent: 1000px;
+      width: 5px;
+      height: 20px;
+      overflow: hidden;
+      position: relative;
+
+      span.form-required{
+
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        text-indent: 0;
+        color: #fff;
+        z-index: 10;
+        /* line-height: 0; */
+        height: 20px;
+        width: 20px;
+      }
+    }
+
+    .form-type-radio{
+      margin-left: 10px;
+    }
+  }
+
+  #edit-field-question-or-comment {
+
+    clear: both;
+
+    textarea {
+      max-height: 40px;
+    }
+  }
+
+  input,
+  textarea{
+
+    background: rgba(white, .85);
+  }
+}
+
+// CTA Field Layout -- front
+@mixin field-layout--front{
+
+  // default
+  @include field-layout;
+}
+
+@mixin override--cta {
+
+  position: relative;
+
+  .block-content{
+
+  }
+
+
+  form{
+
+
+      margin-top: 15px !important;
+
+
+    #edit-actions{
+
+      @include rem(margin-right, .5);
+      @include rem(margin-left, .5);
+    }
+
+    fieldset{
+
+      border-color: rgba(white, .6);
+
+      legend{
+        color: rgba(white, .6) !important;
+      }
+    }
+
+    textarea{
+
+      resize: none;
+    }
+
+    .grippie{
+
+      display: none;
+    }
+  }
+
+  .form-item, .form-actions{
+
+    margin: 0;
+  }
+
+  ~ .panel-pane:nth-of-type(1) {
+
+    .has-featured-image &,
+    .front &{
+
+      margin-top: 0;
+    }
+  }
+
+  .field-name-field-i-need{
+
+    clear: both;
+    @include rem(margin, 0, .5);
+    label,
+    .form-radios{
+
+      @include body-copy();
+
+      @include breakpoint(961px){
+        color: white
+      }
+      display: inline;
+    }
+  }
+
+  #edit-field-question-or-comment textarea {
+    // max-height: 33px !important;
+  }
+
+  // Contact Us Page
+  .page-node-25 &{
+
+    form{
+
+      @include limiter;
+      float: none;
+    }
+
+    #edit-field-first-name,
+    #edit-field-last-name,
+    #edit-field-email,
+    #edit-field-phone{
+
+      @include teaser-content($width: calc(25% ), $float: left, $breakpoint: 767px);
+    }
+  }
+
+
+
+  .has-featured-image:not(.page-node-12) & {
+
+    &.block{
+
+      margin: 0 !important;
+    }
+
+    form{
+
+      @include rem(margin, 0, -.25);
+    }
+
+    .block-content{
+
+      @include breakpoint(961px){
+
+        position: absolute;
+        width: 50%;
+        bottom: calc(.1 * #{$feat-img-viewport-max-height}vw);
+        right: 0;
+        border-color: white;
+      }
+    }
+
+    .views-field-field-call-to-action{
+
+      @include teaser-content($width: 100%, $float: left, $breakpoint: 769px);
+      @include rem(padding-right, 0);
+    }
+
+    form{
+      @include teaser-content($width: 100%, $float: left, $breakpoint: 769px);
+      margin: 0;
+    }
+  }
+}
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    12. Blog Teasers
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$blog-stretch-panel:             false;
+$blog-stretch-panel--front:      false;
+
+// panel-pane background color
+$blog-panel-background:          none;
+$blog-panel-background--front:   none;
+$blog-panel-background--blog:    none;
+
+// teaser background color - usually views-row or field-item
+$blog-teaser-background:         none;
+
+// panel-pane alignment
+$blog-panel-alignment:           left;
+
+// teaser alignment - usually views-row or field-item
+$blog-teaser-alignment:          left;
+
+// columns for not-front pages
+$blog-col:                       1;
+
+// columns for front page
+$blog-col--front:                1;
+
+// columns for blog page
+$blog-col--blog:                3;
+
+// stack or float teaser image?
+// val1 = float || stack
+// val2 = width (percent value)
+$blog-image-pos:                 "stack", "33%";
+
+// stack or float teaser image for front page?
+// val1 = float || stack
+// val2 = width (percent value)
+$blog-image-pos--front:          "stack", "33%";
+
+// stack or float teaser image?
+// val1 = float || stack
+// val2 = width (percent value)
+$blog-image-pos--blog:          "stack", "33%";
+
+// teaser gutter (px value)
+$blog-gutter:                     $gutter-width;
+
+@mixin override--blogs {
+
+  .views-field-field-blog-image{
+
+    @include rem(margin-bottom, 2);
+  }
+
+  .views-more-link{
+
+    // color: $primary;
+    display: inline;
+    text-decoration: underline;
+    @include rem(margin-top, 1);
+  }
+
+}
+
+[class*="pane-blog-listing-panel-pane"] {
+
+  .views-field-field-blog-image {
+
+    img {
+
+      // width: auto;
+    }
+  }
+}
+
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    13. Service Teasers
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$service-stretch-panel:             false;
+$service-stretch-panel--front:      false;
+
+// panel-pane background color
+$service-panel-background:          none;
+$service-panel-background--front:   none;
+
+// teaser background color - usually views-row or field-item
+$service-teaser-background:         none;
+
+// panel-pane alignment
+$service-panel-alignment:           center;
+
+// teaser alignment - usually views-row or field-item
+$service-teaser-alignment:          left;
+
+// columns for not-front pages
+$service-col:                       3;
+
+// columns for front page
+$service-col--front:                1;
+
+// stack or float teaser image?
+// val1 = float || stack
+// val2 = width (percent value)
+$service-image-pos:                 "stack", "33%";
+
+// stack or float teaser image for front page?
+// val1 = float || stack
+// val2 = width (percent value)
+$service-image-pos--front:          "stack", "33%";
+
+// teaser gutter (px value)
+$service-gutter:                     $gutter-width;
+
+@mixin override--services {
+
+}
+
+/*-----------------------------------------------------------------------*\
+
+
+    14. Testimonials
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$testimonial-stretch-panel:              true;
+$testimonial-stretch-panel--front:       true;
+
+// panel-pane background color
+$testimonial-panel-background:           none;
+$testimonial-panel-background--front:    $testimonial-panel-background;
+
+$testimonial-border:                     false;
+$testimonial-border-color:               rgba($primary, 0);
+
+$testimonial-limit-block-content:        true;
+$testimonial-limit-block-content-width:  70%;
+
+$testimonial-text-align:                 left;
+
+@mixin testimonial-body {
+
+  font-family: $primary-ff;
+  font-style: italic;
+  @include font-size(3.6);
+  @include rem(line-height, 4);
+  font-weight: 300;
+
+}
+
+@mixin testimonial-city {
+
+  @include body-copy($size: 1.7);
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+
+  &:before{
+    content: " — ";
+    display: inline-block;
+  }
+  .field-content{
+
+    display: inline-block;
+  }
+}
+
+@mixin override--testimonials {
+
+  ul.slides li{
+
+    .views-field-body{
+
+      border-top: 5px solid darken($lt_gray, 10%);
+      @include rem(padding-top, $vp);
+    }
+
+    .views-field-field-testimonial-city{
+
+      @include rem(padding-bottom, $vp);
+      border-bottom: 5px solid darken($lt_gray, 10%);
+    }
+
+  }
+
+
+  .flex-direction-nav {
+
+    .flex-prev,
+    .flex-next{
+
+      // background: none;
+      // color: white;
+      width: 50px;
+      @include rem(height, 24.5);
+      bottom: 50%;
+      -moz-transform: translateY(50%);
+      -webkit-transform: translateY(50%);
+      transform: translateY(50%);
+
+      &:before{
+        @include font-size-calc(15);
+        -moz-transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        left: 50%;
+        position: relative;
+      }
+    }
+  }
+
+
+}
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    15. Promotions
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$promo-stretch-panel:             false;
+$promo-stretch-panel--front:      false;
+
+// panel-pane background color
+$promo-panel-background:          none;
+$promo-panel-background--front:   $promo-panel-background;
+
+// teaser background color - usually views-row or field-item
+$promo-teaser-background:         none;
+
+// panel-pane alignment
+$promo-panel-alignment:           left;
+
+// teaser alignment - usually views-row or field-item
+$promo-teaser-alignment:          left;
+
+// columns for not-front pages
+$promo-col:                       1;
+
+// columns for front page
+$promo-col--front:                1;
+
+// stack or float teaser image?
+// val1 = float || stack
+// val2 = width (percent value)
+$promo-image-pos:                 "stack", "100%";
+
+// stack or float teaser image for front page?
+// val1 = float || stack
+// val2 = width (percent value)
+$promo-image-pos--front:          "stack", "33%";
+
+// teaser gutter (px value)
+$promo-gutter:                     $gutter-width;
+
+@mixin override--promo {
+
+  .views-field-field-display-title{
+    @include title(1.8);
+    @include rem(margin, 2, 0, 0, 0);
+  }
+
+  .views-field-field-promotion-link-text{
+    display: inline;
+  }
+
+
+  .views-row {
+
+    .section-specials &{
+
+        @include teaser-content($width: calc(98.5%/3 - #{$promo-gutter*2}), $breakpoint: 769px);
+
+    }
+
+  }
+
+}
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    16. Distinctions
+
+
+\*-----------------------------------------------------------------------*/
+
+// use faux-width mixin - boolean value
+$distinction-stretch-panel:             false;
+$distinction-stretch-panel--footer:     true;
+
+$distinction-panel-border:              none;
+
+// panel-pane background color
+$distinction-panel-background:           none;
+$distinction-panel-background--footer:   none;
+
+// teaser background color - usually views-row or field-item
+$distinction-teaser-background:         none;
+
+// panel-pane alignment
+$distinction-panel-alignment:           left;
+
+// teaser alignment - usually views-row or field-item
+$distinction-teaser-alignment:          left;
+
+// columns for not-front pages
+$distinction-col:                       2;
+
+// stack or float teaser image?
+// val1 = float || stack
+// val2 = width (percent value)
+$distinction-image-pos:                 "float", "25%";
+
+// teaser gutter (px value)
+$distinction-gutter:                     $gutter-width;
+
+@mixin override--distinctions {
+
+  padding-top: 0;
+
+  .pane-title{
+
+    color: black;
+  }
+
+
+  #footer-wrapper &{
+
+    .views-row {
+
+      @include rem(padding, 0, 1);
+      max-width: 120px;
+    }
+  }
+}
+
+
+
+
+/*-----------------------------------------------------------------------*\
+
+
+    17. Misc
+
+
+\*-----------------------------------------------------------------------*/
+
+.section-manage-lists {
+
+	#page-title {
+
+		display: none;
+	}
+}
+
+[class*="pane-promotions-panel"] {
+
+  [class*="views-field"][class*="-image"] {
+
+      img {
+
+        max-width: auto;
+        // width: auto;
+      }
+    }
+}
+
+@mixin override--global{
+
+
+  html{
+
+
+  }
+
+  h1 {
+
+     @include title($color: $dk_gray);
+  }
+
+  h2 {
+    @include title($size: 1.8, $color: $dk_gray);
+  }
+
+  h3 {
+    @include title($size: 1.6, $color: $dk_gray);
+  }
+
+
+
+  #page-title{
+
+   @include page_title;
+
+  }
+
+  .pane-node-title,
+  .pane-title{
+
+    @include body-copy;
+    text-transform: uppercase;
+  }
+
+  .block-title:not(.pane-title){
+
+    @include title($color: $dk_gray);
+  }
+
+  h1.node-title{
+
+    @include body-copy;
+    text-transform: uppercase;
+  }
+
+  a{
+     color: $primary;
+     @include css-transition(color);
+     text-decoration: underline;
+
+     &:hover{
+      color: darken($primary, 10%);
+     }
+  }
+
+  .EC-region-main{
+
+    @include breakpoint{
+      @include rem(padding-right, 4);
+    }
+  }
+
+  .container{
+
+    width: 100%;
+    max-width: $max-width;
+  }
+
+  .pane-node-body .view-distinctions{
+
+    .views-field-title{
+
+      @include title($size: 1.8, $color: $dk_gray);
+    }
+
+    .views-row{
+
+      @include rem(margin, 3, 0);
+
+      &::after{
+
+        @include clearfix;
+      }
+    }
+
+    @include breakpoint(769px){
+
+      .views-field-field-logo{
+        @include teaser-content($width: 33.333%, $float: left);
+      }
+
+      .views-field-title,
+      .views-field-body{
+        @include teaser-content($width: 66.666%, $float: left);
+      }
+
+    }
+  }
+
+  .custom-faq{
+
+    &.block{
+
+      @include rem(margin, $vp, 0);
+    }
+
+    .field-name-field-featured-image{
+
+      @include rem(margin-bottom, 2);
+
+      img{
+
+        width: 100%;
+        max-width: none;
+        display: block;
+      }
+    }
+
+    .node-readmore a{
+
+      text-transform: uppercase;
+      font-weight: 700;
+      color: $secondary;
+      // display: block;
+      @include rem(margin-top, 1);
+    }
+
+  }
+
+  .pane-node-field-display-startend{
+
+    margin-top: $vp+rem !important;
+
+    .block-content{
+
+      @include body-copy;
+    }
+  }
+
+  [class*="pane-faq-all-panel-pane"]{
+
+    &.block{
+      @include limiter;
+    }
+
+    .view-content > h3{
+
+      @include title;
+      @include rem(margin-top, $vp);
+      &:before{
+        content: "";
+        background: $primary;
+        position: absolute;
+        left: -20px;
+        right: auto;
+        top: 0;
+        bottom: 0;
+        display: block;
+        width: 3px;
+      }
+    }
+  }
+}
+
+
+
+@mixin override--staff {
+
+
+}

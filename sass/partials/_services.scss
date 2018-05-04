@@ -1,0 +1,433 @@
+
+
+/*-----------------------------------------------------------------------*\
+
+    Service Category Teasers
+
+\*-----------------------------------------------------------------------*/
+
+.pane-node-field-ref-page-serv-cat,
+.pane-node-field-ref-serv-cat-services,
+.pane-node-field-ref-serv-group-serv-cat,
+[class*="pane-node-field-ref-serv-"]{
+
+  text-align: $service-panel-alignment;
+  @include rem(margin, $default-padding, 0);
+
+  .block-content{
+
+    @include rem(margin, 0, -$service-gutter*.1);
+  }
+
+  .block-content > .field > .field-items > .field-item {
+
+    display: inline-block;
+    vertical-align: top;
+    background: $service-teaser-background;
+    text-align: $service-teaser-alignment;
+
+    @include rem(margin, 0, $service-gutter*.1);
+
+    @if $service-teaser-background != "none"{
+
+      @include rem(padding, $default-padding);
+    }
+
+    .EC-region-right & {
+      width: 100%;
+      padding: 0;
+      display: block;
+    }
+
+    &:after {
+      @include clearfix;
+    }
+  }
+
+  [class*='field-name-field'][class*='-image'] {
+    position: relative;
+    text-align: $service-teaser-alignment;
+
+    a {
+      display: block;
+    }
+
+    img {
+      max-width: none;
+      width: 100%;
+      display: block;
+    }
+
+    &:after {
+
+    }
+  }
+
+  .node-header,
+  .field-name-body,
+  nav {
+    text-align: $service-teaser-alignment;
+
+    li {
+
+    }
+  }
+
+  .node-header {
+
+    .node-title {
+
+      @include subtitle {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .field-name-body {
+    @include body-copy;
+    // @include rem(margin-top, 2);
+  }
+
+
+  @if $service-panel-background != "none"{
+
+    @if lightness($service-panel-background) < 70{
+
+      .pane-title{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $service-teaser-background != "none"{
+    @if  lightness($service-teaser-background) < 70 {
+       // Lighter backgorund, return dark color
+
+      .node-header .node-title,
+      .field-name-body,
+      nav li{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $service-teaser-background == "none"{
+
+    @if $service-panel-background != "none"{
+
+      @if lightness($service-panel-background) < 70{
+
+        .node-header .node-title,
+        .field-name-body,
+        nav li{
+
+          color: white;
+        }
+      }
+    }
+  }
+
+/*-----------------------------------------------------------------------*\
+   Home Page
+\*-----------------------------------------------------------------------*/
+
+.front & {
+
+
+
+  @if $service-stretch-panel--front{
+
+    &.block{
+
+      margin-bottom: 0;
+    }
+
+    @include faux-width($service-panel-background--front);
+  }
+
+  @else{
+
+   background: $service-panel-background--front;
+
+    &.block{
+
+      @include rem(margin, $vp, 0);
+    }
+  }
+
+ .block-content > .field > .field-items > .field-item {
+
+  @if($service-col--front > 1){
+    @include teaser-content($width: calc(99%/#{$service-col--front} - #{$service-gutter*2}), $breakpoint: 769px);
+  }
+
+ }
+
+ @if nth($service-image-pos--front, 1) == "float"{
+
+   .node-header,
+   .field-name-body,
+   nav {
+
+     @include teaser-content($width: calc( 100% - #{unquote(nth($service-image-pos--front, 2))} ), $float: right, $breakpoint: 769px);
+   }
+
+   [class*='field-name-field'][class*='-image'] {
+
+     @include teaser-content($width: #{unquote(nth($service-image-pos--front, 2))}, $float: left, $breakpoint: 769px);
+     min-height: 100px;
+     @include rem(padding-right, 3);
+   }
+ }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sub Pages
+\*-----------------------------------------------------------------------*/
+
+.not-front & {
+
+  .block-content > .field > .field-items > .field-item {
+
+    @if($service-col > 1){
+      @include teaser-content($width: calc(99%/#{$service-col} - #{$service-gutter*2}), $breakpoint: 769px);
+    }
+
+  }
+
+  @if nth($service-image-pos, 1) == "float"{
+
+    .node-header,
+    .field-name-body,
+    nav {
+
+      @include teaser-content($width: calc( 100% - #{unquote(nth($service-image-pos, 2))} ), $float: right, $breakpoint: 769px);
+    }
+
+    [class*='field-name-field'][class*='-image'] {
+
+      @include teaser-content($width: #{unquote(nth($service-image-pos, 2))}, $float: left, $breakpoint: 769px);
+      min-height: 100px;
+      @include rem(padding-right, 3);
+    }
+
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+}
+
+
+
+
+
+
+[class*="pane-home-page-service-categories-panel-pane-"]{
+
+  text-align: $service-panel-alignment;
+  @include rem(padding, $default-padding);
+
+  .block-content{
+
+    @include rem(margin, 0, -$service-gutter*.1);
+  }
+
+  .views-row {
+
+    display: inline-block;
+    vertical-align: top;
+    background: $service-teaser-background;
+    text-align: $service-teaser-alignment;
+
+    @if $service-teaser-background != "none"{
+
+      @include rem(padding, $default-padding);
+    }
+
+    @include rem(margin, 0, $service-gutter*.1, 3);
+
+    .EC-region-right & {
+      width: 100%;
+      padding: 0;
+      display: block;
+    }
+
+    &:after {
+      @include clearfix;
+    }
+  }
+
+  [class*='views-field'][class*='-image'] {
+    position: relative;
+    text-align: $service-teaser-alignment;
+    a {
+      display: block;
+    }
+
+    img {
+      max-width: none;
+      width: 100%;
+      display: block;
+    }
+
+    &:after {
+
+    }
+  }
+
+  .views-field-title,
+  .views-field-body {
+    text-align: $service-teaser-alignment;
+  }
+
+  .views-field-title {
+
+    @include subtitle {
+      text-transform: uppercase;
+    }
+  }
+
+  .views-field-body {
+    @include body-copy;
+    // @include rem(margin-top, 2);
+  }
+
+  @if $service-panel-background != "none"{
+
+    @if lightness($service-panel-background) < 70{
+
+      .pane-title{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $service-teaser-background != "none"{
+    @if  lightness($service-teaser-background) < 70 {
+       // Lighter backgorund, return dark color
+
+       .views-field-title,
+       .views-field-body{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $service-teaser-background == "none"{
+
+    @if $service-panel-background != "none"{
+      @if lightness($service-panel-background) < 70{
+
+        .views-field-title,
+        .views-field-body{
+
+          color: white;
+        }
+      }
+    }
+  }
+
+/*-----------------------------------------------------------------------*\
+   Home Page
+\*-----------------------------------------------------------------------*/
+
+.front & {
+
+
+
+  @if $service-stretch-panel--front{
+
+    &.block{
+
+      margin-bottom: 0;
+    }
+
+    @include faux-width($service-panel-background--front);
+  }
+
+  @else{
+
+   background: $service-panel-background--front;
+
+    &.block{
+
+      @include rem(margin, $vp, 0);
+    }
+  }
+
+ .views-row {
+
+  @if($service-col--front > 1){
+    @include teaser-content($width: calc(99%/#{$service-col--front} - #{$service-gutter*2}), $breakpoint: 769px);
+  }
+
+ }
+
+ @if nth($service-image-pos--front, 1) == "float"{
+
+   .views-field-title,
+   .views-field-body {
+
+     @include teaser-content($width: calc( 100% - #{unquote(nth($service-image-pos--front, 2))} ), $float: right, $breakpoint: 769px);
+   }
+
+   [class*='views-field'][class*='-image'] {
+
+     @include teaser-content($width: #{unquote(nth($service-image-pos--front, 2))}, $float: left, $breakpoint: 769px);
+     min-height: 100px;
+     @include rem(padding-right, 3);
+   }
+ }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sub Pages
+\*-----------------------------------------------------------------------*/
+
+.not-front & {
+
+  .views-row {
+
+    @if($service-col > 1){
+      @include teaser-content($width: calc(99%/#{$service-col} - #{$service-gutter*2}), $breakpoint: 769px);
+    }
+
+  }
+
+  @if nth($service-image-pos, 1) == "float"{
+
+    .views-field-title,
+    .views-field-body {
+
+      @include teaser-content($width: calc( 100% - #{unquote(nth($service-image-pos, 2))} ), $float: right, $breakpoint: 769px);
+    }
+
+    [class*='views-field'][class*='-image'] {
+
+      @include teaser-content($width: #{unquote(nth($service-image-pos, 2))}, $float: left, $breakpoint: 769px);
+      min-height: 100px;
+      @include rem(padding-right, 3);
+    }
+
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+}
+
+
+@include override--services;

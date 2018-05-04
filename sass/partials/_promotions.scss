@@ -1,0 +1,387 @@
+
+
+/*-----------------------------------------------------------------------*\
+
+    Promotions
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-promotions-panel"] {
+
+  .pane-title {
+
+  }
+
+  .block-content{
+
+    @include rem(margin, 0, -$promo-gutter*.1);
+  }
+
+  .views-row {
+    display: inline-block;
+    vertical-align: top;
+
+    text-align: $promo-teaser-alignment;
+
+    @if $promo-teaser-background != "none"{
+
+      background: $promo-teaser-background;
+      @include rem(padding, $default-padding);
+    }
+
+    @include rem(margin, 0, $promo-gutter*.1, 3);
+
+    .EC-region-right & {
+      width: 100%;
+      padding: 0;
+      display: block;
+    }
+
+    &:after {
+      @include clearfix;
+    }
+  }
+
+  [class*='views-field'][class*='-image'] {
+    position: relative;
+    text-align: $promo-teaser-alignment;
+    a {
+      display: block;
+    }
+
+    img {
+      max-width: none;
+      width: 100%;
+      display: block;
+    }
+
+    &:after {
+
+    }
+  }
+
+  .views-field-field-display-title,
+  .views-field-field-promotion-link-text,
+  .views-field-field-display-subtitle,
+  .views-field-body {
+    text-align: $promo-teaser-alignment;
+  }
+
+  .views-field-field-display-title {
+
+    // @include subtitle {
+    //   text-transform: uppercase;
+    // }
+  }
+
+  .views-field-field-promotion-link-text,
+  .views-field-field-display-subtitle,
+  .views-field-body {
+    @include body-copy;
+    // @include rem(margin-top, 2);
+  }
+
+  .promo-button {
+    color: $primary;
+    text-decoration: underline;
+
+    &:hover {
+      color: $tertiary;
+    }
+  }
+
+
+
+  // .node-show-this-block {
+  //
+  //   .node-header{
+  //     display: none;
+  //
+  //   }
+  //
+  //   .field-name-field-display-title {
+  //
+  //     @include subtitle {
+  //       text-transform: uppercase;
+  //
+  //       a {
+  //         color: inherit;
+  //       }
+  //     }
+  //   }
+  //
+  //   .field-name-field-display-subtitle {
+  //     @include body-copy;
+  //     @include rem(margin-top, 2);
+  //
+  //     a{
+  //       color: inherit;
+  //     }
+  //   }
+  //
+  //   .field-name-field-promotion-link-text a {
+  //     @include body-copy;
+  //     color: $primary;
+  //     text-decoration: underline;
+  //
+  //     &:hover {
+  //       color: $tertiary;
+  //     }
+  //   }
+  // }
+
+
+
+/*-----------------------------------------------------------------------*\
+   Home Page
+\*-----------------------------------------------------------------------*/
+
+.front & {
+
+  @if $promo-stretch-panel--front{
+
+   &.block{
+
+     margin-bottom: 0;
+   }
+
+   @include faux-width($promo-panel-background--front);
+  }
+
+  @else{
+
+    @if $promo-panel-background--front != none{
+
+      .block-inner{
+        background: $promo-panel-background--front;
+        @include rem(padding, $default-padding);
+      }
+
+    }
+
+   &.block{
+
+     @include rem(margin, $vp, 0);
+   }
+  }
+
+
+  @if $promo-panel-background--front != "none"{
+
+    @if lightness($promo-panel-background--front) < 70{
+
+      .pane-title{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $promo-teaser-background != "none"{
+    @if  lightness($promo-teaser-background) < 70 {
+       // Lighter backgorund, return dark color
+
+       .views-field-field-display-title,
+       .views-field-field-display-title a,
+       .views-field-field-display-subtitle,
+       .views-field-body,
+       .views-field-body p,
+       .promo-button{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $promo-teaser-background == "none"{
+
+    @if $promo-panel-background--front != "none"{
+
+      .block-inner{
+
+        @include rem(padding, $default-padding);
+        background: $promo-panel-background--front;
+      }
+
+
+      @if lightness($promo-panel-background--front) < 70{
+
+        .views-field-field-display-title,
+        .views-field-field-display-title a,
+        .views-field-field-display-subtitle,
+        .views-field-body,
+        .views-field-body p,
+        .promo-button{
+
+          color: white;
+        }
+      }
+    }
+  }
+
+
+  .views-row {
+
+    @if($promo-col--front > 1){
+      @include teaser-content($width: calc(98.5%/#{$promo-col--front} - #{$promo-gutter*2}), $breakpoint: 769px);
+    }
+
+  }
+
+  @if nth($promo-image-pos--front, 1) == "float"{
+
+    .field-name-field-display-title,
+    .field-name-field-display-subtitle,
+    .field-name-field-promotion-link-text,
+    .views-field-body {
+
+      @include teaser-content($width: calc( 100% - #{unquote(nth($promo-image-pos--front, 2))} ), $float: left, $breakpoint: 769px);
+    }
+
+    [class*='views-field'][class*='-image'] {
+
+      @include teaser-content($width: #{unquote(nth($promo-image-pos--front, 2))}, $float: left, $breakpoint: 769px);
+      min-height: 100px;
+      @include rem(padding-right, 3);
+    }
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+Sub Pages
+\*-----------------------------------------------------------------------*/
+
+.not-front & {
+
+  @if $promo-stretch-panel{
+
+   &.block{
+
+     margin-bottom: 0;
+   }
+
+   @include faux-width($promo-panel-background);
+  }
+
+  @else{
+
+
+
+    @if $promo-panel-background != none{
+
+      .block-inner{
+
+        background: $promo-panel-background;
+        @include rem(padding, $default-padding);
+      }
+    }
+
+   &.block{
+
+     @include rem(margin, $vp, 0);
+   }
+  }
+
+
+  @if $promo-panel-background != "none"{
+
+    @if lightness($promo-panel-background) < 70{
+
+      .pane-title{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $promo-teaser-background != "none"{
+    @if  lightness($promo-teaser-background) < 70 {
+       // Lighter backgorund, return dark color
+
+       .views-field-field-display-title,
+       .views-field-field-display-title a,
+       .views-field-field-display-subtitle,
+       .views-field-body,
+       .views-field-body p,
+       .promo-button{
+
+        color: white;
+      }
+    }
+  }
+
+  @if $promo-teaser-background == "none"{
+
+    @if $promo-panel-background != "none"{
+
+      .block-inner{
+
+        background: $promo-panel-background;
+        @include rem(padding, $default-padding);
+      }
+
+      @if lightness($promo-panel-background) < 70{
+
+        .views-field-field-display-title,
+        .views-field-field-display-title a,
+        .views-field-field-display-subtitle,
+        .views-field-body,
+        .views-field-body p,
+        .promo-button{
+
+          color: white;
+        }
+      }
+    }
+  }
+
+
+
+  .views-row {
+    @if($promo-col){
+      @include teaser-content($width: calc(98.5%/#{$promo-col} - #{$promo-gutter*2}), $breakpoint: 769px);
+    }
+
+  }
+
+  @if nth($promo-image-pos, 1) == "float"{
+
+    .field-name-field-display-title,
+    .field-name-field-display-subtitle,
+    .field-name-field-promotion-link-text,
+    .views-field-body {
+
+     @include teaser-content($width: calc( 100% - #{unquote(nth($promo-image-pos, 2))} ), $float: left, $breakpoint: 769px);
+   }
+
+   [class*='views-field'][class*='-image'] {
+
+     @include teaser-content($width: #{unquote(nth($promo-image-pos, 2))}, $float: left, $breakpoint: 769px);
+     min-height: 100px;
+     @include rem(padding-right, 3);
+   }
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sidebar
+\*-----------------------------------------------------------------------*/
+
+  .EC-region-right & {
+
+  }
+
+/*---- end section ------------------------------------------------------*/
+
+
+  @include override--promo;
+
+}

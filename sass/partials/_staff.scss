@@ -1,0 +1,49 @@
+/*-----------------------------------------------------------------------*\
+
+
+    Staff Teasers
+
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-staff-panel-pane"] {
+  .views-row {
+    @include rem(margin, $vp, 0);
+
+    &::after {
+      @include clearfix;
+    }
+  }
+
+  .views-field-field-staff-photo {
+    @include teaser-content($width: calc(33% + 30px), $float: left, $breakpoint: 768px);
+    max-width: calc(220px + 30px);
+    min-height: 50px;
+
+    img {
+      width: 100%;
+      @media only screen and (min-width: 769px) {
+         @include rem(padding-right, 3);
+      }
+    }
+  }
+
+  .views-field-field-first-name,
+  .views-field-field-last-name {
+    @include title($size: 2, $color: $dk_gray);
+    text-align: left;
+  }
+
+  .views-field-field-staff-title {
+    @include body-copy;
+    font-style: italic;
+  }
+
+  .views-field-body {
+    @include teaser-content($width: calc(100% - (220px + 30px)), $float: right, $breakpoint: 768px);
+  }
+
+
+  @include override--staff;
+
+}

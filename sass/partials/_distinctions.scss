@@ -1,0 +1,96 @@
+
+
+/*-----------------------------------------------------------------------*\
+
+   Distinctions
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-distinctions-panel-pane-"] {
+
+
+/*-----------------------------------------------------------------------*\
+   Footer
+\*-----------------------------------------------------------------------*/
+
+  #footer-wrapper & {
+
+    text-align: center;
+    position: relative;
+    @include rem(padding, $vp, 0);
+    // @include rem(margin-bottom, $vp);
+    margin-bottom: $vp*10px  !important;
+    margin-left: -15px;
+    margin-right: -15px;
+
+    @if $distinction-stretch-panel--footer{
+
+      @include faux-width($distinction-panel-background--footer, 2);
+    }
+    @else{
+      background: $distinction-panel-background--footer;
+    }
+
+    @if $distinction-panel-border != "none"{
+      border-top: $distinction-panel-border;
+    }
+
+    .views-row{
+
+      display: inline-block;
+      vertical-align: middle;
+      @include rem(padding, 0, 2);
+    }
+  }
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Content
+\*-----------------------------------------------------------------------*/
+
+
+  #content-wrapper & {
+
+    .views-row {
+
+      @if $distinction-teaser-background != "none"{
+
+        @include rem(padding, $default-padding);
+      }
+
+      @include teaser-content($width: calc(99%/#{$distinction-col} - #{$distinction-gutter*2}), $breakpoint: 769px);
+
+      &:after{
+        @include clearfix;
+      }
+    }
+
+    @if nth($distinction-image-pos, 1) == "float"{
+
+      .views-field-title,
+      .views-field-body {
+
+        @include teaser-content($width: calc( 100% - #{unquote(nth($distinction-image-pos, 2))} ), $float: left, $breakpoint: 769px);
+      }
+
+      .views-field-field-logo,
+      .views-field-field-dynamic-seal {
+
+        @include teaser-content($width: #{unquote(nth($distinction-image-pos, 2))}, $float: left, $breakpoint: 769px);
+
+        @include breakpoint{
+
+          @include rem(padding-right, $default-padding);
+        }
+      }
+    }
+  }
+
+/*---- end section ------------------------------------------------------*/
+
+  @include override--distinctions;
+
+}

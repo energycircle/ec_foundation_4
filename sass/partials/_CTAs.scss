@@ -1,0 +1,291 @@
+/*-----------------------------------------------------------------------*\
+
+    Service Request
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-service-request-panel-pane-"] {
+
+  position: relative;
+  z-index: 2;
+  text-align: $cta-panel-alignment;
+  // background: $cta-panel-background;
+
+  .block-content{
+
+    // @include rem(margin, 0, -$cta-gutter*.1);
+
+  }
+
+  @include cta-font-styles;
+
+
+  .entityform-type-entityform-type {
+
+    h2 {
+      display: none;
+    }
+  }
+
+  #edit-field-i-need-und {
+
+    .form-item {
+      display: inline-block;
+      // color: $lt_gray;
+      margin-right: 10px;
+      @include font-size(1.5);
+    }
+
+    div:last-child {
+      margin-right: 0;
+    }
+  }
+
+  form #edit-actions {
+
+    @include cta-button;
+    @include rem(margin, 1, 0, 0);
+
+    input {
+
+      margin: 0;
+      padding: 0;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+
+      &:hover {
+
+        background: none;
+        text-indent: 0;
+      }
+    }
+  }
+
+/*-----------------------------------------------------------------------*\
+   Home Page
+\*-----------------------------------------------------------------------*/
+
+   .front & {
+
+     @if $cta-stretch-panel--front{
+
+       &.block{
+
+         margin-bottom: 0;
+       }
+
+       @include faux-width($cta-panel-background--front);
+     }
+
+     @else{
+
+       &.block{
+
+         @include rem(margin, $vp, 0);
+
+       }
+
+       .block-content {
+
+          @include rem(padding, $default-padding);
+       }
+     }
+
+
+
+     &.block{
+
+       @if $cta-vertical-offset--front > 0{
+
+         position: relative;
+
+         @include breakpoint($primary-breakpoint){
+           @include rem(top, -$cta-vertical-offset--front);
+           @include rem(margin-bottom, -$cta-vertical-offset--front  + $vp);
+         }
+
+       }
+     }
+
+     @if $cta-panel-background--front != "none"{
+
+       .block-content{
+
+         background: $cta-panel-background;
+         // @include rem(padding, $default-padding);
+
+       }
+
+       @if lightness($cta-panel-background--front) < 70{
+
+         h1,
+         h2,
+         h3, p,
+         label:not(.compact-form-label) {
+
+           color: white;
+         }
+       }
+     }
+
+     @include field-layout--front;
+
+   }
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sub Pages
+\*-----------------------------------------------------------------------*/
+
+   .not-front & {
+
+     @if $cta-stretch-panel{
+
+       &.block{
+
+         margin-bottom: 0;
+       }
+
+       @include faux-width($cta-panel-background);
+     }
+
+     @else{
+
+
+       .block-content{
+
+         @include rem(padding, $default-padding);
+       }
+
+       &.block{
+
+         @include rem(margin, $vp, 0);
+       }
+     }
+
+     &.block{
+
+       @if $cta-vertical-offset > 0{
+
+         position: relative;
+
+
+
+         @include breakpoint($primary-breakpoint){
+           @include rem(top, -$cta-vertical-offset);
+           @include rem(margin-bottom, -$cta-vertical-offset  + $vp);
+         }
+
+       }
+     }
+     @if $cta-panel-background != "none"{
+
+       .block-content{
+
+         background: $cta-panel-background;
+         // @include rem(padding, $default-padding);
+       }
+
+       @if lightness($cta-panel-background) < 70{
+
+         h1,
+         h2,
+         h3, p,
+         label:not(.compact-form-label) {
+
+           color: white;
+         }
+       }
+     }
+
+      @include field-layout;
+
+   }
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sidebar
+\*-----------------------------------------------------------------------*/
+
+  .EC-region-right &,
+  .region-two-66-33-second & {
+
+    @if $cta-stretch-panel or $cta-stretch-panel--front {
+
+      @include rem(padding, $default-padding);
+
+      &.block{
+
+        @include rem(margin, $vp, 0);
+      }
+    }
+
+    &.block{
+
+      .not-front & {
+
+        @if $cta-vertical-offset > 0 {
+
+          position: relative;
+          @include breakpoint($primary-breakpoint){
+            @include rem(top, -$cta-vertical-offset);
+            // @include rem(margin-bottom, -$cta-vertical-offset  + $vp);
+            margin-bottom: calc(-#{$cta-vertical-offset}rem  + #{$gutter-width} );
+          }
+        }
+      }
+
+
+      .front &{
+
+        @if $cta-vertical-offset--front > 0 {
+
+          position: relative;
+          @include breakpoint($primary-breakpoint){
+            @include rem(top, -$cta-vertical-offset--front);
+            // @include rem(margin-bottom, -$cta-vertical-offset--front  + $vp);
+            margin-bottom: calc(-#{$cta-vertical-offset--front}rem  + #{$gutter-width} );
+          }
+        }
+      }
+    }
+
+    .front &{
+
+      @if $cta-panel-background--front != "none" and $cta-stretch-panel--front == false{
+
+
+        .block-content{
+
+          background: $cta-panel-background--front;
+        }
+      }
+
+    }
+
+    .not-front &{
+
+      @if $cta-panel-background != "none" and $cta-stretch-panel == false{
+
+        .block-content{
+
+          background: $cta-panel-background;
+        }
+      }
+    }
+
+  }
+
+/*---- end section ------------------------------------------------------*/
+
+  @include override--cta;
+
+}

@@ -1,0 +1,67 @@
+
+#block-system-main .pane-node-body {
+
+  >.block-inner > .block-content {
+
+    // @include rem(margin, $vp, 0);
+
+    .has-featured-image &{
+
+
+    }
+
+    .not-front &{
+
+      h1, h2, h3, p{
+
+        text-align: $pane-node-body-text-align;
+      }
+
+      @if $pane-node-body-limit-block-content{
+        @include limiter;
+      }
+    }
+
+    .front & {
+
+      h1, h2, h3, p{
+
+        text-align: $pane-node-body-text-align--front;
+      }
+
+      @if $pane-node-body-limit-block-content--front{
+        @include limiter;
+      }
+    }
+  }
+}
+
+#breadcrumb-title-wrapper{
+
+  .block-content{
+    @if $pane-node-body-limit-block-content{
+      @include limiter;
+    }
+  }
+}
+
+.pane-node-field-display-date {
+
+  .block-content {
+    @include rem(margin, 2, 0, 0);
+
+    @if $pane-node-body-limit-block-content{
+      @include limiter;
+    }
+
+  }
+}
+
+#user-login-panel{
+  @if $pane-node-body-limit-block-content{
+    @include limiter;
+    margin: auto !important;
+  }
+}
+
+@include override--body;

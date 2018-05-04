@@ -1,0 +1,232 @@
+[class*="pane-testimonials-panel-pane-"] {
+  clear: both;
+
+  @include rem(margin, $vp, 0);
+
+  .block-inner{
+
+    // @include rem(padding, $default-padding);
+  }
+
+
+  @if $testimonial-border{
+
+
+
+    .block-inner{
+
+      border: 1px solid $testimonial-border-color;
+    }
+  }
+
+  .pane-title,
+  .block-content{
+
+    @if $testimonial-limit-block-content{
+      @include limiter($width: $testimonial-limit-block-content-width);
+    }
+  }
+
+  &.fs .pane-title{
+
+    @include rem(padding, 0);
+    @media only screen and (min-width: 769px) {
+       @include rem(padding, 0, 8);
+    }
+  }
+
+  .pane-title{
+    text-align: $testimonial-text-align;
+  }
+
+  .views-row:not(.views-row-last){
+
+    @include rem(margin-bottom, 4);
+    @include rem(padding-bottom, 4);
+    border-bottom: 1px solid lighten(gray, 40%);
+  }
+
+
+  ul.slides {
+    li {
+      @include rem(padding, 0, 0, 6);
+      @media only screen and (min-width: 769px) {
+         @include rem(padding, 0, 8);
+      }
+    }
+  }
+
+  .pane-title,
+  .views-field-body,
+  .views-field-field-display-subtitle,
+  .views-field-field-display-title,
+  .views-field-field-testimonial-city{
+
+    text-align: $testimonial-text-align;
+
+    .front &{
+      @if $testimonial-panel-background--front != "none"{
+
+        @if lightness($testimonial-panel-background--front) < 70{
+
+            color: white;
+        }
+      }
+    }
+
+    .not-front &{
+      @if $testimonial-panel-background != "none"{
+
+        @if lightness($testimonial-panel-background) < 70{
+
+            color: white;
+        }
+      }
+    }
+  }
+
+  .views-field-field-testimonial-image {}
+
+  .views-field-body,
+  .views-field-body p {
+
+    @include testimonial-body;
+
+    .front &{
+      @if $testimonial-panel-background--front != "none"{
+
+        @if lightness($testimonial-panel-background--front) < 70{
+
+            color: white;
+        }
+      }
+    }
+
+    .not-front &{
+      @if $testimonial-panel-background != "none"{
+
+        @if lightness($testimonial-panel-background) < 70{
+
+            color: white;
+        }
+      }
+    }
+
+  }
+
+  .views-field-field-testimonial-city {
+
+    @include testimonial-city;
+
+    .front &{
+      @if $testimonial-panel-background--front != "none"{
+
+        @if lightness($testimonial-panel-background--front) < 70{
+
+            color: white;
+        }
+      }
+    }
+
+    .not-front &{
+      @if $testimonial-panel-background != "none"{
+
+        @if lightness($testimonial-panel-background) < 70{
+
+            color: white;
+        }
+      }
+    }
+  }
+
+  .flex-control-paging {
+    display: none;
+  }
+
+  .views-more-link {
+    //display: block;
+  }
+
+
+  /*-----------------------------------------------------------------------*\
+    Home Page
+  \*-----------------------------------------------------------------------*/
+
+  .front & {
+    @if $testimonial-stretch-panel--front{
+
+      @include faux-width($testimonial-panel-background--front);
+    }
+    @else{
+
+      .block-inner{
+        background: $testimonial-panel-background--front;
+      }
+    }
+
+    .block-content {
+      //@include limiter(80%);
+    }
+  }
+
+  /*---- end section ------------------------------------------------------*/
+
+
+
+  /*-----------------------------------------------------------------------*\
+    Sub Pages
+  \*-----------------------------------------------------------------------*/
+
+    .not-front & {
+
+      @if $testimonial-stretch-panel{
+
+        @include faux-width($testimonial-panel-background);
+      }
+
+      @else{
+
+        .block-inner{
+
+          background: $testimonial-panel-background;
+        }
+
+      }
+
+    }
+
+  /*---- end section ------------------------------------------------------*/
+
+
+
+  /*-----------------------------------------------------------------------*\
+    Sidebar
+  \*-----------------------------------------------------------------------*/
+
+   .region-two-66-33-second &,
+   .EC-region-right & {
+
+     .pane-title,
+     .block-content{
+
+       @if $testimonial-limit-block-content{
+         @include limiter($width: 100%);
+       }
+
+     }
+
+     .pane-title{
+
+       padding: 0;
+     }
+
+     ul.slides {
+       li {
+         @include rem(padding, 0, 0, 6);
+       }
+     }
+
+   }
+
+   @include override--testimonials;
+}

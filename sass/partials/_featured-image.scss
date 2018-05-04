@@ -1,0 +1,148 @@
+/*-----------------------------------------------------------------------*\
+
+
+    Featured Image
+
+
+\*-----------------------------------------------------------------------*/
+
+.not-front {
+
+  .pane-node-field-image,
+  .pane-node-field-service-group-image,
+  [class*='pane-services-hero-image-or-video-panel-'],
+  [class*='pane-hero-image-or-video-panel-pane'],
+  .pane-node-field-featured-image,
+  .pane-node-field-promotion-image,
+  .pane-node-field-blog-image {
+
+    position: relative;
+    overflow: hidden;
+
+    .contextual-links-region {
+
+      position: initial;
+    }
+
+    &.block {
+
+      @include rem(margin-bottom, $vp);
+    }
+
+    img{
+
+      width: 100%;
+      max-width: none;
+      display: block;
+
+      min-width: $feat-img-min-width;
+    }
+
+    @if $feat-img-stretch-panel {
+
+      margin: 0 -15px;
+
+      .block-inner {
+
+        margin: 0;
+      }
+
+      @media only screen and (min-width: $max-width) {
+
+        margin: 0 $nm;
+      }
+
+      img{
+
+        width: 100%;
+        max-width: none;
+      }
+
+    }
+
+    .block-content{
+
+      @if $feat-img-max-width != "none"{
+
+        max-width: $feat-img-max-width;
+        margin: auto;
+        overflow: hidden;
+      }
+    }
+
+    .block-content{
+
+      position: relative;
+      overflow: hidden;
+      &:after{
+
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background: $feat-img-overlay-color;
+
+      }
+    }
+
+    @if $feat-img-viewport-height{
+
+      .block-content{
+
+        height: calc(100vh - 380px);
+        position: relative;
+        overflow: hidden;
+        max-height: $feat-img-viewport-max-height+vw;
+
+        @if $feat-img-max-width == "none" {
+
+        }
+
+        @if $feat-img-max-width != "none" {
+
+          @media only screen and (min-width: $feat-img-max-width){
+
+            max-height: calc( #{$feat-img-max-width} * (#{$feat-img-viewport-max-height} *.01));
+          }
+
+        }
+
+       @if $feat-img-stretch-panel == false{
+
+         @media only screen and (min-width: $max-width){
+
+          max-height: calc( #{$max-width} * (#{$feat-img-viewport-max-height} *.01));
+         }
+       }
+
+       img{
+
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+       }
+      }
+    }
+
+    &.block{
+
+      // margin-bottom: 0;
+    }
+
+    .block-inner{
+
+    }
+
+    img{
+
+    }
+
+    @include override--featured-img;
+  }
+
+
+}

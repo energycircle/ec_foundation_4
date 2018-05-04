@@ -1,0 +1,340 @@
+
+/*-----------------------------------------------------------------------*\
+
+    Main Navigation
+
+\*-----------------------------------------------------------------------*/
+
+#nav-wrapper {
+
+  background: $primary-menu-wrapper-background;
+
+  .container{
+
+   position: relative;
+  }
+}
+
+/*-----------------------------------------------------------------------*\
+    Primary Menu
+\*-----------------------------------------------------------------------*/
+
+#primary-menu {
+  left: 0;
+  right: 0;
+  text-align: $primary-menu-text-align;
+
+  .block-content{
+
+    background: $primary-menu-background;
+  }
+  &.block{
+
+    margin: 0;
+  }
+
+ #superfish-1 {
+
+   display: inline-block;
+   margin: 0;
+   position: relative;
+   text-align: $primary-menu-text-align;
+   pointer-events: auto;
+   float: none;
+
+   @if $nest-menu{
+
+     position: absolute;
+     right: 0;
+     bottom: 0;
+   }
+
+   li.sf-depth-1 {
+
+     background: none;
+     background-color: transparent;
+     padding: 0;
+     @include rem(margin, 0);
+     display: inline-block;
+     float: none;
+     position: relative;
+
+     @include primary-menu-text-style;
+
+     > a {
+
+
+       @include css-transition(all);
+
+       &:focus,
+       &.active,
+       &:active,
+       &:hover {
+         background: none;
+         color: $primary-menu-text-color--hover;
+       }
+     }
+
+     &.active-trail > a {
+       background: none;
+       color: $primary-menu-text-color--hover;
+     }
+
+     .sf-sub-indicator {
+       display: none;
+     }
+
+     &.first {
+
+       > a {
+         border-left: 0;
+       }
+     }
+
+     &.last {
+
+       > a {
+
+       }
+     }
+   }
+
+   li.sf-clone-parent,
+   li.sf-depth-2,
+   li.sf-depth-3 {
+
+     background: $primary-menu-dropdown-color;
+     text-align: left;
+
+     > a {
+
+       color: $lt_gray;
+       border-left: 0;
+       border-top: 0;
+       @include font-size(1.4);
+       @include css-transition(all);
+       @include bounce-to-right(lighten($primary-menu-dropdown-color, 5%));
+       display: block;
+       text-indent: 0;
+
+       &.active,
+       &:active,
+       &:hover {
+         background: lighten($primary-menu-dropdown-color, 5%);
+         color: $lt_gray;
+       }
+     }
+
+     &.active-trail > a {
+       background: lighten($primary-menu-dropdown-color, 5%);
+       color: $lt_gray;
+     }
+   }
+
+   ul {
+     overflow: visible !important;
+     float: none;
+     margin-top: 3px;
+
+     ul {
+       box-shadow: 0 5px 10px rgba(darken($primary, 50%), .2);
+     }
+   }
+ }
+}
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+    Superfish Menu Default
+\*-----------------------------------------------------------------------*/
+
+.sf-menu.sf-style-default {
+
+  li:hover,
+  li.sfHover,
+  a:focus,
+  a:hover,
+  a:active,
+  span.nolink:hover {
+       background:none;
+   }
+
+  a.sf-with-ul,
+  span.nolink.sf-with-ul {
+
+    padding-right: 10px;
+  }
+
+  &.sf-accordion li.sf-depth-2 {
+
+    a {
+      @include rem(margin-bottom, .5);
+      @include rem(padding-bottom, .5);
+      border-bottom: 1px solid rgba($lt_gray, .05) !important;
+    }
+
+    &.last > a {
+      border-bottom: 0 !important;
+    }
+  }
+
+  &.sf-accordion li.sf-expanded > a,
+  &.sf-accordion li.sf-expanded > span.nolink,
+  &.sf-accordion-toggle a.sf-expanded {
+
+    font-weight: 400;
+    background: none;
+  }
+
+  &.sf-accordion li li a,
+  &.sf-accordion li li span.nolink,
+  a,
+  a:visited,
+  span.nolink {
+
+    padding: 0;
+    height: auto;
+  }
+
+  &.sf-accordion li a.sf-accordion-button{
+
+    height: 40px;
+    width: 40px;
+    //background: rgba(black, .1);
+    text-indent: 1000px;
+    //position: relative;
+    overflow: hidden;
+    padding: 0;
+    right: 5px;
+
+    &:before {
+
+      content: "\e313";
+      font-family: 'Material Icons';
+      height: 40px;
+      width: 40px;
+      @include font-size-calc(2.5);
+      line-height: 40px;
+      position: absolute;
+      display: block;
+      text-indent: 0;
+      font-weight: 400;
+      color: rgba($lt_gray, .5);
+    }
+  }
+
+  &.sf-accordion li.sf-expanded > a.sf-accordion-button{
+    &:before{
+
+      content: "\e316";
+      font-family: 'Material Icons';
+
+    }
+  }
+
+  &.sf-accordion li li li a,
+  &.sf-accordion li li li span.nolink{
+
+    padding-left: 0;
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+    Superfish Mobile Toggle
+\*-----------------------------------------------------------------------*/
+
+#superfish-1-toggle {
+
+   background: none !important;
+   border-left: 0 !important;
+   border-top: 0 !important;
+   color: #000 !important;
+   display: block;
+   padding: 0;
+   background-color: rgba(0, 0, 0, 0) !important;
+   display: inline-block;
+   float: right !important;
+   width: 25px;
+   height: 25px;
+   overflow: hidden;
+   position: absolute;
+   @include primary-menu-toggle--pos;
+
+   &:before {
+
+      content: '\e5d2';
+      font-family: "Material Icons";
+      @include font-size(3.2);
+      color: $primary-menu-hamburger-color;
+   }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+    Superfish Mobile Menu
+\*-----------------------------------------------------------------------*/
+
+#superfish-1-accordion {
+  $offset: calc(-1 * (15px + #{$gutter-width}) );
+  width: calc(100% + (#{$offset} * -2) );
+  right: 0px;
+  left: $offset !important;
+  text-align: right;
+  text-align: center;
+  background: $primary-menu-hamburger-background;
+
+  li.sf-depth-1 {
+    @include rem(margin, 0, 0, .1);
+    @include rem(padding, 0, 0);
+    background: none;
+    border-bottom: 1px solid rgba($lt_gray, .1);
+
+    a {
+      color: $lt_gray;
+      border-radius: 0;
+      border: none;
+    }
+
+    &.last {
+      @include rem(padding, 0, 0);
+    }
+  }
+
+  li.sf-depth-2,
+  li.sf-depth-3 {
+
+    text-align: center !important;
+    background: rgba(black, .1);
+  }
+}
+
+/*---- end section ------------------------------------------------------*/
+
+
+.sf-menu li:hover > ul,
+.sf-menu li.sfHover > ul {
+
+  margin-top: 0px;
+}
+
+.sf-clone-parent{
+
+  text-align: center !important;
+}
+
+.sf-accordion-toggle.sf-style-default {
+
+  position: relative;
+}
+
+
+@include override--navigation;

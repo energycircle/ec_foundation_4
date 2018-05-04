@@ -73,6 +73,7 @@
 
 @media only screen and (max-width: 1190px) {
 
+
 }
 
 
@@ -83,8 +84,19 @@
 
     header{
 
-      padding-right: 50px;
+      //padding-right: 50px;
 
+    }
+    .pane-page-logo {
+      width: 100%;
+      margin-top: 80px;
+
+      #logo {
+        img {
+          display: block;
+          margin: auto;
+        }
+      }
     }
 
     .pane-search-form {
@@ -93,9 +105,18 @@
 
     .pane-menu-menu-auxiliary-menu{
 
-      @include rem(margin, 2, 0, 0);
+      // @include rem(margin, 2, 0, 0);
     }
   }
+
+  .desktop {
+    display: none !important;
+  }
+
+  .mobile {
+    display: inline-block !important;
+  }
+
 }
 
 @media only screen and (max-width:959px) {
@@ -123,39 +144,9 @@
     width: 100%;
   }
 
-  #fs-homeslide{
-
-    background: $primary;
-  }
-
-  .hero-caption-wrapper {
-
-      position: relative;
-      @include rem(padding, 3);
-      background: none;
-
-      .front &{
-
-        width: 100%;
-      }
-
-      .hero-caption{
-
-        width: 90%;
-        margin: 0 auto;
-        position: relative;
-        top: 0;
-        transform: none;
-
-        .front &{
-
-          @include rem(padding, 2, 0);
-        }
-      }
-  }
 }
 
-@media only screen and (max-width: 859px) {
+@media only screen and (max-width: 960px) {
 
   #header-wrapper {
 
@@ -175,12 +166,12 @@
       @include rem(padding, 0, 3);
     }
 
-    .pane-page-logo{
+    /*.pane-page-logo{
 
       margin: 0 auto;
       float: none;
-      text-align: left;
-    }
+      text-align: center;
+    }*/
 
     .pane-menu-menu-auxiliary-menu{
 
@@ -266,10 +257,26 @@
 }
 
 
-@media only screen and (max-width: 569px) {
+@media only screen and (max-width: 882px) {
 
+  .front {
+
+    .field-name-body {
+
+      margin: auto;
+
+      &::before {
+      background: none;
+    }
+  }
+}
 }
 
+@media screen and (max-width: 450px) {
+  #superfish-1-toggle {
+    right: -10px !important;
+  }
+}
 
 
 /*

@@ -1,5 +1,8 @@
 // _base.scss imports _custom.scss (variables and mixins) and other partials.
 @import "base";
+
+
+
 /*
  * @file
  * global.styles
@@ -23,9 +26,11 @@
  * See global.base also which includes normalize.css and some additional
  * helper classes and base styles.
  */
+
 /* =============================================================================
  *   Base
  * ========================================================================== */
+
 /*
  * To preserve theme settings never apply font properties to the HTML element.
  * This is critically important if you are using the Responsive JavaScript
@@ -33,195 +38,203 @@
  * element. If you need to set default font properties of any kind use the BODY
  * element as these can be overridden using font theme settings.
  */
+
+
 html {
+
   //background: $lt_gray;
-  font-size         : 62.5%;
-  /* Sets up the Base 10 stuff */
+  font-size:      62.5%; /* Sets up the Base 10 stuff */
+
   -webkit-box-sizing: border-box;
-  -moz-box-sizing   : border-box;
-  box-sizing        : border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
+
   @include font-size-calc(1.8);
-  font-family            : $primary-ff;
-  overflow               : hidden;
-  margin-bottom          : 0;
-  -webkit-font-smoothing : antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering         : optimizeLegibility;
+  font-family: $primary-ff;
+  overflow: hidden;
+  margin-bottom: 0;
+
+  -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ text-rendering: optimizeLegibility;
 }
 
-*,
-*:after,
-*:before {
+
+*, *:before, *:after {
+
   -webkit-box-sizing: inherit;
-  -moz-box-sizing   : inherit;
-  box-sizing        : inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
 }
 /* =============================================================================
 *   HTML Elements
 * ========================================================================== */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @include rem(margin, 0, 0, 1.5);
+
+
+
+h1, h2, h3, h4, h5, h6{
+
+   @include rem(margin, 0, 0, 1.5);
 }
 
-h1 {
-  @include title;
+
+
+@include override--global;
+
+
+h4 {
 }
 
-h2 {
-  @include title($size: 2.8, $weight: 400);
-  //text-align: left;
-}
-
-h3 {
-  @include subtitle;
-}
-
-h4 {}
 
 h5 {}
 
+
 h6 {}
 
+
 p {
-  @include body-copy;
 
-  &.caption-text {
-    @include font-size-calc(1.3);
-  }
+ @include body-copy;
 
-  ~ ol,
-  ~ ul {
-    @include body-copy;
-  }
+ &.caption-text{
+
+   @include font-size-calc(1.3);
+ }
+
+ ~ ol,
+ ~ ul{
+
+   @include body-copy;
+   overflow: hidden;
+ }
+
 }
+
 
 b,
 strong {
-  font-weight: 700;
+
+   font-weight: 700;
 }
 
-em,
-i {}
+
+i,
+em {}
+
 
 dfn {}
 
+
 sup {}
+
 
 sub {}
 
+
 del {}
+
 
 ins {}
 
+
 blockquote {}
+
 
 cite {}
 
+
 q {}
+
 
 address {}
 
-ol,
-ul {
-  .block-system.block-main & {
-    //@include body-copy;
-  }
+
+ul,
+ol {
+
+ .block-system.block-main & {
+
+   //@include body-copy;
+ }
 }
+
 
 li {}
 
+
 dl {}
+
 
 dd {}
 
+
 dt {}
+
 
 abbr {}
 
+
 acronym {}
 
-code,
-kbd,
+
 pre,
-samp,
+code,
 tt,
+samp,
+kbd,
 var {
-  font-family: $mono;
+ font-family: $mono;
 }
 
-a {
-  color          : $tertiary;
-  @include css-transition(color);
-  text-decoration: underline;
 
-  &:hover {
-    color: $tertiary;
-    //text-decoration: none;
-  }
-}
 
-input[type="email"],
+
+
+
 input[type="password"],
-input[type="search"],
 input[type="text"],
-textarea {
-  @include input-style;
+input[type="email"],
+input[type="search"],
+textarea{
+
+   @include input-style;
 }
+
 
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
-  cursor            : pointer;
-  -webkit-appearance: none;
-  @include button($color: $primary);
-  @include bounce-to-bottom(darken($tertiary, 20%));
+input[type="submit"]{
+
+   cursor: pointer;
+   -webkit-appearance: none;
+
+   @include button($color: $primary);
+   @include bounce-to-bottom(darken($tertiary, 20%));
 }
 
-select {
-  height     : 34px !important;
-  line-height: 34px !important;
-  padding    : 0 8px;
-  border     : 1px solid #D3D3D3;
-  background : $lt_gray;
-  @include font-size(1.5);
+select{
+
+   height: 34px !important;
+   line-height: 34px !important;
+   padding: 0 8px;
+   border: 1px solid #D3D3D3;
+   background: $lt_gray;
+
+   @include font-size(1.5);
 }
 
-#page-title {
-  @include title($weight: 600);
-  text-transform: uppercase;
-  // .has_featured_image &{
-  color         : inherit;
-  // }
-}
 
-.pane-node-title {
-  @include subtitle($weight: 300) {
-    text-transform: uppercase;
-  }
-}
 
-.block-title {
-  @include subtitle {
-    text-transform: uppercase;
-  }
-}
 
-h1.node-title {
-  color: $primary;
-  @include font-size-calc(2);
-}
+
 /* =============================================================================
  *   Wrappers
  * ========================================================================== */
+
 /*
  * Outer wrappers:
  * - #page-wrapper: body > #page-wrapper
@@ -232,41 +245,59 @@ h1.node-title {
  * style the .container class but do not add width such as border, padding,
  * margins etc.
  */
+
 #page-wrapper {}
 
-#page {
+
+#page  {
   &.container {}
 }
+
+
 /*
  * Wraps all header elements - branding and .region-header
  */
 #header {}
+
+
 /*
  * Wraps the sidebars the content column
  */
 #columns {}
+
+
 /*
  * Main content column wrapper
  */
 #content-column {}
+
+
 /*
  * Wraps the main-content-header, the content region and feed-icons. Use this
  * wrapper to style the entire main content column
  */
 #main-content {}
+
+
 /*
  * Wraps the content region, avoid applying styles to this wrapper, its used
  * mainly for position and invisible gutters and can be problematic to style
  */
 #content {}
+
+
 /*
  * Footer wrapper
  */
 #footer {}
+
+
 /*
  * Panels may need additional margin wrangling when in the $content region
  */
 #content .panel-display {}
+
+
 /*
  * Full Width Wrappers
  * These are used in the optional page--full-width-wrappers.tpl.php template.
@@ -274,658 +305,30 @@ h1.node-title {
  * .container classes set the width or max-width - you can style this but never
  * add any width/margin/padding/borders etc to .container
  */
+
 /*
  * Wraps the leaderboard
  */
 #leaderboard-wrapper {
   .container {}
 }
-/*-----------------------------------------------------------------------*\
 
-
-    Header
-
-
-\*-----------------------------------------------------------------------*/
-#header-wrapper {
-  position  : relative;
-  @include rem(padding, 0, 0, 0);
-  //border-bottom: 1px solid lighten($secondary, 55%);
-  background: darken($secondary, 15%);
-  color     : inherit;
-
-  .container {
-    @include rem(padding-top, 1.5);
-    @include rem(padding-bottom, 1.5);
-  }
-
-  .pane-page-logo {
-    width     : 33%;
-    float     : left;
-    min-width : 240px;
-    @include rem(margin, 0, 0);
-    text-align: left;
-
-    .block-inner {
-      margin: 0;
-    }
-
-    a {
-      pointer-events: auto;
-    }
-  }
-
-  #mini-panel-header {
-    text-align: right;
-    position  : relative;
-
-    .panel-separator {
-      display: none;
-    }
-
-    .pane-page-logo + .panel-separator {
-      display: block;
-    }
-  }
-
-  #header-phone {
-    display       : inline-block;
-    vertical-align: top;
-    @include rem(margin, 0);
-
-    .block-inner {
-      margin-left: 0;
-    }
-
-    a,
-    p {
-      font-family: $primary-ff;
-      @include font-size(2.0);
-      font-weight: 700;
-      margin     : 0;
-      color      : $lt_gray;
-      background : $tertiary;
-      @include rem(padding, 1);
-
-      &:hover {
-        text-decoration: none;
-        color          : $lt_gray;
-      }
-    }
-  }
-
-  .pane-page-slogan {
-    margin : 0;
-    display: none;
-  }
-
-  .pane-menu-menu-auxiliary-menu {
-    display   : block;
-    width     : 66%;
-    float     : right;
-    text-align: right;
-    @include rem(margin, 0, 0, 2);
-    position  : relative;
-    z-index   : 2;
-
-    .block-inner {
-      margin: 0;
-    }
-
-    .menu {
-      padding: 0;
-      margin : 0;
-      display: inline-block;
-
-      li {
-        margin : 0;
-        display: inline-block;
-        @include rem(margin-right, .5);
-
-        a {
-          color      : $primary;
-          font-weight: 400;
-          @include rem(padding, 0, 0, 0, .5);
-          @include font-size(1.3);
-          @include rem(line-height, 1.3);
-          display    : inline-block;
-          border-left: 1px solid gray;
-
-          &.active,
-          &:hover {
-            color: $tertiary;
-          }
-        }
-
-        &.active-trail > a {
-          color: $tertiary;
-        }
-
-        &.first {
-          a {
-            border-left: 0;
-          }
-        }
-      }
-
-      .menu {
-        display: none;
-      }
-    }
-  }
-
-  .pane-search-form {
-    display: inline-block;
-    margin : 0;
-
-    .block-inner {
-      margin: 0;
-    }
-  }
-  $tl       : .6s; // transition length
-
-  input[id*='edit-keys-'] {
-    transition   : width $tl, border-radius $tl, background $tl, box-shadow $tl;
-    width        : 30px;
-    height       : 30px;
-    border-radius: 20px;
-    border       : none;
-    cursor       : pointer;
-    background   : rgba($primary, .0);
-    padding      : 0;
-    color        : gray !important;
-
-    & + label .search-icon {
-      color: $md_gray;
-    }
-
-    &:hover {
-      background: rgba($primary, .1);
-      //box-shadow: 0 0 0 5px rgb(61, 71, 82);
-      & + label:after {
-        color: $primary;
-      }
-    }
-
-    &:focus {
-      transition   : width $tl cubic-bezier(0,1.22,.66,1.39), border-radius $tl, background $tl;
-      border       : 1px solid $primary;
-      outline      : none;
-      box-shadow   : none;
-      padding-left : 15px;
-      cursor       : text;
-      width        : 210px;
-      border-radius: 5px;
-      background   : rgba($lt_gray, .1);
-      color        : black;
-
-      & + label:after {
-        color: black;
-      }
-    }
-
-    &:not(:focus) {
-      text-indent: -5000px;
-    }
-    // for more-graceful falling back (:not browsers likely support indent)
-  }
-
-  [id*="-submit-"].form-submit {
-    position: absolute;
-    left    : -5000px;
-  }
-
-  .search-icon {
-    position: relative;
-    left    : -30px;
-    color   : $primary;
-    cursor  : pointer;
-  }
-
-  [id*="search-form-"] {
-    display : inline-block;
-    margin  : 0;
-    position: relative;
-
-    .form-item {
-      position: relative;
-      display : inline-block;
-      margin  : 0;
-
-      label {
-        display: none !important;
-      }
-
-      &:after {
-        content       : '\e802';
-        font-family   : 'fontello';
-        @include font-size(1.8);
-        line-height   : 30px;
-        display       : inline-block;
-        width         : 30px;
-        height        : 30px;
-        position      : absolute;
-        top           : 0;
-        bottom        : 0;
-        text-align    : center;
-        left          : auto;
-        right         : 0;
-        pointer-events: none;
-        color         : $primary;
-      }
-    }
-  }
-}
-/*-----------------------------------------------------------------------*\
-
-
-    Navigation
-
-
-\*-----------------------------------------------------------------------*/
-#nav-wrapper {
-  .container {
-    position: relative;
-  }
-}
-/*-----------------------------------------------------------------------*\
-    primary-menu
-\*-----------------------------------------------------------------------*/
-#primary-menu {
-  left      : 0;
-  right     : 0;
-  text-align: center;
-
-  #superfish-1 {
-    display       : inline-block;
-    margin        : 0;
-    position      : relative;
-    text-align    : center;
-    pointer-events: auto;
-    float         : none;
-
-    li.sf-depth-1 {
-      background      : none;
-      background-color: transparent;
-      padding         : 0;
-      @include rem(margin, 0);
-      display         : inline-block;
-      float           : none;
-      position        : relative;
-
-      > a {
-        @include font-size-calc(1.5);
-        font-weight   : 700;
-        color         : $primary;
-        text-transform: uppercase;
-        @include rem(padding, 1, 1.5);
-        border        : 0;
-        border-left   : 0 solid $lt_gray;
-        background    : none;
-        margin        : 0;
-        height        : auto;
-        @include css-transition(all);
-
-        &.active,
-        &:active,
-        &:focus,
-        &:hover {
-          background: none;
-          color     : $tertiary;
-        }
-      }
-
-      &.active-trail > a {
-        background: none;
-        color     : $tertiary;
-      }
-
-      .sf-sub-indicator {
-        display: none;
-      }
-
-      &.first {
-        > a {
-          border-left: 0;
-        }
-      }
-
-      &.last {
-        > a {}
-      }
-    }
-
-    li.sf-clone-parent,
-    li.sf-depth-2,
-    li.sf-depth-3 {
-      background: darken( $primary, 5%);
-      text-align: left;
-
-      > a {
-        color      : $lt_gray;
-        border-left: 0;
-        border-top : 0;
-        @include font-size(1.4);
-        //padding-right: 40px;
-        text-indent: 0;
-        @include css-transition(all);
-        @include bounce-to-right(lighten($primary, 5%));
-        display    : block;
-
-        &.active,
-        &:active,
-        &:hover {
-          //text-indent: 20px;
-          //padding-right: 0;
-          background: lighten($primary, 5%);
-          color     : $lt_gray;
-        }
-      }
-
-      &.active-trail > a {
-        background: lighten($primary, 5%);
-        color     : $lt_gray;
-      }
-    }
-
-    ul {
-      overflow  : visible !important;
-      float     : none;
-      margin-top: 3px;
-
-      ul {
-        box-shadow: 0 5px 10px rgba(darken($primary, 50%), .2);
-      }
-    }
-  }
-}
-// END primary-menu
-/*-----------------------------------------------------------------------*\
-    sf-menu.sf-style-default
-\*-----------------------------------------------------------------------*/
-.sf-menu.sf-style-default {
-  a:active,
-  a:focus,
-  a:hover,
-  li.sfHover,
-  li:hover,
-  span.nolink:hover {
-    background: none;
-  }
-
-  a.sf-with-ul,
-  span.nolink.sf-with-ul {
-    padding-right: 10px;
-  }
-
-  &.sf-accordion li.sf-depth-2 {
-    a {
-      @include rem(margin-bottom, .5);
-      @include rem(padding-bottom, .5);
-      border-bottom: 1px solid rgba($lt_gray, .05) !important;
-    }
-
-    &.last > a {
-      border-bottom: 0 !important;
-    }
-  }
-
-  &.sf-accordion li.sf-expanded > a,
-  &.sf-accordion li.sf-expanded > span.nolink,
-  &.sf-accordion-toggle a.sf-expanded {
-    font-weight: 400;
-    background : none;
-  }
-
-  &.sf-accordion li li a,
-  &.sf-accordion li li span.nolink,
-  a,
-  a:visited,
-  span.nolink {
-    padding: 0;
-    height : auto;
-  }
-
-  &.sf-accordion li a.sf-accordion-button {
-    height     : 40px;
-    width      : 40px;
-    //background: rgba(black, .1);
-    text-indent: 1000px;
-    //position: relative;
-    overflow   : hidden;
-    padding    : 0;
-    right      : 5px;
-
-    &:before {
-      content    : "\e812";
-      font-family: 'fontello';
-      height     : 40px;
-      width      : 40px;
-      @include font-size-calc(2.5);
-      line-height: 40px;
-      position   : absolute;
-      display    : block;
-      text-indent: 0;
-      font-weight: 400;
-      color      : rgba($lt_gray, .5);
-    }
-  }
-
-  &.sf-accordion li.sf-expanded > a.sf-accordion-button {
-    &:before {
-      content    : "\e813";
-      font-family: 'fontello';
-    }
-  }
-
-  &.sf-accordion li li li a,
-  &.sf-accordion li li li span.nolink {
-    padding-left: 0;
-  }
-}
-// END sf-menu.sf-style-default
-/*-----------------------------------------------------------------------*\
-    superfish-1-toggle
-\*-----------------------------------------------------------------------*/
-#superfish-1-toggle {
-  background      : none !important;
-  border-left     : 0 !important;
-  border-top      : 0 !important;
-  color           : #000 !important;
-  display         : block;
-  padding         : 0;
-  background-color: rgba(0, 0, 0, 0) !important;
-  display         : inline-block;
-  float           : right !important;
-  width           : 25px;
-  height          : 25px;
-  overflow        : hidden;
-  position        : absolute;
-  top             : -35px;
-  right           : 35px;
-
-  &:before {
-    content    : '\e80c';
-    font-family: "fontello";
-    @include font-size(3.2);
-    color      : $primary;
-  }
-}
-// END superfish-1-toggle
-/*-----------------------------------------------------------------------*\
-    superfish-1-accordion
-\*-----------------------------------------------------------------------*/
-#superfish-1-accordion {
-  right     : 0;
-  text-align: right;
-  text-align: center;
-
-  li.sf-depth-1 {
-    @include rem(margin, 0, 0, .1);
-    @include rem(padding, 0, 0);
-    background   : none;
-    border-bottom: 1px solid rgba($lt_gray, .1);
-
-    a {
-      color        : $lt_gray;
-      border-radius: 0;
-      border       : none;
-    }
-
-    &.last {
-      @include rem(padding, 0, 0);
-    }
-  }
-
-  li.sf-depth-2,
-  li.sf-depth-3 {
-    text-align: center !important;
-    background: rgba(black, .1);
-  }
-}
-// END superfish-1-accordion
-
-.sf-menu li.sfHover > ul,
-.sf-menu li:hover > ul {
-  margin-top: 0;
-}
-
-.sf-clone-parent {
-  text-align: center !important;
-}
-
-.sf-accordion-toggle.sf-style-default {
-  position: relative;
-}
-/*
- * Wraps breadcrumb
- */
-#breadcrumb-wrapper {
-  .container {}
-}
-/*-----------------------------------------------------------------------*\
-
-
-    Secondary Navigation
-
-
-\*-----------------------------------------------------------------------*/
-#mini-panel-secondary_menu_tree .pane-menu-tree {
-  @include rem(padding, 0, 0);
-  text-align   : left;
-  margin-bottom: 0;
-
-  .pane-menu-tree {
-    margin: 0;
-  }
-
-  .block-content,
-  .block-title {
-    margin : 0;
-    display: inline-block;
-
-    .block {
-      margin: 0;
-    }
-
-    a {
-      @include font-size(1.3);
-      @include rem(line-height, 1.3);
-      display     : inline-block;
-      @include rem(margin, 0, .5, 0, 0);
-      @include rem(padding, 0, .5, 0, 0);
-      border-right: 1px solid $lt_gray;
-      font-weight : 400;
-      color       : $md_gray;
-      color       : $lt_gray;
-
-      &:hover {
-        color: $secondary;
-      }
-    }
-  }
-
-  .block-title {
-    @include font-size-calc(1.3);
-    font-weight   : 700;
-    text-transform: none;
-    position      : relative;
-    //display: none;
-    letter-spacing: 0;
-    text-transform: uppercase;
-
-    &:after {
-      //content: "";
-      display   : block;
-      position  : absolute;
-      @include font-size(1.5);
-      top       : 6px;
-      right     : 6px;
-      width     : 1px;
-      height    : 12px;
-      background: $lt_gray;
-    }
-
-    a {
-      @include rem(margin, 0, .5, 0, 0);
-      margin-left : 0;
-      padding-left: 0;
-      border-left : 0;
-    }
-  }
-
-  ul.menu {
-    margin    : 0;
-    padding   : 0;
-    text-align: left;
-    display   : inline-block;
-
-    li {
-      display: inline-block;
-
-      &.last.menu-depth-2 a {
-        border-right : 0;
-        margin-right : 0;
-        padding-right: 0;
-      }
-    }
-
-    span.nolink {
-      display: none;
-    }
-
-    ul.menu {
-      a {
-        color: $md_gray;
-      }
-    }
-  }
-
-  a.active {
-    color: $primary;
-  }
-
-  > li.first > a {}
-
-  li.menu-depth-2.first > a {
-    margin-left : 0;
-    padding-left: 0;
-    border-left : 0;
-  }
-}
-// END mini-panel-secondary_menu_tree .pane-menu-tree
 /*
  * Wraps messages and help
  */
 #messages-help-wrapper {
   .container {}
 }
+
+
 /*
  * Wraps the secondary content/preface region
  */
 #secondary-content-wrapper {
   .container {}
 }
+
+
 /*
  * Wraps the main content column
  */
@@ -933,804 +336,152 @@ h1.node-title {
   .container {}
 }
 
-#block-system-main .pane-node-body {
-  .block-content {
-    // @include limiter;
-  }
 
-  .front & {
-    // text-align: center;
-  }
-}
+
+
+@import 'partials/pane-node-body';
+
 /*
  * Wraps the tertiary content/postfix region
  */
 #tertiary-content-wrapper {
+
   .container {}
 }
+
+
 /*-----------------------------------------------------------------------*\
 
+    Header
+
+\*-----------------------------------------------------------------------*/
+
+@import 'partials/header';
+
+
+/*-----------------------------------------------------------------------*\
+
+    Main Navigation
+
+\*-----------------------------------------------------------------------*/
+
+@import 'partials/navigation';
+
+
+/*-----------------------------------------------------------------------*\
+
+    Breadcrumbs (Secondary Navigation)
+
+\*-----------------------------------------------------------------------*/
+
+@import 'partials/breadcrumbs';
+
+
+/*-----------------------------------------------------------------------*\
 
     Hero
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-slides-home-panel-"] {
-  overflow: hidden;
-  @media only screen and (min-width: $max-width) {
-    margin: 0 $nm;
-  }
 
-  &.block {
-    margin-bottom: 0;
-  }
+@import 'partials/hero';
 
-  .block-inner {
-    margin: 0;
-  }
 
-  .views-field-field-slide-image {
-    &:after {
-      content   : "";
-      display   : block;
-      position  : absolute;
-      top       : 0;
-      right     : 0;
-      bottom    : 0;
-      left      : 0;
-      background: rgba($primary, .2);
-    }
-  }
-
-  .flex-control-nav {
-    display: none;
-  }
-
-  .flex-direction-nav {
-    margin: 0;
-  }
-}
-
-.hero-caption-wrapper {
-  width   : 100%;
-  padding : 0 10px;
-  margin  : auto;
-  position: absolute;
-  top     : auto;
-  //bottom: 30px;
-  bottom  : -200px;
-  right   : 0;
-  left    : 0;
-  color   : $lt_gray;
-
-  .front & {}
-
-  .hero-caption {
-    margin    : 0 auto;
-    position  : relative;
-    width     : 100%;
-    max-width : 1280px;
-    text-align: left;
-    color     : $lt_gray;
-    @include rem(padding, 1, 0, 2.5);
-
-    .front & {
-      @include rem(padding, 2, 2);
-    }
-  }
-
-  .field-display-title {
-    @include title( $color:$lt_gray);
-    text-align: left;
-  }
-
-  .field-display-subtitle {
-    @include body-copy;
-    font-weight: 800;
-    color      : $lt_gray;
-  }
-
-  .link a {
-    @include button($color: $secondary);
-    @include bounce-to-right($tertiary);
-  }
-}
-
-.flex-active-slide {
-  .hero-caption-wrapper {
-    bottom : 20%;
-    opacity: 1;
-    @include css-transition($type:all, $duration: 700ms, $ease:ease-in-out);
-  }
-}
 /*-----------------------------------------------------------------------*\
-
 
     Featured Image
 
-
 \*-----------------------------------------------------------------------*/
-.not-front {
-  .pane-node-field-featured-image,
-  .pane-node-field-service-group-image,
-  [class*='pane-services-hero-image-or-video-panel-'] {
-    &.block {
-      // margin-bottom: 0;
-    }
 
-    .block-inner {}
+@import 'partials/featured-image';
 
-    img {}
-  }
-}
+
 /*-----------------------------------------------------------------------*\
-
 
     Service Request
 
-
 \*-----------------------------------------------------------------------*/
-#primary-cta-form {
-  .view-service-request {
-    position  : relative;
-    @include rem(padding, 2, 2, 2);
-    //border-bottom: 1px solid lighten($secondary, 55%);
-    background: darken($primary, 10%);
-    color     : inherit;
 
-    h1 {
-      @include title($size: 2.5, $weight: 300);
-    }
+@import 'partials/CTAs';
 
-    h2 {
-      @include title($size: 2.8, $weight: 700);
-    }
 
-    h3,
-    p {
-      @include body-copy;
-      font-style: italic;
-      color     : $lt_gray;
-    }
-
-    .entityform-type-entityform-type {
-      h2 {
-        display: none;
-      }
-    }
-  }
-
-  #edit-field-email,
-  #edit-field-name,
-  #edit-field-phone {
-    // @include teaser-content($width: 33.333%, $float: left, $breakpoint: 767px);
-  }
-
-  #edit-field-question-or-comment {
-    clear: both;
-
-    textarea {
-      max-height: 90px;
-    }
-  }
-
-  #edit-field-email,
-  #edit-field-name,
-  #edit-field-phone,
-  #edit-field-question-or-comment {
-    [id*="more-wrapper"] {
-      @include rem(margin, 1, .5);
-    }
-  }
-
-  label[for="edit-field-i-need-und"] {
-    color      : $lt_gray;
-    font-weight: 400;
-  }
-
-  #edit-field-i-need-und {
-    .form-item {
-      display     : inline-block;
-      color       : $lt_gray;
-      margin-right: 10px;
-      @include font-size(1.5);
-    }
-
-    div:last-child {
-      margin-right: 0;
-    }
-  }
-
-  form #edit-actions {
-    @include button($color: $secondary);
-    @include bounce-to-right($primary);
-
-    input {
-      margin    : 0;
-      padding   : 0;
-      background: none;
-
-      &:hover {
-        background : none;
-        text-indent: 0;
-      }
-    }
-  }
-
-  .front & {}
-
-  .not-front & {}
-
-  .EC-region-right & {}
-}
 /*-----------------------------------------------------------------------*\
 
-
-    Service category Teasers
-
+    Service Category Teasers
 
 \*-----------------------------------------------------------------------*/
-.pane-node-field-ref-serv-cat-services,
-.pane-node-field-ref-serv-group-serv-cat {
-  text-align: center;
-  @include rem(padding, $vp, 0);
 
-  .block-content > .field > .field-items > .field-item {
-    @include teaser-content($width: 32%, $breakpoint: 767px);
-    @include rem(padding, 0, 1);
-    @include rem(margin, 0, 0, 3);
-    display       : inline-block;
-    vertical-align: top;
+@import 'partials/services';
 
-    .EC-region-right & {
-      width  : 100%;
-      padding: 0;
-      display: block;
-    }
 
-    &:after {
-      @include clearfix;
-    }
-  }
-
-  .field-name-field-service-image {
-    position: relative;
-
-    a {
-      display: block;
-    }
-
-    img {
-      max-width: none;
-      width    : 100%;
-      display  : block;
-    }
-
-    &:after {}
-  }
-
-  .field-name-body,
-  .node-header,
-  nav {
-    text-align: left;
-
-    li {
-      // font-family: $secondary-ff;
-    }
-  }
-
-  .node-header {
-    .node-title {
-      @include subtitle {
-        text-transform: uppercase;
-      }
-    }
-  }
-
-  .field-name-body {
-    @include body-copy;
-    @include rem(margin-top, 2);
-  }
-}
 /*-----------------------------------------------------------------------*\
-
 
     Blog Teasers
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-articles-panel-pane"],
-[class*="pane-blog-listing-panel-pane"] {
-  text-align: center;
-  @include rem(padding, $vp, 0);
 
-  .views-row {
-    @include teaser-content($width: 32%, $breakpoint: 767px);
-    @include rem(padding, 0, 1);
-    @include rem(margin, 0, 0, 3);
-    display       : inline-block;
-    vertical-align: top;
+@import 'partials/blogs';
 
-    .EC-region-right & {
-      width  : 100%;
-      padding: 0;
-      display: block;
-    }
 
-    &:after {
-      @include clearfix;
-    }
-  }
-
-  .views-field-field-blog-image {
-    position: relative;
-
-    a {
-      display: block;
-    }
-
-    img {
-      max-width: none;
-      width    : 100%;
-      display  : block;
-    }
-
-    &:after {}
-  }
-
-  .views-field-title {
-    @include subtitle {
-      text-transform: uppercase;
-    }
-  }
-
-  .views-field-body {
-    @include body-copy;
-    @include rem(margin-top, 2);
-  }
-
-  .views-field-field-display-date {
-    @include body-copy;
-    font-style: italic;
-  }
-
-  .views-more-link {}
-}
 /*-----------------------------------------------------------------------*\
 
+    Staff
+
+\*-----------------------------------------------------------------------*/
+
+@import 'partials/staff';
+
+
+/*-----------------------------------------------------------------------*\
 
     FAQ
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-faq-all-panel-pane"] {
-  .views-row {
-    @include rem(margin-bottom, 2);
-    @include rem(padding-bottom, 2);
-    border-bottom: 1px solid lightgray;
-  }
-}
-/*-----------------------------------------------------------------------*\
 
+@import 'partials/faqs';
+
+/*-----------------------------------------------------------------------*\
 
     Testimonials
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-testimonials-panel-pane-"] {
-  clear: both;
 
-  .front & {
-    .block-content {
-      //@include limiter(80%);
-    }
-  }
+@import 'partials/testimonials';
 
-  .not-front & {}
-
-  ul.slides {
-    li {
-      @include rem(padding, 0, 6);
-    }
-  }
-
-  .views-field-body,
-  .views-field-field-display-subtitle,
-  .views-field-field-display-title,
-  .views-field-field-testimonial-city,
-  .views-field-field-testimonial-image {}
-
-  .views-field-body,
-  .views-field-body p {
-    @include body-copy($size: 1.8, $weight: 300, $color: $primary);
-    font-style: italic;
-    text-align: center;
-  }
-
-  .views-field-field-testimonial-city {
-    @include subtitle($weight: 300, $color: $secondary) {
-      text-transform: uppercase;
-    }
-    text-align: center;
-  }
-
-  .views-more-link {
-    //display: block;
-  }
-}
 /*-----------------------------------------------------------------------*\
-
 
     Promotions
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-promotions-panel"] {
-  .pane-title {
-    //@include sidebar-pane-title;
-  }
 
-  .block-inner {
-    border    : 4px solid #dfe8f9;
-    @include rem(padding, 4);
-    background: rgba(#dfe8f9, .5);
-  }
+@import 'partials/promotions';
 
-  .views-field-field-display-title {
-    @include subtitle {
-      text-transform: uppercase;
-    }
-  }
-
-  .views-field-field-display-subtitle,
-  .views-field-field-promotion-link-text {
-    @include body-copy;
-    @include rem(margin-top, 2);
-  }
-
-  .promo-button {
-    color          : $primary;
-    text-decoration: underline;
-
-    &:hover {
-      color: $tertiary;
-    }
-  }
-
-  .node-show-this-block {
-    .node-header {
-      display: none;
-    }
-
-    .field-name-field-display-title {
-      @include subtitle {
-        text-transform: uppercase;
-
-        a {
-          color: inherit;
-        }
-      }
-    }
-
-    .field-name-field-display-subtitle {
-      @include body-copy;
-      @include rem(margin-top, 2);
-
-      a {
-        color: inherit;
-      }
-    }
-
-    .field-name-field-promotion-link-text a {
-      @include body-copy;
-      color          : $primary;
-      text-decoration: underline;
-
-      &:hover {
-        color: $tertiary;
-      }
-    }
-  }
-
-  .views-row {
-    @include rem(padding-bottom, 3);
-    @include rem(margin-bottom, 3);
-    border-bottom: 1px solid $primary;
-
-    &.views-row-last {
-      padding-bottom: 0;
-      margin-bottom : 0;
-      border-bottom : none;
-    }
-  }
-}
 /*-----------------------------------------------------------------------*\
-
 
     Distinctions
 
-
 \*-----------------------------------------------------------------------*/
-[class*="pane-distinctions-panel-pane-"] {
-  #footer-wrapper & {
-    text-align: center;
-    position  : relative;
-    @include faux-width($lt_gray, 2);
-    @include rem(padding, 3, 0);
-    border-top: 1px solid lighten($primary, 60%);
 
-    .views-row {
-      display       : inline-block;
-      vertical-align: middle;
-      @include rem(padding, 0, 2);
-    }
-  }
+@import 'partials/distinctions';
 
-  #content-wrapper & {
-    .views-row {
-      @include rem(margin, 5, 0);
-
-      .views-field-field-dynamic-seal,
-      .views-field-field-logo {
-        @include teaser-content($width: 25%, $float: left, $breakpoint: 767px);
-        text-align: center;
-        @include rem(padding-right, 2);
-      }
-
-      .views-field-body,
-      .views-field-title {
-        @include teaser-content($width: 75%, $float: right, $breakpoint: 767px);
-      }
-
-      .views-field-title {
-        @include subtitle;
-      }
-
-      &:after {
-        @include clearfix;
-      }
-    }
-  }
-}
 /*-----------------------------------------------------------------------*\
 
-
-    Footer Wrapper
-
+    Footer
 
 \*-----------------------------------------------------------------------*/
-#footer-wrapper {
-  background: darken($primary, 15%);
-  @include rem(padding, 0, 0, $vp);
-  @include font-size(1.4);
-  @include rem(margin-top, .1);
-  color     : $lt_gray;
 
-  .custom-service-area-map {}
 
-  .custom-contact-us,
-  .pane-entityform-block-newsletter-signup {}
+@import 'partials/footer';
 
-  .pane-entityform-block-newsletter-signup {
-    input[type="text"] {
-      background: $lt_gray;
-    }
-
-    input[type="submit"] {
-      background     : none;
-      color          : $tertiary;
-      text-transform : none;
-      text-decoration: underline;
-      padding        : 0;
-      font-weight    : 800;
-      @include font-size-calc(1.8);
-
-      &:hover {
-        color: $primary;
-      }
-    }
-  }
-
-  .custom-contact-info {
-    h3 {
-      @include title;
-    }
-  }
-
-  a {
-    color: $lt_gray;
-    @include rem(line-height, 1.7);
-
-    &:hover {
-      color          : $secondary;
-      text-decoration: none;
-    }
-
-    &[href*="tel"] {
-      &:hover {
-        color: $secondary;
-      }
-    }
-  }
-
-  .pane-main-menu,
-  .pane-menu-auxiliary-menu {
-    @include rem(padding-top, 3);
-
-    &.block {
-      margin-bottom: 0;
-    }
-    font-weight: 400;
-
-    ul.menu {
-      padding: 0;
-      margin : 0;
-
-      li {
-        display                    : block;
-        -webkit-column-break-inside: avoid;
-        page-break-inside          : avoid;
-        break-inside               : avoid;
-
-        a {
-          display: block;
-        }
-      }
-
-      li.menu-depth-1 {
-        @include rem(padding-bottom, 1.7);
-        @include rem(padding-right, 2);
-      }
-
-      ul.menu {
-        @include rem(margin, 0, 0, 0);
-      }
-
-      span.nolink {
-        display: none;
-      }
-    }
-
-    li.menu-depth-1 > a {
-      font-weight   : 700;
-      text-transform: uppercase;
-    }
-
-    li.menu-depth-2 {
-      text-transform: none;
-      font-weight   : 400;
-    }
-  }
-
-  .pane-menu-auxiliary-menu {
-    width: 49%;
-    float: left;
-
-    ul.menu {
-      -webkit-columns   : 2;
-      -moz-columns      : 2;
-      columns           : 2;
-      -webkit-column-gap: 0;
-      -moz-column-gap   : 0;
-      column-gap        : 0;
-
-      .menu-depth-1 {
-        //padding-bottom: 0;
-      }
-
-      ul.menu {
-        -webkit-columns: 1;
-        -moz-columns   : 1;
-        columns        : 1;
-      }
-    }
-  }
-
-  .pane-main-menu {
-    width: 51%;
-    float: right;
-
-    ul.menu {
-      -webkit-columns   : 2;
-      -moz-columns      : 2;
-      columns           : 2;
-      -webkit-column-gap: 0;
-      -moz-column-gap   : 0;
-      column-gap        : 0;
-
-      ul.menu {
-        -webkit-columns: 1;
-        -moz-columns   : 1;
-        columns        : 1;
-      }
-    }
-
-    li.menu-depth-1 {
-      @include rem(padding, 0, 1);
-      -webkit-column-break-inside: avoid;
-      page-break-inside          : avoid;
-      break-inside               : avoid;
-
-      > a {
-        font-weight: 700;
-      }
-
-      &:nth-child(3n+1) {}
-    }
-  }
-
-  p {
-    color: $lt_gray;
-  }
-
-  #footer-social-links {
-    @include rem(padding-top, 1);
-
-    a[href*="facebook"] {
-      @include social-icons;
-
-      &:before {
-        content: '\e803';
-      }
-    }
-
-    a[href*="twitter"] {
-      @include social-icons;
-
-      &:before {
-        content: '\e805';
-      }
-    }
-
-    a[href*="google"] {
-      @include social-icons;
-
-      &:before {
-        content: '\e804';
-      }
-    }
-
-    a[href*="linkedin"] {
-      @include social-icons;
-
-      &:before {
-        content: '\e806';
-      }
-    }
-  }
-
-  .custom-copyright {
-    display   : block;
-    text-align: center;
-    //border-top: 1px solid rgba($lt_gray, .55);
-    @include rem(padding-top, 3);
-    color     : $dk_gray;
-    clear     : both;
-
-    p {
-      color      : $lt_gray;
-      text-align : left;
-      @include font-size(1.3);
-      display    : inline-block;
-      font-family: $primary-ff;
-    }
-  }
-
-  .pane-title {
-    @include body-copy($color: $dk_gray);
-    text-transform: none;
-    font-weight   : 800;
-  }
-
-  .container {}
-}
 /* =============================================================================
  *   Branding
  * ========================================================================== */
+
 /*
  * Wraps all the branding elements, logo, name and slogan
  */
 #branding {}
+
+
 /*
  * Logo
  */
@@ -1741,10 +492,14 @@ h1.node-title {
     vertical-align: bottom;
   }
 }
+
+
 /*
  * Wrapper for the site name and slogan
  */
 #name-and-slogan {}
+
+
 /*
  * Site name (h1)
  */
@@ -1752,330 +507,409 @@ h1.node-title {
   margin: 0;
 
   a {
+
     &:link,
     &:visited {
       text-decoration: none;
     }
 
-    &:focus,
-    &:hover {
+    &:hover,
+    &:focus {
       text-decoration: underline;
     }
   }
 }
+
+
 /*
  * Site slogan (h2)
  */
 #site-slogan {
   margin: 0;
 }
+
+
 /* =============================================================================
  *   Page content header
  * ========================================================================== */
+
 /*
  * Main content header wraps the page title, tabs and actions links
  */
 #main-content-header {}
+
+
 /*
  * The main page title (h1)
  */
 #page-title {
   margin: 0;
 }
-/*-----------------------------------------------------------------------*\
 
+
+/*-----------------------------------------------------------------------*\
 
     Misc Global Styles
 
-
 \*-----------------------------------------------------------------------*/
-.pane-node-field-display-date {
+
+.pane-node-field-display-date{
+
   @include body-copy;
   font-style: italic;
 }
 
-iframe[src*="google"] {
+iframe[src*="google"]{
+
   width: 100% !important;
 }
 
-iframe[src*="youtube"] {
+iframe[src*="youtube"]{
+
   width: 100% !important;
 }
 
-.media-element-container {
+.media-element-container{
+
   @include rem(margin, 2, 0);
 }
 
 div.caption-left {
-  margin: 10px 40px 10px 0 !important;
+
+    margin: 10px 40px 10px 0 !important;
+
 }
+
 
 div.caption-right {
-  margin: 10px 0 10px 40px !important;
-}
-@media only screen and (max-width: 479px) {
-  div.caption-left,
-  div.caption-right {
-    width     : 100% !important;
-    text-align: center;
 
-    img {
-      width: 100%;
-    }
-  }
+ margin: 10px 0px 10px 40px !important;
 }
 
-img {
-  &[style*="float:left"],
-  &[style*="float:left"] {
-    margin-right : 15px;
+@media only screen and (max-width: 479px){
+
+ div.caption-left,
+ div.caption-right {
+
+   width: 100% !important;
+   text-align: center;
+
+   img{
+
+     width: 100%;
+   }
+ }
+}
+
+
+img{
+
+  &[style*="float:"][style*="left"]{
+
+    margin-right: 15px;
     margin-bottom: 10px;
   }
 
-  &[style*="float:right"],
-  &[style*="float:right"] {
-    margin-left  : 15px;
+  &[style*="float:"][style*="right"]{
+
+    margin-left: 15px;
     margin-bottom: 10px;
   }
-  @media only screen and (max-width: 379px) {
-    &[style*="float:left"],
-    &[style*="float:left"],
-    &[style*="float:right"],
-    &[style*="float:right"] {
-      max-width : none;
-      width     : 100% !important;
+
+  @media only screen and (max-width: 379px){
+
+    &[style*="float:"][style*="left"],
+    &[style*="float:"][style*="right"]{
+
+      max-width: none;
+      width: 100% !important;
       text-align: center;
 
-      img {
-        width: 100%;
-      }
     }
   }
 }
 
-.EC-region-right {
-  .panel-pane {
-    margin-bottom: 50px;
+
+.EC-region-right{
+
+  .region-inner > .panel-pane:nth-of-type(1) {
+    margin-top: 0;
+  }
+  .panel-pane{
+    // margin-bottom: 50px;
   }
 }
 
-.EC-region-top {
-  .block {
-    margin: 0;
-  }
+.EC-region-top{
+
+    .block{
+
+        margin-bottom: 0;
+    }
 }
 
-.node.node-promotion {
+.node.node-promotion{
+
   margin-bottom: 0;
 }
-/*-----------------------------------------------------------------------*\
 
+
+
+/*-----------------------------------------------------------------------*\
 
     Flexslider
 
-
 \*-----------------------------------------------------------------------*/
+
 .flexslider {
-  margin               : 0;
-  background           : none;
-  border               : 0;
-  position             : relative;
-  -webkit-border-radius: 0;
-  -moz-border-radius   : 0;
-  -o-border-radius     : 0;
-  border-radius        : 0;
-  -webkit-box-shadow   : none;
-  -moz-box-shadow      : none;
-  -o-box-shadow        : none;
-  box-shadow           : none;
-  zoom                 : 1;
 
-  .flex-control-nav,
-  .flex-control-paging,
-  .slides {
-    padding: 0;
-  }
+    margin:         0 0 0px;
+    background:     none;
+    border:         0;
 
-  .slides > li {
-    //display: block;
-  }
+    position:       relative;
 
-  a {
-    &:before {
-      line-height: 40px;
+    -webkit-border-radius:      0px;
+    -moz-border-radius:         0px;
+    -o-border-radius:           0px;
+    border-radius:              0px;
+
+    -webkit-box-shadow:         none;
+    -moz-box-shadow:            none;
+    -o-box-shadow:              none;
+    box-shadow:                 none;
+
+    zoom: 1;
+
+
+    .slides,
+    .flex-control-nav,
+    .flex-control-paging{
+
+        padding: 0;
     }
-  }
+
+    .slides > li {
+
+        //display: block;
+    }
+
+    a{
+
+        &:before{
+
+            line-height: 40px;
+        }
+    }
+
 }
 
-.flex-direction-nav .flex-next,
-.flex-direction-nav .flex-prev {
-  background: rgba($lt_gray, .4);
-  color     : $dk_gray;
+.flex-direction-nav .flex-prev,
+.flex-direction-nav .flex-next{
+
+    background: rgba($lt_gray, .4);
+    color: $dk_gray;
 }
 
-.flex-direction-nav a {
-  color      : $dk_gray;
-  text-shadow: none;
-  width      : 40px;
-  top        : auto;
-  bottom     : 20px;
-  text-align : center !important;
+.flex-direction-nav a{
+
+    color: $dk_gray;
+    text-shadow: none;
+    width: 40px;
+    top: auto;
+    bottom: 20px;
+    text-align: center !important;
 }
+
 
 .flex-direction-nav a:before {
-  font-size : 30px;
-  display   : inline-block;
-  width     : 20px;
-  text-align: center;
+
+    font-size: 30px;
+    display: inline-block;
+    text-align: center;
 }
 
+
 .flex-direction-nav a.flex-prev:before {
-  content    : '\e815';
-  font-family: 'fontello';
+
+    content: '\e314';
+    font-family: 'Material Icons';
 }
 
 .flex-direction-nav a.flex-next:before {
-  content    : '\e816';
-  font-family: 'fontello';
+
+  font-family: 'Material Icons';
+  content: "\e315";
 }
+
 
 fieldset {
-  width    : 100%;
-  min-width: 0;
 
-  select {
-    width    : 100%;
+    width: 100%;
     min-width: 0;
-  }
-}
-/*-----------------------------------------------------------------------*\
 
+    select{
+
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+/*-----------------------------------------------------------------------*\
 
     jCarousel
 
-
 \*-----------------------------------------------------------------------*/
+
 .jcarousel-skin-ecdefault {
-  .jcarousel-container-horizontal {
-    padding: 0;
-  }
 
-  .jcarousel-next,
-  .jcarousel-prev {
-    display   : block;
-    width     : 32px;
-    height    : 32px;
-    background: rgba($dk_gray, .8);
-    top       : auto;
+    .jcarousel-container-horizontal{
 
-    &:hover {
-      background: rgba($dk_gray, 1);
+        padding: 0;
     }
-  }
 
-  .jcarousel-next-horizontal,
-  .jcarousel-prev-horizontal {
-    text-decoration: none;
+    .jcarousel-next,
+    .jcarousel-prev {
 
-    &:hover {
-      text-decoration: none;
-      color          : $lt_gray;
+        display: block;
+        width: 32px;
+        height: 32px;
+        background: rgba($dk_gray, .8);
+        top: auto;
 
-      &:before {
+        &:hover{
+
+            background: rgba($dk_gray, 1);
+        }
+
+
+    }
+
+    .jcarousel-prev-horizontal,
+    .jcarousel-next-horizontal{
+
         text-decoration: none;
-        color          : $lt_gray;
-      }
+
+        &:hover{
+
+            text-decoration: none;
+            color: $lt_gray;
+
+            &:before{
+
+                text-decoration: none;
+                color: $lt_gray;
+            }
+        }
+
+        &:before{
+
+            font-family: "Material Icons";
+            display: block;
+            font-size: 20px;
+            line-height: 35px;
+            width: 35px;
+            text-align: center;
+            color: $lt_gray;
+            text-decoration: none;
+
+        }
     }
 
-    &:before {
-      font-family    : "fontello";
-      display        : block;
-      font-size      : 20px;
-      line-height    : 35px;
-      width          : 35px;
-      text-align     : center;
-      color          : $lt_gray;
-      text-decoration: none;
+    .jcarousel-prev-horizontal {
+        position: absolute;
+        top: auto;
+        bottom: 20px;
+        left: 20px;
+        background-position: 0 0;
+
+        &:before{
+
+            content: "\e314";
+        }
     }
-  }
 
-  .jcarousel-prev-horizontal {
-    position           : absolute;
-    top                : auto;
-    bottom             : 20px;
-    left               : 20px;
-    background-position: 0 0;
+    .jcarousel-next-horizontal {
+        position: absolute;
+        top: auto;
+        bottom: 20px;
+        right: auto;
+        left: 60px;
 
-    &:before {
-      content: "\e806";
+        &:before{
+
+            content: "\e315";
+        }
     }
-  }
-
-  .jcarousel-next-horizontal {
-    position: absolute;
-    top     : auto;
-    bottom  : 20px;
-    right   : auto;
-    left    : 60px;
-
-    &:before {
-      content: "\e807";
-    }
-  }
 }
 
 #block-system-main,
-.page-default.node-promoted {
-  margin-bottom: 0;
+.page-default.node-promoted{
+
+    margin-bottom: 0;
 }
 
-.node.node-full {
-  margin-bottom: 0;
+
+.node.node-full{
+
+    margin-bottom: 0;
 }
 
-.form-actions,
-.form-item {
-  @include rem(margin, 1, 0, 0);
-  position: relative;
-}
-//links appear h3 in body content
 
-h3 {
-  a {
-    color: $primary;
+.form-item, .form-actions {
 
-    &:hover {
-      color: $secondary;
-    }
-  }
+    @include rem(margin, 1, 0, 0);
+    position: relative;
 }
+
+ //links appear h3 in body content
+
+h3{
+
+   a{
+     color: $primary;
+
+     &:hover{
+
+       color: $secondary;
+     }
+   }
+}
+
 /*
  * Feed icons
  */
 .feed-icon {}
+
+
 /*
  * Aggregator feed source
  */
 #aggregator .feed-source .feed-icon {
-  display     : inline;
-  float       : none;
+  display: inline;
+  float: none;
   margin-right: 10px;
 }
 
-.feed-details dd,
-.feed-details dt {
+
+.feed-details dt,
+.feed-details dd {
   display: inline;
-  margin : 0;
+  margin: 0;
 }
+
+
 /*
  * Generic styles for the more link
  */
 .more-link {}
+
+
 /*
  * Generic styles for links. See the ul.links declaration in node and comment stylesheets
  */
 ul.links {
-  margin : 0;
+  margin: 0;
   padding: 0;
 
   &.inline {
@@ -2083,188 +917,262 @@ ul.links {
   }
 
   li {
-    display   : inline;
+    display: inline;
     list-style: none;
-    padding   : 0 10px 0 0;
+    padding: 0 10px 0 0;
   }
 }
+
+
 /*
  * Search results are an ordered list so reset the margin
  */
-.search-results {
-  margin : 0;
-  padding: 0;
-}
+ .search-results {
+   margin: 40px 0 0;
+   padding: 0;
+
+   .search-snippet-info{
+
+     padding-left: 0;
+   }
+
+   .search-result{
+
+     @include rem(margin, 3, 0);
+     @include rem(padding, 3, 0);
+     border-bottom: 1px dashed rgba(gray, .5);
+   }
+ }
+
+ form.search-form{
+
+  #content-wrapper &{
+    padding-bottoM: 30px;
+    border-bottom: 1px solid rgba(gray, .5);
+  }
+
+
+   .compact-form-wrapper{
+     display: block;
+     margin-bottom: 10px;
+
+     input {
+
+       width: auto;
+     }
+   }
+ }
+
+
 /*
  * Attribution message and link
  */
 .attribution {
-  display   : block;
-  opacity   : .65;
-  padding   : 1em 0;
+  display: block;
+  opacity: 0.65;
+  padding: 1em 0;
   text-align: center;
 
   a {
     text-decoration: none;
-    color          : inherit;
+    color: inherit;
 
-    &:focus,
-    &:hover {
+    &:hover,
+    &:focus {
       text-decoration: underline;
     }
   }
 }
+
+
 /* =============================================================================
  *   Regions
  * ========================================================================== */
+
 /*
  * Standard region wrapper, don't add width to any regions, you will bork the layout - no margin, padding or borders etc
  */
 .region {}
+
+
 /*
  * Regions have an inner div - perfect for adding margin, padding or borders
  */
 .region-inner {}
+
+
 /*
  * Regions can be nested, such as when using Panels
  */
 .region-inner .region-inner {}
+
+
 /*
  * Header region, embedded in the #header
  */
 .region-header {}
+
+
 /*
  * Generally used to output Drupals help block, if the help module is enabled
  */
 .region-help {}
+
+
 /*
  * Secondary content
  */
 .region-secondary-content {}
+
+
 /*
  * Sits above the main content header, like a content-top region
  */
 .region-highlighted {}
+
+
 /*
  * Sits below the main content, like a content-bottom region
  */
 .region-content-aside {}
+
+
 /*
  * Sidebars - targets both
  */
 .sidebar {}
+
+
 /*
  * First sidebar
  */
 .region-sidebar-first {}
+
+
 /*
  * Second sidebar
  */
 .region-sidebar-second {}
+
+
 /*
  * Tertiary content
  */
 .region-tertiary-content {}
+
+
 /*
  * Footer region
  */
 .region-footer {}
+
+
 /* =============================================================================
  *   Links
  * ========================================================================== */
+
 a {
   text-decoration: none;
 
   &:link,
   &:visited {}
 
-  &.active,
-  &:active {}
+  &:active,
+  &.active {}
 
-  &:focus,
-  &:hover {
+  &:hover,
+  &:focus {
     text-decoration: underline;
   }
 }
+
+
 /* =============================================================================
  *   Primary, Secondary and Menu Bar region menus
  * ========================================================================== */
+
 .nav {
-  clear : both;
+  clear: both;
   margin: 10px 0;
 
   ul,
   ul.menu {
-    margin : 0;
+    margin: 0;
     padding: 0;
   }
 
   li,
   ul.menu li {
-    display   : inline;
-    float     : left;
+    display: inline;
+    float: left;
     list-style: none;
-    margin    : 0;
-    padding   : 0;
+    margin: 0;
+    padding: 0;
   }
 
   li a,
   ul.menu li a {
-    display       : block;
+    display: block;
     $lt_gray-space: nowrap;
-    padding       : 0 10px;
+    padding: 0 10px;
 
     &:visited {}
 
-    &:focus,
-    &:hover {}
+    &:hover,
+    &:focus {}
   }
 
   .block {
     margin-bottom: 0;
   }
 }
+
+
 /* =============================================================================
  *   Superfish
  * ========================================================================== */
+
 ul.sf-menu {
   margin-bottom: 0;
 
   a {
-    border-left    : 0;
-    border-top     : 0;
-    padding        : 0 10px;
+    border-left: 0;
+    border-top: 0;
+    padding: 0 10px;
     text-decoration: none;
-    height         : 2.5em;
-    line-height    : 2.5em;
+    height: 2.5em;
+    line-height: 2.5em;
 
     &:link,
     &:visited {}
   }
 
   li {
-    &.sfHover,
-    &:hover {
+    &:hover,
+    &.sfHover {
       outline: 0;
     }
   }
 
   a {
-    &:active,
     &:focus,
-    &:hover {
+    &:hover,
+    &:active {
       outline: 0;
     }
   }
 }
+
+
 /*
  * Superfish blocks
  */
 .block-superfish {
+
   .block-inner .content {}
 
   ul {
-    margin : 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
 
     ul {
@@ -2275,10 +1183,12 @@ ul.sf-menu {
   }
 
   li {
-    margin : 0 !important;
+    margin: 0 !important;
     padding: 0 !important;
   }
 }
+
+
 /*
  * Vertical style
  */
@@ -2290,11 +1200,11 @@ ul.sf-menu {
 
     &.last {}
 
-    &.sfHover ul,
-    &:hover ul {
-      left   : 100%;
-      top    : 0;
-      margin : 0;
+    &:hover ul,
+    &.sfHover ul {
+      left: 100%;
+      top: 0;
+      margin: 0;
       padding: 0;
     }
 
@@ -2303,30 +1213,35 @@ ul.sf-menu {
     }
   }
 }
+
+
 /*
  * Navbar style
  */
 .sf-navbar {
   padding-bottom: 0 !important;
 }
+
+
 /*
  * Sensible padding for the default style
  */
 .sf-menu.sf-style-default a {
   padding: 0 10px;
 }
+
+
 /* =============================================================================
  *   Menu Toggles
  * ========================================================================== */
 // .at-mt is a page class
-
 .at-mt {
   .at-menu-toggle,
   .at-menu-toggle ul,
   .at-menu-toggle ul.menu {
-    margin-top   : 0;
+    margin-top: 0;
     margin-bottom: 0;
-    padding      : 0;
+    padding: 0;
   }
 
   .at-menu-toggle-button {
@@ -2334,13 +1249,16 @@ ul.sf-menu {
   }
 
   .at-menu-toggle ul a {
-    padding       : 0 10px;
+    padding: 0 10px;
     $lt_gray-space: nowrap;
   }
 }
+
+
 /* =============================================================================
  *   Menus, usually blocks
  * ========================================================================== */
+
 ul.menu {
   padding-left: 15px;
 
@@ -2360,14 +1278,15 @@ ul.menu {
     &.leaf {}
 
     a {
+
       &:link,
       &:visited {}
 
-      &.active,
-      &:active {}
+      &:active,
+      &.active {}
 
-      &:focus,
-      &:hover {}
+      &:hover,
+      &:focus {}
     }
 
     &.active a,
@@ -2377,14 +1296,20 @@ ul.menu {
     &.last {}
   }
 }
+
+
 /* If li.content exists it's a problem, so reset the padding */
 .block .menu li.content {
   padding: 0;
 }
+
+
 /* =============================================================================
  *   Book navigation menu
  * ========================================================================== */
+
 .book-navigation {
+
   .page-links {}
 
   .page-previous {}
@@ -2393,7 +1318,7 @@ ul.menu {
 
   .page-up {
     /* Prevent text wrapping to a new line, assumes English "up" is used (two characters) */
-    min-width     : 2em;
+    min-width: 2em;
     $lt_gray-space: nowrap;
   }
 
@@ -2401,15 +1326,19 @@ ul.menu {
     margin-left: 0;
   }
 }
+
+
 /* =============================================================================
  *   Breadcrumbs
  * ========================================================================== */
+
 #breadcrumb {
   margin: 10px 0;
+
   /* If the label is set to show in theme settings the label class is added */
   .breadcrumb-label {
-    font-size    : 1em;
-    display      : inline;
+    font-size: 1em;
+    display: inline;
     padding-right: 10px;
 
     &:after {
@@ -2418,7 +1347,7 @@ ul.menu {
   }
 
   ol {
-    margin : 0;
+    margin: 0;
     padding: 0;
   }
 
@@ -2428,7 +1357,7 @@ ul.menu {
 
   li {
     list-style: none;
-    display   : inline;
+    display: inline;
   }
 
   li.crumb-first {}
@@ -2436,314 +1365,347 @@ ul.menu {
   li.crumb-last {}
 
   a {
+
     &:link,
     &:visited {}
 
-    &.active,
-    &:active {}
+    &:active,
+    &.active {}
 
-    &:focus,
-    &:hover {}
+    &:hover,
+    &:focus {}
   }
 }
+
+
 /* =============================================================================
  *   Pagers
  * ========================================================================== */
+
 ul.pager {
-  clear     : both;
-  margin    : 0;
+  clear: both;
+  margin: 0;
   text-align: center;
 }
+
 
 .item-list ul.pager li {
   margin: 0;
 }
 
+
 ul.pager li {
   background-image: none;
-  display         : inline;
-  list-style-type : none;
-  padding         : .5em;
+  display: inline;
+  list-style-type: none;
+  padding: .5em;
 
   &.pager-current {
     font-weight: 700;
   }
 }
 
+
 .block ul.pager li {
   margin: 0;
 }
+
+
 /*
  * Theme the various states of pager links
  */
 ul.pager li {
+
   a {
+
     &:link,
     &:visited {}
 
-    &.active,
-    &:active {}
+    &:active,
+    &.active {}
 
-    &:focus,
-    &:hover {}
+    &:hover,
+    &:focus {}
   }
 
   &.pager-item {}
-
   &.first {}
-
   &.last {}
-
   &.pager-current {}
-
   &.pager-first {}
-
   &.pager-previous {}
-
   &.pager-next {}
-
   &.pager-last {}
 }
+
+
 /* =============================================================================
  *   Skip Navigation
  * ========================================================================== */
+
 #skip-link {
-  left       : 50%;
+  left: 50%;
   margin-left: -6.5em;
-  margin-top : 0;
-  padding    : 0 .5em;
-  position   : absolute;
-  width      : 12em;
-  z-index    : 50;
+  margin-top: 0;
+  padding: 0 0.5em;
+  position: absolute;
+  width: 12em;
+  z-index: 50;
 
   a {
-    background     : #444;
-    background     : rgba(0, 0, 0, 0.6);
-    color          : $page;
-    display        : block;
-    line-height    : 2;
-    padding        : 0;
-    text-align     : center;
+    background: #444;
+    background: rgba(0, 0, 0, 0.6);
+    color: $page;
+    display: block;
+    line-height: 2;
+    padding: 0;
+    text-align: center;
     text-decoration: none;
 
     &:link,
     &:visited {
-      background     : #444;
-      background     : rgba(0, 0, 0, 0.6);
-      color          : $page;
-      display        : block;
-      line-height    : 2;
-      padding        : 0;
-      text-align     : center;
+      background: #444;
+      background: rgba(0, 0, 0, 0.6);
+      color: $page;
+      display: block;
+      line-height: 2;
+      padding: 0;
+      text-align: center;
       text-decoration: none;
     }
-
-    &:active,
+    &:hover,
     &:focus,
-    &:hover {
+    &:active {
       outline: 0;
     }
   }
 }
+
+
 /* =============================================================================
  *   Tabs (local tasks)
  * ========================================================================== */
+
 #tasks {
   margin-bottom: 15px;
 }
 
+
 ul.primary {
   border-bottom-color: $border;
-  margin             : 20px 0;
-  padding            : 0 0 0 5px;
+  margin: 20px 0;
+  padding: 0 0 0 5px;
 
   li {
     display: block;
-    float  : left;
-    margin : 0 1px -1px;
+    float: left;
+    margin: 0 1px -1px;
 
     a {
       background-color: $ultralight;
-      border-color    : $border;
-      margin-right    : 1px;
-      padding         : 0 10px;
-      display         : block;
-      float           : left;
-      height          : 1.5em;
-      line-height     : 1.5em;
+      border-color: $border;
+      margin-right: 1px;
+      padding: 0 10px;
+      display: block;
+      float: left;
+      height: 1.5em;
+      line-height: 1.5em;
 
-      &:focus,
-      &:hover {
+      &:hover,
+      &:focus {
         background-color: $light;
-        border-color    : $border;
+        border-color: $border;
       }
     }
   }
 
   li.active {
     a,
-    a:focus,
-    a:hover {
-      background-color   : $page;
+    a:hover,
+    a:focus {
+      background-color: $page;
       border-bottom-color: $page;
     }
   }
 }
 
+
 ul.secondary {
   border-bottom: 1px solid $border;
-  margin       : 1em 0 0;
-  padding      : 0 .3em 1em;
+  margin: 1em 0 0;
+  padding: 0 .3em 1em;
 
   li {
     border-right: 0;
-    list-style  : none;
-    padding     : 0 10px 0 0;
+    list-style: none;
+    padding: 0 10px 0 0;
 
     a {
-      &.active,
-      &:hover {
-        border-bottom  : none;
+      &:hover,
+      &.active {
+        border-bottom: none;
         text-decoration: underline;
       }
     }
   }
 }
-/* =============================================================================
- *   Manage Lists
- * ========================================================================== */
-.section-manage-lists {
-  .pane-slides-home-panel-pane-2 {
-    margin: 0;
 
-    .views-field-field-slide-image {
-      height: 200px;
 
-      &:after {
-        content: "";
-        display: none;
-      }
-    }
-  }
-
-  #breadcrumb-title-wrapper {
-    display: none;
-  }
-}
 /* =============================================================================
  *   Action links
  * ========================================================================== */
+
 ul.action-links {
-  margin    : 20px 0 0;
+  margin: 20px 0 0;
   list-style: none;
 
   li {}
 }
+
+
 /* =============================================================================
  *  Field Styling
  * ========================================================================== */
+
 /*
  * Wrapper for any field
  */
 .field {}
+
+
 /*
  * Above and inline classes are on the field wrapper
  */
 .field-label-above {}
+
+
 /*
  * When labels are set to inline in field display settings the clearfix class is automatically added
  */
 .field-label-inline {
+
   /* Remove the margin on inline field lables to preserve vertical formatting */
   .field-label {
     margin: 0;
   }
 }
+
 /*
  * Labels are h2 in Adaptivetheme. Use a strong selector to mitigate unwanted ineritance issues
  */
 .field-label {
-  font-size    : 1em;
-  font-weight  : 700;
-  font-family  : inherit;
-  line-height  : inherit;
+  font-size: 1em;
+  font-weight: 700;
+  font-family: inherit;
+  line-height: inherit;
   margin-bottom: 0;
 }
+
+
 /*
  * Field types (Core)
  */
+
 /*
  * Image fields use the <figure> and <figcaption> elements from HTML5
  */
 .field-type-image {
+
   .caption {}
 
   .full-caption {}
 
   .teaser-caption {}
 }
+
+
 /*
  * Taxonomy
  */
 .field-type-taxonomy-term-reference {
+
   /* The same bottom margin as p, blockquote, ul, ol and dl */
   margin-bottom: 1.5em;
 
   &.field-label-inline .field-items {
-    margin : 0;
+    margin: 0;
     padding: 0;
   }
 
   &.field-label-inline .field-item {
-    display   : inline;
+    display: inline;
     list-style: none;
-    padding   : 0 10px 0 0;
+    padding: 0 10px 0 0;
   }
 }
+
+
 /*
  * Text
  */
 .field-type-text {}
+
+
 /*
  * Long text
  */
 .field-type-text-long {}
+
+
 /*
  * Text with summary
  */
 .field-type-text-with-summary {}
+
+
 /*
  * File
  */
 .field-type-file {}
+
+
 /*
  * Number/Integer
  */
 .field-type-number-integer {}
+
+
 /*
  * Decimal
  */
 .field-type-number-decimal {}
+
+
 /*
  * Number float
  */
 .field-type-number-float {}
+
+
 /*
  * List
  */
 .field-type-list-text {}
+
+
 /*
  * List boolean
  */
 .field-type-list-boolean {}
+
+
 /*
  * List integer
  */
 .field-type-list-integer {}
+
+
 /*
  * List float
  */
 .field-type-list-float {}
+
+
 /*
  * Field types (Contrib)
  */
@@ -2752,6 +1714,8 @@ ul.action-links {
 .field-type-node-reference {}
 
 .field-type-user-reference {}
+
+
 /*
  * Named fields
  */
@@ -2760,18 +1724,25 @@ ul.action-links {
 .field-name-field-image {}
 
 .field-name-field-tags {}
+
+
 /*
  * Underscores in field name are replaced with dashes
  */
 .field-name-field-FIELDNAME {}
+
+
 /*
  * Image Alignment Theme Settings - included here so you can easily override
  */
+
 /*
  * Float none setting
  */
 .ia-n .field-type-image,
 .iat-n .field-type-image {}
+
+
 /*
  * Float left setting
  */
@@ -2779,6 +1750,8 @@ ul.action-links {
 .iat-l .field-type-image figure {
   margin: 5px 20px 15px 0;
 }
+
+
 /*
  * Centered setting
  */
@@ -2786,6 +1759,8 @@ ul.action-links {
 .iat-c .field-type-image figure {
   margin: 5px auto 15px;
 }
+
+
 /*
  * Float right setting
  */
@@ -2793,170 +1768,250 @@ ul.action-links {
 .iat-r .field-type-image figure {
   margin: 5px 0 15px 20px;
 }
+
+
+
 /* =============================================================================
  *   Block Styling
  * ========================================================================== */
+
 /*
  * Main wrapper for most blocks, block_system_main does not have it
  */
 .block {
   margin-bottom: 20px;
 }
+
+
 /*
  * Inner wrapper for most blocks, good for margin, padding and borders, block_system_main does not have it
  */
 .block-inner {}
+
+
 /*
  * The first block in the region
  */
 .block.first {}
+
+
 /*
  * The last block in the region
  */
 .block.last {}
+
+
 /*
  * Zebra striping for each block in the region
  */
 .block.odd {}
+
+
 /*
  * Zebra striping for each block in the region
  */
 .block.even {}
+
+
 /*
  * Block title
  */
 .block-title {
-  margin: 0;
+  // margin: 0;
 }
+
+
 /*
  * Block content wrapper
  */
 .block-content {}
+
+
 /*
  * Match item list and block menu margin and padding
  */
 .block-content {
-  ol,
-  ul {
+
+  ul,
+  ol {
     padding: 0 0 0 15px;
+    @include body-copy;
+
   }
 
   li {
-    margin : 0;
+    margin: 0;
     padding: 0;
   }
 }
+
+
 /*
  * Block for the latest news items in the first category
  */
 #block-aggregator-category-1 {}
+
+
 /*
  * Block for the latest news items in the first feed
  */
 #block-aggregator-feed-1 {}
+
+
 /*
  * First block created with "Add block" link
  */
 #block-block-1 {}
+
+
 /*
  * "Recent blog posts" block
  */
 #block-blog-recent {}
+
+
 /*
  * "Book navigation" block for the current book's table of contents
  */
 #block-book-navigation {}
+
+
 /*
  * "Recent comments" block
  */
 #block-comment-recent {}
+
+
 /*
  * "Active forum topics" block
  */
 #block-forum-active {}
+
+
 /*
  * "New forum topics" block
  */
 #block-forum-new {}
+
+
 /*
  * Language switcher block
  */
 #block-locale-language {}
+
+
 /*
  * Custom menu block
  */
 #block-menu-menu-NAME {}
+
+
 /*
  * "Recent content" block
  */
 #block-node-recent {}
+
+
 /*
  * "Syndicate" block for primary RSS feed; see also page.css's .feed-icon
  */
 #block-node-syndicate {}
+
+
 /*
  * "Most recent poll" block
  */
 #block-poll-recent {}
+
+
 /*
  * "Author information" block for the profile of the page's author
  */
 #block-profile-author-information {}
+
+
 /*
  * "Search form" block
  */
 #block-search-form {}
+
+
 /*
  * "Shortcuts" block
  */
 #block-shortcut-shortcuts {}
+
+
 /*
  * "Popular content" block
  */
 #block-statistics-popular {}
+
+
 /*
  * "Main menu" block
  */
 #block-system-main-menu {}
+
+
 /*
  * "Management" block for Drupal management menu
  */
 #block-system-management {}
+
+
 /*
  * "Navigation" block for Drupal navigation menu
  */
 #block-system-navigation {}
+
+
 /*
  * "User menu" block for Drupal user menu
  */
 #block-system-user-menu {}
+
+
 /*
  * "System help" block
  */
 #block-system-help {}
+
+
 /*
  * "Main page content" block
  */
 #block-system-main {}
+
+
 /*
  * "Powered by Drupal" block
  */
 #block-system-powered-by {}
+
+
 /*
  * "User login form" block
  */
 #block-user-login {}
+
+
 /*
  * "Who's new" block for a list of the newest users
  */
 #block-user-new {}
+
+
 /*
  * "Who's online" block for a list of the online users
  */
 #block-user-online {}
+
+
 /* =============================================================================
  *   Node Styling
  * ========================================================================== */
+
 .node {
   margin-bottom: 20px;
 
@@ -2975,12 +2030,13 @@ ul.action-links {
   &.even {}
 
   .node-title {
-    margin: 0;
+    //margin: 0;
   }
 
   .user-picture {}
 
   .submitted {
+
     .username {}
 
     time {}
@@ -2989,29 +2045,25 @@ ul.action-links {
   .node-content {}
 
   ul.links {
-    li {}
 
+    li {}
     li a {}
 
     li.node-read-more a {}
-
     li.comment-add a {}
-
     li.comment-comments a {}
-
     li.comment-new-comments a {}
-
     li.blog-sernames-blog a {}
-
     li.print-html a {}
-
     li.print-email a {}
-
     li.print-pdf a {}
   }
 }
 
+
 .preview .node {}
+
+
 /*
  * All nodes are given a node-FOO class that describes the type of content that
  * it is. If you create a new content type called "my-custom-type", it will
@@ -3026,9 +2078,12 @@ ul.action-links {
 .node-forum {}
 
 .node-poll {}
+
+
 /* =============================================================================
  *   Comment Styling - Comments, comment wrapper, comment form
  * ========================================================================== */
+
 /*
  * Wrapper for the list of comments and its titles
  */
@@ -3045,6 +2100,8 @@ ul.action-links {
     }
   }
 }
+
+
 /*
  * Wrapper for a single comment
  */
@@ -3062,6 +2119,7 @@ ul.action-links {
   .user-picture {}
 
   .submitted {
+
     p {}
 
     .username {}
@@ -3073,12 +2131,16 @@ ul.action-links {
 
   ul.links {}
 }
+
+
 /*
  * Comment title
  */
 .comment-title {
   margin: 0;
 }
+
+
 /*
  * Comment states
  */
@@ -3095,75 +2157,101 @@ ul.action-links {
 .comment-with-picture {}
 
 .comment-with-signature {}
+
+
 /*
  * Preview of the comment before submitting new or updated comment
  */
 .comment-preview {}
+
+
 /*
  * "New" marker for comments that are new for the current user
  */
 .new {
   color: $highlight;
 }
+
+
 /*
  * Nested comments are indented
  */
 .indented {
   margin-left: 40px;
 }
+
+
 /* =============================================================================
  *   Forms
  * ========================================================================== */
+
 /*
  * Wrapper for a form element (or group of form elements) and its label
  */
-.form-item {
-  input.error,
-  select.error,
-  textarea.error {
-    border: 1px solid $highlight;
-  }
+ .form-item {
 
-  label {
-    font-weight: 400;
-  }
+   input.error,
+   textarea.error,
+   select.error {
+     border: 1px solid $highlight;
+   }
 
-  label.option {}
+   label {
+     font-weight: 400;
+   }
 
-  .description {
-    font-size: .85em;
-  }
+   label.option {
+   }
 
-  &.form-checkboxes,
-  &.form-radios {}
-}
+   .description {
+     font-size: 0.85em;
+   }
 
-.compact-form-label {
-  top  : 10px;
-  left : 15px;
-  color: gray !important;
-  @include font-size-calc(1.4);
-}
+   &.form-checkboxes,
+   &.form-radios {
+   }
+ }
 
-.compact-form-wrapper {
-  //display: inline-block;
-  display: block;
+ .compact-form-label {
 
-  .form-required {
-    //position: absolute;
-  }
-}
+     top: 5px;
+     left: 15px;
+     color: gray !important;
+     @include font-size-calc(1.4);
+ }
+
+ .compact-form-wrapper{
+
+   //display: inline-block;
+   display: block;
+
+   .form-required{
+
+     //position: absolute;
+   }
+ }
+
 /*
  * Highlight marks and form required mark
  */
-.form-required,
-.marker {
+.marker,
+.form-required {
   color: $highlight;
+
+  .compact-form-wrapper &{
+
+    // position: absolute;
+    // right: 10px;
+  }
 }
+
+
 /*
  * The submit button
  */
-.form-submit {}
+.form-submit {
+}
+
 
 .container-inline {
   div,
@@ -3171,55 +2259,69 @@ ul.action-links {
     display: inline;
   }
 }
+
 /*
  * Define consistent borders
  */
-fieldset {
-  border: 1px solid rgba(black, .2);
+ fieldset {
+   border:         1px solid rgba(black, .2);
 
-  legend {
-    color: rgba(black, .6) !important;
-    @include font-size-calc(1.4);
-  }
-}
+   legend{
+
+     color: rgba(black, .6) !important;
+     @include font-size-calc(1.4);
+   }
+ }
+
 /*
  * Tips for Drupal's input formats
  */
-.tips {}
+.tips {
+}
+
+
 /*
  * Buttons used by contrib modules like Media
  */
 a.button {
   @include appearance(button);
 }
+
+
 /*
  * Password confirmation
  */
-.confirm-parent,
-.password-parent {
+.password-parent,
+.confirm-parent {
   margin: 0;
 }
+
+
+
 /* =============================================================================
  *   Tables
  * ========================================================================== */
+
 table {
-  margin : 10px 0;
+  margin: 10px 0;
   padding: 0;
-  width  : 100%;
+  width: 100%;
 
   &.sticky-header {
     z-index: 10;
   }
 }
 
+
 table,
-tbody,
-td,
-th,
 thead,
-tr {
+tbody,
+tr,
+th,
+td {
   border-color: $border;
 }
+
 
 table,
 td,
@@ -3227,39 +2329,47 @@ th {
   vertical-align: middle;
 }
 
+
 caption,
-td,
-th {
+th,
+td {
   text-align: left;
 }
 
+
 thead tr {
-  font-weight     : 700;
+  font-weight: 700;
   background-color: $medium_dark;
 }
+
 
 td,
 th {
   border-bottom: 0;
-  margin       : 0;
-  padding      : 5px 7px;
+  margin: 0;
+  padding: 5px 7px;
 }
 
+
 tbody {}
+
 
 tbody tr {
   border-top: 1px solid $border;
 }
 
+
 tr {
+
   &.odd {
     background: $page;
   }
+
   /* Table row striping */
-  &.even,
   &.info,
-  &:nth-child(2n+2) {
-    border-bottom   : 0;
+  &.even,
+  &:nth-child(2n+2)  {
+    border-bottom: 0;
     background-color: $ultralight;
   }
 
@@ -3276,86 +2386,113 @@ tr {
   }
 }
 
+
 .lt-ie8 tr {
+
   &.even,
   &.odd {
-    td,
-    th {}
+
+    th,
+    td {
+    }
   }
 }
+
+
 /*
  * Forum tables
  * Core sets $lt_gray-space to nowrap, which makes no sense
  */
 #forum td {
   &.created,
-  &.last-reply,
-  &.pager,
   &.posts,
+  &.topics,
+  &.last-reply,
   &.replies,
-  &.topics {
+  &.pager {
     $lt_gray-space: normal;
   }
 }
+
+
 /* =============================================================================
  *   Messages
  * ========================================================================== */
+
 div {
   &.messages {
-    // Left and right margin are set by the global gutter width
-    margin-bottom: 10px;
-    margin-top   : 10px;
+  // Left and right margin are set by the global gutter width
+  margin-bottom: 10px;
+  margin-top: 10px;
 
     ul {
-      margin-top   : 0;
+      margin-top: 0;
       margin-bottom: 0;
     }
   }
 
-  &.status {}
+  &.status {
+  }
 
-  &.warning {}
+  &.warning {
+  }
 }
 
-tr.warning {}
+tr.warning {
+}
+
 
 div.error,
-tr.error {}
+tr.error {
+}
 
-.error {}
 
-.warning {}
+.error {
+}
+
+
+.warning {
+}
+
+
 /*
  * Unpublished nodes
  */
-.comment-unpublished,
-.node-unpublished {}
+.node-unpublished,
+.comment-unpublished {
+}
 
-.comment-unpublished,
-.node-unpublished {
+
+.node-unpublished,
+.comment-unpublished {
+
   p.unpublished {
     @include unpublished;
   }
 }
+
+
 /* =============================================================================
  *    Maintenance pages
  * ========================================================================== */
+
 .maintenance-page {
   .container {
     padding: 40px 0;
   }
 
-  #page-title,
-  #site-name {
+  #site-name,
+  #page-title {
     margin: 0;
   }
 }
 
+
 .db-offline {
   .container {
-    margin   : 0 auto;
-    padding  : 40px 0;
-    width    : 100%;
+    margin: 0 auto;
+    padding: 40px 0;
+    width: 100%;
     max-width: 960px;
   }
 
@@ -3367,23 +2504,30 @@ tr.error {}
     padding: 20px 0;
   }
 }
+
+
 /* =============================================================================
  *   Misc overrides for contrib modules
  * ========================================================================== */
+
 /*
  * Admin menu overrides
  */
 #admin-menu {
-  margin : 0;
+  margin: 0;
   padding: 0;
 }
+
+
 /*
  * Devel Module
  */
 .dev-query {
   background: $light;
-  padding   : 30px;
+  padding: 30px;
 }
+
+
 /*
  * Styleguide module tweaks
  */
@@ -3392,28 +2536,29 @@ tr.error {}
 
   .item-list {
     font-family: inherit;
-    margin     : 0 20px 20px 0;
-    min-height : 260px;
-    width      : auto;
+    margin: 0 20px 20px 0;
+    min-height: 260px;
+    width: auto;
   }
 }
+
+
 /* =============================================================================
  *   EC HACKS
  * ========================================================================== */
+
 #admin-menu {
-  .dropdown li li {
-    opacity         : 1;
-    background-color: rgba(69, 69, 69, 0.88);
-  }
+	.dropdown li li {
+			opacity: 1;
+			background-color: rgba(69, 69, 69, 0.88);
+		}
 }
 
 .url-textfield {
-  display: none;
+	display:none;
 }
-
 #total-subscription-subscribe-form {
-  .form-item-node-taxonomy,
-  .form-type-checkbox {
-    display: none;
-  }
+	.form-item-node-taxonomy, .form-type-checkbox {
+		display:none;
+	}
 }

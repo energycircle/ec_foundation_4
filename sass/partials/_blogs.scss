@@ -1,0 +1,425 @@
+
+/*-----------------------------------------------------------------------*\
+
+    Blog Teasers
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-articles-panel-pane"],
+[class*="pane-blog-listing-panel-pane"] {
+
+  text-align: $blog-panel-alignment;
+
+  .block-content{
+
+    @include rem(margin, 0, -$blog-gutter*.1);
+  }
+
+  .views-row {
+
+    display: inline-block;
+    vertical-align: top;
+    background: $blog-teaser-background;
+    text-align: $blog-teaser-alignment;
+    // width: 100%;
+
+    @if $blog-teaser-background != "none"{
+
+      @include rem(padding, $default-padding);
+    }
+
+    @include rem(margin, 0, $blog-gutter*.1, 3);
+
+    &[class*="last"]{
+
+      margin-bottom: 0;
+    }
+
+
+    .EC-region-right & {
+
+      width: 100%;
+      padding: 0;
+      display: block;
+    }
+
+    &:after {
+      @include clearfix;
+    }
+  }
+
+  .views-field-field-blog-image {
+    position: relative;
+    text-align: $blog-teaser-alignment;
+
+    a {
+      display: block;
+    }
+
+    img {
+
+      max-width: none;
+      width: 100%;
+      display: block;
+    }
+
+    &:after {
+
+    }
+  }
+
+  .views-field-title {
+
+    // @include subtitle {
+    //   text-transform: uppercase;
+    // }
+  }
+
+  .views-field-body {
+
+    @include body-copy;
+  }
+
+  .views-field-field-display-date {
+
+    @include body-copy;
+    font-style: italic;
+  }
+
+  .views-more-link {
+
+  }
+
+
+
+
+/*-----------------------------------------------------------------------*\
+   Home Page
+\*-----------------------------------------------------------------------*/
+
+   .front & {
+
+
+
+     @if $blog-stretch-panel--front{
+
+       &.block{
+
+         margin-bottom: 0;
+       }
+
+       @include faux-width($blog-panel-background--front);
+     }
+
+     @else{
+
+       @if $blog-panel-background--front != none{
+
+        .block-inner{
+          @include rem(padding, $default-padding);
+          background: $blog-panel-background--front;
+        }
+
+       }
+
+       &.block{
+
+         @include rem(margin, $vp, 0);
+       }
+     }
+
+
+
+     @if $blog-panel-background--front != "none"{
+
+       @if lightness($blog-panel-background--front) < 70{
+
+         .pane-title{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background != "none"{
+       @if  lightness($blog-teaser-background) < 70 {
+          // Lighter backgorund, return dark color
+         .views-field-title,
+         .views-field-title a,
+         .views-field-body,
+         .views-field-body a,
+         .views-field-field-display-date,
+         .views-more-link{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background == "none"{
+
+       @if $blog-panel-background--front != "none"{
+         @if lightness($blog-panel-background--front) < 70{
+
+           .views-field-title,
+           .views-field-title a,
+           .views-field-body,
+           .views-field-body a,
+           .views-field-field-display-date,
+           .views-more-link{
+
+             color: white;
+           }
+         }
+       }
+     }
+
+    .views-row {
+      @if($blog-col--front > 1){
+        @include teaser-content($width: calc(98.5%/#{$blog-col--front} - #{$blog-gutter*2}), $breakpoint: 769px);
+      }
+
+    }
+
+    @if nth($blog-image-pos--front, 1) == "float"{
+
+      .views-field-title,
+      .views-field-body,
+      .views-field-field-display-date,
+      .views-more-link {
+
+        @include teaser-content($width: calc( 100% - #{unquote(nth($blog-image-pos--front, 2))} ), $float: left, $breakpoint: 769px);
+      }
+
+      .views-field-field-blog-image {
+
+        @include teaser-content($width: #{unquote(nth($blog-image-pos--front, 2))}, $float: left, $breakpoint: 769px);
+        min-height: 100px;
+        @include rem(padding-right, 3);
+      }
+    }
+   }
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sub Pages
+\*-----------------------------------------------------------------------*/
+
+   .not-front:not(.section-blog) & {
+     @if $blog-stretch-panel{
+
+       &.block{
+
+         margin-bottom: 0;
+       }
+
+       @include faux-width($blog-panel-background);
+     }
+
+     @else{
+
+       @if $blog-panel-background--front != none{
+
+         .block-inner{
+           @include rem(padding, $default-padding);
+           background: $blog-panel-background;
+         }
+       }
+
+
+       &.block{
+
+         @include rem(margin, $vp, 0);
+       }
+     }
+
+
+     @if $blog-panel-background != "none"{
+
+       @if lightness($blog-panel-background) < 70{
+
+         .pane-title{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background != "none"{
+       @if  lightness($blog-teaser-background) < 70 {
+          // Lighter backgorund, return dark color
+         .views-field-title,
+         .views-field-title a,
+         .views-field-body,
+         .views-field-body a,
+         .views-field-field-display-date,
+         .views-more-link{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background == "none"{
+
+       @if $blog-panel-background != "none"{
+         @if lightness($blog-panel-background) < 70{
+
+           .views-field-title,
+           .views-field-title a,
+           .views-field-body,
+           .views-field-body a,
+           .views-field-field-display-date,
+           .views-more-link{
+
+             color: white;
+           }
+         }
+       }
+     }
+
+     .views-row {
+      @if($blog-col > 1){
+        @include teaser-content($width: calc(98.5%/#{$blog-col} - #{$blog-gutter*2}), $breakpoint: 769px);
+      }
+
+     }
+
+     @if nth($blog-image-pos, 1) == "float"{
+
+       .views-field-title,
+       .views-field-body,
+       .views-field-field-display-date,
+       .views-more-link {
+
+         @include teaser-content($width: calc( 100% - #{unquote(nth($blog-image-pos, 2))} ), $float: left, $breakpoint: 769px);
+       }
+
+       .views-field-field-blog-image {
+
+         @include teaser-content($width: #{unquote(nth($blog-image-pos, 2))}, $float: left, $breakpoint: 769px);
+         min-height: 100px;
+         @include rem(padding-right, 3);
+       }
+
+     }
+   }
+
+/*---- end section ------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------*\
+   Blog Section
+\*-----------------------------------------------------------------------*/
+
+   .section-blog & {
+
+    @if $blog-panel-background--blog == "none"{
+
+      .block-inner{
+        padding: 0;
+      }
+
+    }
+
+     &.block{
+
+       @include rem(margin, $vp, 0);
+     }
+
+     @if $blog-panel-background--blog != "none"{
+
+       .block-inner{
+         @include rem(padding, $default-padding);
+         background: $blog-panel-background--blog;
+       }
+
+       @if lightness($blog-panel-background--blog) < 70{
+
+         .pane-title{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background != "none"{
+       @if  lightness($blog-teaser-background) < 70 {
+          // Lighter backgorund, return dark color
+         .views-field-title,
+         .views-field-title a,
+         .views-field-body,
+         .views-field-body a,
+         .views-field-field-display-date,
+         .views-more-link{
+
+           color: white;
+         }
+       }
+     }
+
+     @if $blog-teaser-background == "none"{
+
+       @if $blog-panel-background--blog != "none"{
+         @if lightness($blog-panel-background--blog) < 70{
+
+           .views-field-title,
+           .views-field-title a,
+           .views-field-body,
+           .views-field-body a,
+           .views-field-field-display-date,
+           .views-more-link{
+
+             color: white;
+           }
+         }
+       }
+     }
+
+     .views-row {
+      @if($blog-col--blog > 1){
+        @include teaser-content($width: calc(98.5%/#{$blog-col--blog} - #{$blog-gutter*2}), $breakpoint: 769px);
+      }
+
+     }
+
+     @if nth($blog-image-pos--blog, 1) == "float"{
+
+       .views-field-title,
+       .views-field-body,
+       .views-field-field-display-date,
+       .views-more-link {
+
+         @include teaser-content($width: calc( 100% - #{unquote(nth($blog-image-pos--blog, 2))} ), $float: left, $breakpoint: 769px);
+       }
+
+       .views-field-field-blog-image {
+
+         @include teaser-content($width: #{unquote(nth($blog-image-pos--blog, 2))}, $float: left, $breakpoint: 769px);
+         min-height: 100px;
+         @include rem(padding-right, 3);
+       }
+
+     }
+   }
+
+/*---- end section ------------------------------------------------------*/
+
+
+
+/*-----------------------------------------------------------------------*\
+   Sidebar
+\*-----------------------------------------------------------------------*/
+
+  .EC-region-right & {
+
+  }
+
+/*---- end section ------------------------------------------------------*/
+
+  @include override--blogs;
+
+}

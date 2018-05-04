@@ -1,0 +1,232 @@
+/*-----------------------------------------------------------------------*\
+
+
+    Hero
+
+
+\*-----------------------------------------------------------------------*/
+
+[class*="pane-slides-home-panel-"] {
+
+ overflow: hidden;
+
+
+  @if $hero-stretch-panel {
+    margin: 0 -15px;
+
+    @media only screen and (min-width: $max-width) {
+        margin: 0 $nm;
+    }
+    .block-inner {
+      margin: 0;
+    }
+  }
+
+  @else{
+
+    .hero-caption{
+
+      @include rem(padding, 0, 3);
+    }
+  }
+
+
+   &.block {
+     margin-bottom: 0;
+   }
+
+
+
+   @if $feat-img-viewport-height{
+
+     .views-field-field-slide-image{
+
+       height: calc(100vh - 380px);
+       position: relative;
+       overflow: hidden;
+       max-height: $feat-img-viewport-max-height+vw;
+
+       @if $feat-img-max-width == "none" {
+
+       }
+
+       @if $feat-img-max-width != "none" {
+
+         @media only screen and (min-width: $feat-img-max-width){
+
+           max-height: calc( #{$feat-img-max-width} * (#{$feat-img-viewport-max-height} *.01));
+         }
+
+       }
+
+      @if $feat-img-stretch-panel == false{
+
+        @media only screen and (min-width: $max-width){
+
+         max-height: calc( #{$max-width} * (#{$feat-img-viewport-max-height} *.01));
+        }
+      }
+
+      img{
+
+        @media only screen and (min-width: $hero-max-width){
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translateY(-50%) translateX(-50%);
+        }
+      }
+     }
+   }
+
+   .views-field-field-slide-image {
+     position: relative;
+
+    @if $hero-max-width != "none"{
+
+        max-width: $hero-max-width;
+        margin: auto;
+        overflow: hidden;
+    }
+
+     &:after{
+
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: $hero-overlay-color;
+
+     }
+   }
+
+   .flex-control-nav {
+     display: none;
+   }
+
+   .flex-direction-nav {
+     margin: 0;
+   }
+
+
+   .hero-caption-wrapper {
+
+       @if $hero-max-width != "none"{
+
+           max-width: $hero-max-width;
+           overflow: hidden;
+       }
+
+       width: 100%;
+       max-width: calc(#{$max-width} - 30px - (#{$gutter-width}*2) );
+       padding: 0 25px;
+       margin: auto;
+       overflow: hidden;
+       @media only screen and (max-width: $hero-breakpoint){
+
+         background: $hero-caption-bg--mobile;
+         @include rem(padding-top, 2.5);
+         @include rem(padding-bottom, 2.5);
+       }
+
+
+       @include breakpoint($bp: $max-width){
+         padding: 0;
+       }
+
+       @media only screen and (min-width: $hero-breakpoint){
+         position: absolute;
+         top: 0;
+         //bottom: 30px;
+         bottom: 0;
+         right: 25px;
+         left: 25px;
+       }
+
+
+     .hero-caption {
+
+         @include breakpoint( $hero-breakpoint ){
+
+           position: absolute;
+         }
+
+
+         width: 100%;
+         bottom: -300px;
+
+         @if( $hero-caption-bg != none){
+           background: $hero-caption-bg;
+           @include rem(padding, $default-padding);
+         }
+
+         text-align: $hero-caption-text-align;
+
+         @media only screen and (min-width: $hero-breakpoint){
+
+           @if $hero-caption-horizontal-align == "center"{
+             margin: 0px auto;
+             left: 0;
+             right: 0;
+           }
+
+           @if $hero-caption-horizontal-align == "left"{
+             margin: 0px auto 0 0;
+             left: 0;
+           }
+
+           @if $hero-caption-horizontal-align == "right"{
+             margin: 0px 0 0 auto;
+             right: 0;
+           }
+
+           max-width: $hero-caption-max-width;
+         }
+
+     }
+
+     @include hero-caption-font-styles;
+
+     .field-display-title {
+
+       text-align: $hero-caption-text-align;
+     }
+
+     .field-display-subtitle {
+
+       text-align: $hero-caption-text-align;
+     }
+
+     @if $hero-caption-bg != "none"{
+
+       @if lightness($hero-caption-bg) < 70{
+
+         .field-display-title,
+         .field-display-subtitle {
+
+           color: white;
+         }
+       }
+     }
+
+
+   }
+
+   .flex-active-slide {
+
+     .hero-caption {
+         top: auto;
+         bottom: $hero-caption-vertical-position;
+         opacity: 1;
+         @include css-transition($type:all, $duration: 700ms, $ease:ease-in-out);
+       }
+
+   }
+
+
+   @include override--hero;
+
+}
