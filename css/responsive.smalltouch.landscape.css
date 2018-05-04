@@ -1,0 +1,58 @@
+/*---------------------------------------------------------------------------*\
+
+ EC MIXINS
+ 1. colors 2. type 3. buttons 4. misc styles
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 1. COLORS
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 2. TYPE
+ a. @fontface b. global styles
+
+
+\*---------------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ a. @fontface
+ \*-----------------------------------------------------------------------*/
+@font-face { font-family: 'fontello'; src: url("../fonts/fontello.eot?1332134"); src: url("../fonts/fontello.eot?1332134#iefix") format("embedded-opentype"), url("../fonts/fontello.woff2?1332134") format("woff2"), url("../fonts/fontello.woff?1332134") format("woff"), url("../fonts/fontello.ttf?1332134") format("truetype"), url("../fonts/fontello.svg?1332134#fontello") format("svg"); font-weight: normal; font-style: normal; }
+    /*-----------------------------------------------------------------------*\
+ b. global styles
+ \*-----------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ TITLE
+ \*-----------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ BODY
+ \*-----------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 3. BUTTONS
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 4. MISC STYLES
+
+
+\*---------------------------------------------------------------------------*/
+/* Shutter In Horizontal */
+/* Shutter Out Horizontal */
+/* Shutter In Vertical */
+/* Shutter Out Vertical */
+/* Important Information about this CSS File  - Do not delete or rename this file, if you do not use it leave it blank (delete everything) and the file will be skipped when you enable Production Mode in the Global theme settings.  - Read the _README file in this directory, it contains useful help and other information. */
+/* Increase the body font size on small touch devices */
+body { font-size: 100%; }
+
+/* ============================================================================= Mobile Menu Toggle See your theme settings extensions for how to enable the menu toggle. These are example styles for the menu toggle menu, you can use these in the relevant responsive stylesheets as required. Modify to suit your design. ========================================================================== */
+.at-mt .at-menu-toggle { /* The toggle link */ /* Menu items */ }
+.at-mt .at-menu-toggle h2 { margin-bottom: 5px; }
+.at-mt .at-menu-toggle h2 a { background: #eee; border: 2px solid #ccc; padding: 2px 10px; }
+.at-mt .at-menu-toggle ul.menu li a { background: #eee; border-bottom: 1px solid #fff; }

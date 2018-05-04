@@ -1,0 +1,1022 @@
+//
+// Custom sass variables and mixins
+//
+// Variables
+// -----------------------------------------------------------------------------
+// The variables set here serve only as example of how you can use SASS variables
+// to centralize and control frequently used styles more easily. Here you will
+// find variables for colors, fonts and the global gutter width.
+//
+// Mixins
+// -----------------------------------------------------------------------------
+// To use a mixin in this file, add this line to the top of your .scss file:
+//   @import "base"; (_base.scss imports _custom.scss).
+//
+// Then to use a mixin for a particular rule, add this inside the ruleset's
+// curly brackets:
+//   @include mix-in-name;
+//
+
+//
+// Color Variables
+// Colors used in the sample global.styles. You can use these to recolor many
+// elements such as forms, tables, tabs etc.
+//
+
+$page:         #fff;    // to match the page background, default is white
+$border:       #ccc;    // all borders set in global.styles - tables, fieldset, primary links
+$highlight:    #c00;    // required mark, form error highlight, "new" label on comments
+$ultralight:   #f5f5f5; // table row even, primary link inactive tabs
+$light:        #eee;    // table row odd active, primary link inactive hover
+$medium_light: #ebebeb; // table row even active
+$medium_dark:  #e5e5e5; // table thead
+$debug:        rgba(255, 192, 203, 0.5); // Full width wrapper test
+
+$thead:          $medium_dark;
+$tr_odd:         $page;
+$tr_even:        $ultralight;
+$tr_odd_active:  $light;
+$tr_even_active: $medium_light;
+
+$primary_task:        $ultralight;
+$primary_task_hover:  $light;
+$primary_task_active: $page;
+
+
+//
+// Font Variables
+// These font stacks are an exact copy of the stacks found in AT Cores
+// theme settings for web safe fonts.
+//
+
+$sans-serif-small:            'Trebuchet MS', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$sans-serif-large:            Verdana, Geneva, 'DejaVu Sans', Arial, Helvetica, sans-serif;
+$sans-serif-arial-helvetica:  Arial, Helvetica, sans-serif;
+$calibri-candara:             Calibri, Candara, Arial, Helvetica, sans-serif;
+$serif-small:                 Garamond, Perpetua, 'Times New Roman', serif;
+$serif-large:                 Georgia, Baskerville, Palatino, 'Palatino Linotype', 'Book Antiqua', 'Times New Roman', serif;
+$modern-myriad:               'Segoe UI', 'Myriad Pro', Myriad, Arial, Helvetica, sans-serif;
+$lucida:                      'Lucida Sans Unicode', 'Lucida Sans', 'Lucida Grande', Verdana, Geneva, sans-serif;
+$impact:                      Impact, Haettenschweiler, 'Franklin Gothic Bold', Charcoal, 'Helvetica Inserat', 'Bitstream Vera Sans Bold', 'Arial Black', sans-serif;
+$mono:                        Consolas, Monaco, 'Courier New', Courier, monospace, sans-serif;
+
+
+//
+// Gutters
+//
+// Set a variable for the gutters. Adaptivetheme allows you to easly modify the
+// global gutter width for precise control over the design. Panel pages need
+// special gutter wrangling when a Panel is inside #content wrapper, so to ease
+// setting this we use a variable.
+//
+$gutter-width: 10px;
+
+
+//
+// Markup free clearing
+// http://www.stubbornella.org/content/2012/05/02/cross-browser-debugging-css/
+//
+
+@mixin cf {
+  overflow: hidden;   // New formatting context in better browsers
+  *overflow: visible; // Protect IE7 and older from the overflow property
+  *zoom: 1;           // Give IE hasLayout, a new formatting context equivalent
+}
+
+
+//
+// Image replacement
+// Kellum Method: http://www.zeldman.com/2012/03/01/replacing-the-9999px-hack-new-image-replacement
+// Additional helpers from http://html5boilerplate.com/docs/css/
+// This is also included as a SASS mixin, see: sass/custom.rb
+//
+
+@mixin ir {
+  // Kellum Method
+  display: block !important;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  // Additional helpers
+  border: 0;                     // Remove the default border from elements like <button>
+  font: 0/0 a;                   // Crush the text down to take up no space
+  text-shadow: none;             // Remove any text shadows
+  color: transparent;            // Hide any residual text in Safari 4 and any mobile devices that may need it
+  background-color: transparent; // Hide the default background color on elements like <button>
+}
+
+
+//
+// element-invisible improved and more robust
+//
+@mixin element-invisible {
+  border: 0;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+
+//
+// Turns off the element-invisible effect
+//
+@mixin element-invisible-off {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+@mixin element-focusable {
+  @include element-invisible;
+
+  &:active,
+  &:focus {
+    @include element-invisible-off;
+  }
+}
+
+
+//
+// Shift content offscreen, can be usefull when you reall need to do this
+//
+@mixin offscreen {
+  position: absolute;
+  top: -99999em;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  outline: 0;
+}
+
+
+//
+// Hide content from all users
+//
+@mixin element-hidden {
+  display: none;
+}
+
+
+//
+// The word "Unpublished" displayed underneath unpublished nodes and comments
+//
+@mixin unpublished {
+  color: pink; // target browsers that do not support rgba
+  color: rgba(239, 170, 170, 0.4);
+  font-family: $impact;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.2;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  text-align: center;
+  text-transform: uppercase;
+  word-wrap: break-word;
+
+}
+
+
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  EC MIXINS
+
+  1. colors
+  2. type
+  3. buttons
+  4. misc styles
+
+
+\*---------------------------------------------------------------------------*/
+
+
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  1. COLORS
+
+
+\*---------------------------------------------------------------------------*/
+
+
+$primary: #154299;
+$secondary: #037dc3;
+$tertiary: #ec1d24;
+$quaternary: #fae629;
+
+
+$dk_gray: #3d3d3d;
+$md_gray: #707070;
+$lt_gray: #f4f4f4;
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  2. TYPE
+
+    a. @fontface
+    b. global styles
+
+
+\*---------------------------------------------------------------------------*/
+
+
+    /*-----------------------------------------------------------------------*\
+
+        a. @fontface
+
+    \*-----------------------------------------------------------------------*/
+
+
+    //Fontello
+    @font-face {
+      font-family: 'fontello';
+      src: url('../fonts/fontello.eot?1332134');
+      src: url('../fonts/fontello.eot?1332134#iefix') format('embedded-opentype'),
+           url('../fonts/fontello.woff2?1332134') format('woff2'),
+           url('../fonts/fontello.woff?1332134') format('woff'),
+           url('../fonts/fontello.ttf?1332134') format('truetype'),
+           url('../fonts/fontello.svg?1332134#fontello') format('svg');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    $primary-ff: 'Open Sans', sans-serif;
+
+
+
+    /*-----------------------------------------------------------------------*\
+
+        b. global styles
+
+    \*-----------------------------------------------------------------------*/
+
+
+    //
+    // Converts font-sizes to REM with PX fallback
+    //
+
+    @mixin font-size($sizeValue: 1.6) {
+
+      font-size:     ($sizeValue * 10) + px;
+      font-size:     $sizeValue + rem;
+    }
+
+    //
+    // Converts units to REM with PX fallback
+    //
+
+    @function strip-unit($num) {
+
+      @return         $num / ($num * 0 + 1);
+    }
+
+    @mixin rem($property, $values...) {
+
+        $max:             length($values);
+        $pxValues:        '';
+        $remValues:       '';
+
+
+        @for $i from 1 through $max {
+
+            $value:         strip-unit(nth($values, $i));
+            $pxValues:      #{$pxValues + $value*10}px;
+
+            @if $i < $max {
+
+                $pxValues:    #{$pxValues + " "};
+            }
+        }
+
+
+        @for $i from 1 through $max {
+
+            $value:         strip-unit(nth($values, $i));
+            $remValues:     #{$remValues + $value}rem;
+
+            @if $i < $max {
+
+                $remValues:   #{$remValues + " "};
+            }
+        }
+
+        #{$property}:     $pxValues;
+        #{$property}:     $remValues;
+    }
+
+
+
+    @mixin link-style($hover_color: $primary){
+
+        a{
+            color: inherit;
+
+            &:hover{
+
+                color: $hover_color;
+                text-decoration: none;
+            }
+        }
+    }
+
+    @mixin font-size-calc($size){
+
+        $line-height:  $size * 1.65;
+
+        @include       font-size($size);
+        @include       rem(line-height, $line-height);
+    }
+
+
+
+    /*-----------------------------------------------------------------------*\
+
+        TITLE
+
+    \*-----------------------------------------------------------------------*/
+
+    @mixin title($size: 3.2, $color: $primary, $weight: 800){
+
+        position: relative;
+        font-family:   $primary-ff;
+        font-weight:   $weight;
+        color:         $color;
+        @include       font-size-calc($size);
+        @include       rem(margin, 0, 0, 1);
+        text-transform: none;
+        @content;
+
+        h1, h2{
+
+            font-size: inherit;
+            line-height: inherit;
+            margin: 0;
+            color: inherit;
+            font-weight: inherit;
+        }
+
+        @include            link-style;
+
+        @media only screen and (max-width: 959px) {
+
+          @include       font-size-calc($size * .7);
+        }
+
+    }
+
+    @mixin subtitle($size: 1.6, $color: $primary, $weight: 700){
+
+      position: relative;
+      font-family: $primary-ff;
+      font-weight: $weight;
+      color:       $color;
+      @include       font-size-calc($size);
+      @include       rem(margin, 0, 0, 1);
+      font-style: normal;
+      @content;
+
+      h1, h2{
+
+          font-size: inherit;
+          line-height: inherit;
+          margin: 0;
+          color: inherit;
+          font-weight: inherit;
+      }
+
+      @include            link-style;
+
+    }
+
+
+
+    /*-----------------------------------------------------------------------*\
+
+        BODY
+
+    \*-----------------------------------------------------------------------*/
+
+    @mixin body-copy ($size: 1.4, $color: $md_gray, $weight: 400){
+
+        font-family:      $primary-ff;
+
+        font-weight:       $weight;
+        color:             $color;
+
+        @include           rem(margin, 0, 0, 1);
+        @include           font-size-calc($size);
+    }
+
+
+
+/*---------------------------------------------------------------------------*\
+
+
+  3. BUTTONS
+
+
+\*---------------------------------------------------------------------------*/
+
+
+
+@mixin button ($color: $tertiary, $size: 1.6, $outline: 'false' ){
+
+  @include           font-size-calc($size);
+  font-family:       $primary-ff;
+  text-transform:    uppercase;
+  letter-spacing:    0px;
+  text-decoration:   none;
+  font-weight:       300;
+
+  @include rem(padding, .5, 2.5);
+  display: inline-block;
+  border-radius: 3px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  overflow: hidden;
+  position: relative;
+
+  @if $outline == 'false'{
+    background: $color;
+    border: 0;
+  }
+
+  @if $outline == 'true'{
+
+    background: none;
+    border: 1px solid $color;
+  }
+
+  color: white;
+}
+
+/*---------------------------------------------------------------------------*\
+
+
+  4. MISC STYLES
+
+
+\*---------------------------------------------------------------------------*/
+
+$max-width: 1280px;
+$srv-request-heght: 485px;
+
+@mixin box-style{
+
+    text-align: center;
+    border: 1px solid rgba($dk_gray, .5);
+
+    border-radius: 10px;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+
+@mixin input-style{
+
+    @include font-size-calc(1.4);
+
+    margin-top:        0;
+    margin-bottom:     0;
+
+    padding: calc(10px - 1px) 15px;
+    padding: calc(1rem - 1px) 1.5rem;
+
+    border:         1px solid $lt_gray;
+    //border: none;
+    background:     white;
+    color:          $dk_gray;
+
+    @include        rem(border-radius, 0);
+    //box-shadow: inset 3px 2px 10px rgba(0,0,0,.07);
+
+    //width: calc(100% - 32px);
+    width: 100%;
+    //width: auto;
+
+    //top: 1px;
+    position: relative;
+
+}
+
+
+@mixin css-transition($type, $duration:500ms, $ease:ease-out){
+
+    -webkit-transition:         $type $duration $ease;
+    -moz-transition:            $type $duration $ease;
+    -o-transition:              $type $duration $ease;
+    transition:                 $type $duration $ease;
+
+    &:hover{
+
+        text-decoration:        none;
+
+        -webkit-transition:     $type 200ms ease-out;
+        -moz-transition:        $type 200ms ease-out;
+        -o-transition:          $type 200ms ease-out;
+        transition:             $type 200ms ease-out;
+
+    }
+}
+
+@mixin css-transition-none{
+
+    -webkit-transition:         none;
+    -moz-transition:            none;
+    -o-transition:              none;
+    transition:                 none;
+
+    &:hover{
+
+        text-decoration:        none;
+
+        -webkit-transition:     none;
+        -moz-transition:        none;
+        -o-transition:          none;
+        transition:             none;
+
+    }
+}
+
+
+
+
+@mixin teaser-content($float: none, $width: 50%, $breakpoint: 479px ){
+
+    width:     $width;
+    float:     $float;
+
+    @content;
+
+    @media screen and (max-width: $breakpoint) {
+
+      width: 100%;
+      height: auto;
+      padding: 0;
+      float: none;
+    }
+}
+
+
+//vertical padding
+$vp: 5;
+
+//dynamic negative margin
+$nm: calc((( #{$max-width} - 100vw) / 2) - 15px);
+
+//dynamic posative margin
+$pm: calc(((100vw - #{$max-width}) / 2) + 15px);
+
+
+
+@mixin faux-width($color:white, $padding: $vp){
+
+    @include rem(margin, 0, -3);
+    @include rem(padding, $padding, 3);
+
+    @media only screen and (min-width: $max-width) {
+
+        margin: 0 $nm;
+        padding: ($padding*10)+px $pm;
+    }
+
+    //@include rem(padding, $vp, 500);
+
+    background: $color;
+    clear: both;
+}
+
+@mixin custom-border($pos: bottom, $color: $primary){
+
+    border-#{$pos}: 10px solid $color;
+}
+
+
+@mixin limiter($width: 75%, $breakpoint: 569px){
+
+    width: $width;
+    //margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media only screen and (max-width: $breakpoint){
+
+      width: 100%;
+    }
+}
+
+
+
+@mixin social-icons($color:white, $hover: $quaternary, $size: 1.8) {
+
+  @include rem(width, $size);
+  @include rem(height, $size);
+
+  @include font-size($size);
+  @include rem(line-height, $size);
+
+  display:        inline-block;
+  //margin-left:    25px;
+  overflow:       hidden;
+  text-align:     center;
+  vertical-align: middle;
+
+  @include rem(margin, 0, 1.5, 0, 0);
+  color: rgba($color, .6);
+
+  &:hover{
+
+    color: $hover;
+  }
+
+  &:before {
+
+      font-family: "fontello";
+      @include font-size($size);
+      @include rem(line-height, $size);
+      @include rem(width, $size);
+      @include rem(height, $size);
+      display: inline-block;
+
+  }
+}
+
+@mixin clearfix{
+
+    content:    "";
+    display:    table;
+    clear:      both;
+}
+
+
+
+
+// Durations
+$fastDuration: .1s !default;
+$mediumDuration: .3s !default;
+$slowDuration: .5s !default;
+// Browser Prefixes - Which CSS prefixes should be used?
+$webkit: true !default;
+$moz: false !default;
+$ms: false !default;
+$o: false !default;
+
+// prefix declarations
+@mixin prefixed($property, $value) {
+  @if $webkit == true {
+    -webkit-#{$property}: #{$value};
+  }
+
+  @if $moz == true {
+    -moz-#{$property}: #{$value};
+  }
+
+  @if $ms == true {
+    -ms-#{$property}: #{$value};
+  }
+
+  @if $o == true {
+    -o-#{$property}: #{$value};
+  }
+
+  #{$property}: #{$value};
+}
+
+// prefix keyframes
+@mixin keyframes($name) {
+  @if $webkit == true {
+    @-webkit-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $moz == true {
+    @-moz-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $ms == true {
+    @-ms-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @if $o == true {
+    @-o-keyframes #{$name} {
+      @content;
+    }
+  }
+
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin hardwareAccel() {
+	// Improve performance on mobile/tablet devices
+	@include prefixed(transform, translateZ(0));
+}
+
+@mixin improveAntiAlias() {
+	// Improve aliasing on mobile/tablet devices
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+@mixin fontSmooth() {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin forceBlockLevel() {
+	// Transforms need to be block-level to work
+	display: inline-block;
+	vertical-align: middle;
+}
+
+@mixin hacks() {
+	@include forceBlockLevel();
+	@include hardwareAccel();
+	@include improveAntiAlias();
+	@include fontSmooth();
+}
+
+
+
+
+
+
+@mixin bounce-to-bottom($color){
+
+  @include hacks();
+
+  &:before {
+
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $color;
+    @include prefixed(transform, scaleY(0));
+    @include prefixed(transform-origin, 50% 0);
+    @include prefixed(transition-property, transform);
+    @include prefixed(transition-duration, $slowDuration);
+    @include prefixed(transition-timing-function, ease-out);
+  }
+
+  &:hover{
+
+      //background: lighten($color, 10%);
+      color: white;
+      text-decoration:   none;
+      //border-radius: 10px;
+
+      &:before {
+        @include prefixed(transform, scaleY(1));
+        @include prefixed(transition-timing-function, cubic-bezier(.52,1.64,.37,.66));
+      }
+  }
+}
+
+
+@mixin bounce-to-top($color) {
+	@include hacks();
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: $color;
+		@include prefixed(transform, scaleY(0));
+		@include prefixed(transform-origin, 50% 100%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $slowDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+
+		&:before {
+			@include prefixed(transform, scaleY(1));
+			@include prefixed(transition-timing-function, cubic-bezier(.52,1.64,.37,.66));
+		}
+	}
+}
+
+
+@mixin bounce-to-right($color) {
+	@include hacks();
+
+  &:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: $color;
+		@include prefixed(transform, scaleX(0));
+		@include prefixed(transform-origin, 0 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $slowDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleX(1));
+			@include prefixed(transition-timing-function, cubic-bezier(.52,1.64,.37,.66));
+		}
+	}
+}
+
+
+@mixin bounce-to-left($color) {
+	@include hacks();
+
+  &:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: $color;
+		@include prefixed(transform, scaleX(0));
+		@include prefixed(transform-origin, 100% 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $slowDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleX(1));
+			@include prefixed(transition-timing-function, cubic-bezier(.52,1.64,.37,.66));
+		}
+	}
+}
+
+
+/* Shutter In Horizontal */
+@mixin shutter-in-horizontal ($color){
+	@include hacks();
+
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: $color;
+		@include prefixed(transform, scaleX(1));
+		@include prefixed(transform-origin, 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $mediumDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleX(0));
+		}
+	}
+}
+
+
+/* Shutter Out Horizontal */
+@mixin shutter-out-horizontal ($color) {
+	@include hacks();
+
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: $color;
+		@include prefixed(transform, scaleX(0));
+		@include prefixed(transform-origin, 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $mediumDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleX(1));
+		}
+	}
+}
+
+
+/* Shutter In Vertical */
+@mixin shutter-in-vertical ($color){
+	@include hacks();
+
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: $color;
+		@include prefixed(transform, scaleY(1));
+		@include prefixed(transform-origin, 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $mediumDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleY(0));
+		}
+	}
+}
+
+
+
+/* Shutter Out Vertical */
+@mixin shutter-out-vertical ($color){
+	@include hacks();
+
+	&:before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: $color;
+		@include prefixed(transform, scaleY(0));
+		@include prefixed(transform-origin, 50%);
+		@include prefixed(transition-property, transform);
+		@include prefixed(transition-duration, $mediumDuration);
+		@include prefixed(transition-timing-function, ease-out);
+	}
+
+	&:hover,
+	&:focus,
+	&:active {
+		color: white;
+
+		&:before {
+			@include prefixed(transform, scaleY(1));
+		}
+	}
+}

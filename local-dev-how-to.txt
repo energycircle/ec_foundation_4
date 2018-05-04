@@ -1,0 +1,43 @@
+
+
+
+1. clone live to dev
+
+2. create backup of files and db in dev
+
+3. download files from dev
+
+4. git clone dev to Local
+
+5. add files to sites/default directory, make sure permissions is writeable
+
+6. in SequelPro, create the name of the db
+
+7. <— Duplicate default.settings.local.php and name it settings.local.php #this will not be included when you push up —>
+
+only change the following:
+
+      'database' => 'some_db',
+      'username' => 'root',
+      'password' => 'some_pw',
+      'host' => '127.0.0.1',
+
+8. in your .drush directory edit your local.aliases.drushrc.php file by adding the following:
+  $aliases['ec-client-name'] = array(
+   'uri'  => 'ec-client-name.dev',
+   'root' => '/www/sites/ec-client-name',
+   'path-aliases' => array(
+     '%files' => 'sites/default/files',
+  ),
+    'command-specific' => array (
+      'sql-sync' => array (
+        'no-cache' => TRUE,
+    ),
+    ),
+  );
+
+9. clear drush caches in terminal by typing the following:
+  drush cc drush
+
+10. Sync sql databases by typing the following terminal command:
+  drush sql-sync @pantheon.ec-client-name.dev @local.ec-client-name

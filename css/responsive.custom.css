@@ -1,0 +1,85 @@
+/*---------------------------------------------------------------------------*\
+
+ EC MIXINS
+ 1. colors 2. type 3. buttons 4. misc styles
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 1. COLORS
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 2. TYPE
+ a. @fontface b. global styles
+
+
+\*---------------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ a. @fontface
+ \*-----------------------------------------------------------------------*/
+@font-face { font-family: 'fontello'; src: url("../fonts/fontello.eot?1332134"); src: url("../fonts/fontello.eot?1332134#iefix") format("embedded-opentype"), url("../fonts/fontello.woff2?1332134") format("woff2"), url("../fonts/fontello.woff?1332134") format("woff"), url("../fonts/fontello.ttf?1332134") format("truetype"), url("../fonts/fontello.svg?1332134#fontello") format("svg"); font-weight: normal; font-style: normal; }
+    /*-----------------------------------------------------------------------*\
+ b. global styles
+ \*-----------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ TITLE
+ \*-----------------------------------------------------------------------*/
+    /*-----------------------------------------------------------------------*\
+ BODY
+ \*-----------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 3. BUTTONS
+
+
+\*---------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------*\
+
+ 4. MISC STYLES
+
+
+\*---------------------------------------------------------------------------*/
+/* Shutter In Horizontal */
+/* Shutter Out Horizontal */
+/* Shutter In Vertical */
+/* Shutter Out Vertical */
+/* responsive.custom.css is for custom media queries that are not set via the theme settings, such as cascading media queries.  By default all the other responsive stylesheets used in Adaptivetheme use a "stacking method", however cascading media queries use a waterfall method so you can leverage the cascade and inheritance for all browsers that support media queries, regardless of screen size.  @SEE http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack  NOTE: this file loads by default, to disable got to your theme settings and look under the "CSS" settings tab. */
+/* Really small screens and up */
+/* @media only screen and (min-width: 220px) {} */
+/* Smalltouch sizes and up */
+/* @media only screen and (min-width: 320px) {} */
+/* Smalltouch sizes and down */
+@media only screen and (max-width: 480px) { /* Float Region Blocks - custom media query CSS example:  Float regions blocks is an Extension you can enable in the appearance settings for your theme. This feature allows you to automatically float blocks in regions, you can switch it on and off depending on your requirements. For design purposes you many want to remove the floats for devices where the entire theme is just one column - for example small mobile phones. The following CSS is inside the custom media query:  @media only screen and (max-width: 480px){}  This will target devices with a maximum width of 480px - most small phones. In these smaller screen sizes we can remove the float and widths so all blocks stack instead of displaying horizonally. The selector used is an "attribute selector" which will match on any float block class. Use your inspector or Firebug to get the classes from the page output if you need more granular control over block alignment and stacking. */
+  .region[class*="float-blocks"] .block { float: none; width: 100%; } }
+@media only screen and (min-width: 1024px) and (max-width: 1216px) { #primary-menu #superfish-1 li.sf-depth-1 > a { font-size: 12.5px; font-size: 1.25rem; padding: 10px 7.5px 10px; padding: 1rem 0.75rem 1rem; } }
+@media only screen and (max-width: 1023px) { #header-wrapper header { padding-right: 50px; }
+  #header-wrapper .pane-menu-menu-auxiliary-menu { margin: 20px 0px 0px; margin: 2rem 0rem 0rem; } }
+@media only screen and (max-width: 959px) { .two-66-33 > .region-two-66-33-first, .two-33-66 > .region-two-33-66-second, .three-inset-left > .inset-wrapper > div.region-three-inset-left-middle, .three-inset-right > .inset-wrapper > div.region-three-inset-right-middle { width: 100%; }
+  #content-wrapper .EC-region-main { padding-right: 0; }
+  .three-3x33 > .region, .two-66-33 > .region-two-66-33-second, .two-33-66 > .region-two-33-66-first, .three-inset-left > .inset-wrapper > div.region-three-inset-left-inset, .three-inset-right > .inset-wrapper > div.region-three-inset-right-inset, .five-5x20 > .panel-row > .region { width: 100%; }
+  #fs-homeslide { background: #154299; }
+  .hero-caption-wrapper { position: relative; padding: 30px; padding: 3rem; background: none; }
+  .front .hero-caption-wrapper { width: 100%; }
+  .hero-caption-wrapper .hero-caption { width: 90%; margin: 0 auto; position: relative; top: 0; transform: none; }
+  .front .hero-caption-wrapper .hero-caption { padding: 20px 0px; padding: 2rem 0rem; } }
+@media only screen and (max-width: 859px) { #header-wrapper { position: relative; background: #fff; text-align: center; }
+  #header-wrapper header { padding-right: 0px; }
+  #header-wrapper #mini-panel-header { text-align: center; padding: 0px 30px; padding: 0rem 3rem; }
+  #header-wrapper .pane-page-logo { margin: 0 auto; float: none; text-align: left; }
+  #header-wrapper .pane-menu-menu-auxiliary-menu { margin: 10px auto; float: none; width: 100%; text-align: center; }
+  #header-wrapper .pane-menu-menu-auxiliary-menu .menu { text-align: center; }
+  #header-wrapper input[id*='edit-keys-'] { transition: width 0.6s cubic-bezier(0, 1.22, 0.66, 1.39), border-radius 0.6s, background 0.6s; border: 1px solid #154299; outline: none; box-shadow: none; padding-left: 15px; cursor: text; width: 210px; border-radius: 5px; background: rgba(255, 255, 255, 0.1); color: black; } }
+@media only screen and (max-width: 767px) { #footer-wrapper .pane-menu-auxiliary-menu { width: 100%; float: left; text-align: center; }
+  #footer-wrapper .pane-menu-auxiliary-menu ul.menu { text-align: center; -webkit-columns: 1; -moz-columns: 1; columns: 1; }
+  #footer-wrapper .pane-main-menu { width: 100%; float: left; text-align: center; }
+  #footer-wrapper .pane-main-menu ul.menu { -webkit-columns: 1; -moz-columns: 1; columns: 1; text-align: center; }
+  #footer-wrapper .pane-main-menu ul.menu ul.menu { -webkit-columns: 1; -moz-columns: 1; columns: 1; }
+  #footer-wrapper .social { width: 100%; float: right; text-align: center; } }
+/* Tablet sizes and up */
+/* @media only screen and (min-width: 768px) {} */
+/* Desktops/laptops and up */
+/* @media only screen and (min-width: 1025px) {} */

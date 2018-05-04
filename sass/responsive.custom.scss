@@ -1,0 +1,284 @@
+
+// _base.scss imports _custom.scss and other partials.
+@import "base";
+
+/*
+ * responsive.custom.css is for custom media queries that are not set via the
+ * theme settings, such as cascading media queries.
+ *
+ * By default all the other responsive stylesheets used in Adaptivetheme use a
+ * "stacking method", however cascading media queries use a waterfall method so
+ * you can leverage the cascade and inheritance for all browsers that support
+ * media queries, regardless of screen size.
+ *
+ * @SEE http://zomigi.com/blog/essential-considerations-for-crafting-quality-media-queries/#mq-overlap-stack
+ *
+ * NOTE: this file loads by default, to disable got to your theme settings and
+ * look under the "CSS" settings tab.
+ */
+
+
+/*
+ * Really small screens and up
+ */
+/* @media only screen and (min-width: 220px) {} */
+
+
+/*
+ * Smalltouch sizes and up
+ */
+/* @media only screen and (min-width: 320px) {} */
+
+
+/*
+ * Smalltouch sizes and down
+ */
+@media only screen and (max-width: 480px) {
+
+  /*
+   * Float Region Blocks - custom media query CSS example:
+   *
+   * Float regions blocks is an Extension you can enable in the appearance
+   * settings for your theme. This feature allows you to automatically float
+   * blocks in regions, you can switch it on and off depending on your
+   * requirements. For design purposes you many want to remove the floats for
+   * devices where the entire theme is just one column - for example small
+   * mobile phones. The following CSS is inside the custom media query:
+   *
+   *   @media only screen and (max-width: 480px){}
+   *
+   * This will target devices with a maximum width of 480px - most small phones.
+   * In these smaller screen sizes we can remove the float and widths so all
+   * blocks stack instead of displaying horizonally. The selector used is an
+   * "attribute selector" which will match on any float block class. Use your
+   * inspector or Firebug to get the classes from the page output if you need
+   * more granular control over block alignment and stacking.
+   */
+  .region[class*="float-blocks"] .block {
+    float: none;
+    width: 100%;
+  }
+}
+
+
+
+@media only screen and (min-width:1024px) and (max-width:1216px) {
+
+  #primary-menu #superfish-1 li.sf-depth-1 > a{
+
+    @include font-size(1.25);
+    @include rem(padding, 1, .75, 1);
+  }
+}
+
+@media only screen and (max-width: 1190px) {
+
+}
+
+
+@media only screen and (max-width: 1023px) {
+
+
+  #header-wrapper {
+
+    header{
+
+      padding-right: 50px;
+
+    }
+
+    .pane-search-form {
+    }
+
+
+    .pane-menu-menu-auxiliary-menu{
+
+      @include rem(margin, 2, 0, 0);
+    }
+  }
+}
+
+@media only screen and (max-width:959px) {
+
+  .two-66-33 > .region-two-66-33-first,
+  .two-33-66 > .region-two-33-66-second,
+  .three-inset-left > .inset-wrapper > div.region-three-inset-left-middle,
+  .three-inset-right > .inset-wrapper > div.region-three-inset-right-middle {
+
+      width: 100%;
+  }
+
+  #content-wrapper .EC-region-main{
+
+    padding-right: 0;
+  }
+
+  .three-3x33 > .region,
+  .two-66-33 > .region-two-66-33-second,
+  .two-33-66 > .region-two-33-66-first,
+  .three-inset-left > .inset-wrapper > div.region-three-inset-left-inset,
+  .three-inset-right > .inset-wrapper > div.region-three-inset-right-inset,
+  .five-5x20 > .panel-row > .region {
+
+    width: 100%;
+  }
+
+  #fs-homeslide{
+
+    background: $primary;
+  }
+
+  .hero-caption-wrapper {
+
+      position: relative;
+      @include rem(padding, 3);
+      background: none;
+
+      .front &{
+
+        width: 100%;
+      }
+
+      .hero-caption{
+
+        width: 90%;
+        margin: 0 auto;
+        position: relative;
+        top: 0;
+        transform: none;
+
+        .front &{
+
+          @include rem(padding, 2, 0);
+        }
+      }
+  }
+}
+
+@media only screen and (max-width: 859px) {
+
+  #header-wrapper {
+
+    header{
+
+      padding-right: 0px;
+
+    }
+
+    position: relative;
+    background: #fff;
+    text-align: center;
+
+    #mini-panel-header{
+
+      text-align: center;
+      @include rem(padding, 0, 3);
+    }
+
+    .pane-page-logo{
+
+      margin: 0 auto;
+      float: none;
+      text-align: left;
+    }
+
+    .pane-menu-menu-auxiliary-menu{
+
+      margin: 10px auto;
+      float: none;
+      width: 100%;
+      text-align: center;
+
+      .menu{
+
+        text-align: center;
+      }
+    }
+
+    $tl: 0.6s; // transition length
+    input[id*='edit-keys-'] {
+
+      transition: width $tl cubic-bezier(0,1.22,.66,1.39), border-radius $tl, background $tl;
+      border: 1px solid $primary;
+      outline: none;
+      box-shadow: none;
+      padding-left: 15px;
+      cursor: text;
+      width: 210px;
+      border-radius: 5px;
+      background: rgba(white, .1);
+      color: black;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+
+
+
+   #footer-wrapper {
+
+    .pane-menu-auxiliary-menu{
+
+      width: 100%;
+      float: left;
+      text-align: center;
+
+      ul.menu{
+
+        text-align: center;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+        columns:  1;
+      }
+    }
+
+    .pane-main-menu {
+
+      width: 100%;
+      float: left;
+      text-align: center;
+
+
+      ul.menu {
+
+        -webkit-columns: 1;
+        -moz-columns: 1;
+        columns:  1;
+        text-align: center;
+
+        ul.menu {
+
+          -webkit-columns: 1;
+          -moz-columns: 1;
+          columns:  1;
+        }
+      }
+    }
+
+    .social{
+
+      width: 100%;
+      float: right;
+      text-align: center;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 569px) {
+
+}
+
+
+
+/*
+ * Tablet sizes and up
+ */
+/* @media only screen and (min-width: 768px) {} */
+
+
+/*
+ * Desktops/laptops and up
+ */
+/* @media only screen and (min-width: 1025px) {} */

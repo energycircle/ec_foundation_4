@@ -1,0 +1,28 @@
+Dev Helpers
+
+Apache
+sudo apachectl -k restart
+
+SQL
+/usr/local/bin/mysql.server start
+
+terminus site backups create --element=database --site=<site> --env=<env>
+terminus site backups get --element=database --to=$HOME/Desktop/ --latest --site=<site> --env=<env>
+
+terminus site backups create --element=files
+terminus site backups get --element=files --to=$HOME/Desktop/ --latest
+
+drush rsync @pantheon.ec-mysite.dev:%files/ @local.ec-mysite:%files
+
+mysql.server restart
+
+terminus site clone-content [--site=<site>] [--from-env] [--to-env] [--db-only] [--files-only]
+
+<— Duplicate default.settings.local.php and name it settings.local.php #this will not be included when you push up —>
+
+only change the following:
+
+      'database' => 'some_db',
+      'username' => 'root',
+      'password' => 'some_pw',
+      'host' => '127.0.0.1',
